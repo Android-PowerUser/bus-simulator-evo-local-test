@@ -1,4 +1,4 @@
-import json,os,subprocess,time,traceback,zipfile
+import json,os,subprocess,time,traceback,zipfile,shutil,hashlib
 from pathlib import Path
 R=Path(os.environ.get('GITHUB_WORKSPACE','.'));D=R/'runtime-results';D.mkdir(exist_ok=True)
 A=os.environ.get('ANDROID_HOME','/usr/local/lib/android/sdk')+'/platform-tools/adb'
@@ -47,6 +47,12 @@ try:
  with zipfile.ZipFile(archive) as z:
   for name in ['com.Ovilex.BusSimulator2023.apk','config.arm64_v8a.apk','UnityDataAssetPack.apk']:
    z.extract(name,package_dir);apks.append(str(package_dir/name))
+ candidate=package_dir/'candidate-base.apk'
+ if os.environ.get('TEST_BASE_OVERRIDE_ASSET'):
+  assert candidate.is_file(),'Requested candidate override was not downloaded'
+  status['base_override_asset']=os.environ['TEST_BASE_OVERRIDE_ASSET']
+  status['base_override_sha256']=hashlib.sha256(candidate.read_bytes()).hexdigest()
+  shutil.copyfile(candidate,package_dir/'com.Ovilex.BusSimulator2023.apk')
  status['state']='installing_game';save()
  result=adb(['install-multiple','-r','-t','--abi','arm64-v8a',*apks],300)
  assert 'Success' in result,'No game install Success'
