@@ -48,6 +48,15 @@ def dump_il2cpp_got_early():
    data=(D/name).read_bytes() if (D/name).exists() else b''
    sentinel=data[0x818:0x820].hex() if len(data)>=0x820 else ''
    records.append({'name':name,'pid':pid,'base':hex(base),'vaddr':hex(start),'bytes':size,'exit':rc,'sentinel_slot_165':sentinel,'t':round(time.monotonic(),6)})
+   # Once the replacement initializer has populated the sparse GOT, sample the
+   # IL2CPP data/BSS span used by metadata initialization. This distinguishes
+   # missing PairIP data repair from a bad import identity without slowing every
+   # high-frequency GOT capture.
+   if len(records) in (2,6,10,14) and sentinel and sentinel!='0000000000000000':
+    data_start=base+0x553c000
+    data_name='il2cpp-data-%03d.bin'%len(records)
+    drc,dsize=adb_to_file(['exec-out','su','0','dd','if=/proc/'+pid+'/mem','bs=4096','skip='+str(data_start//4096),'count=680'],D/data_name,12)
+    records[-1]['data_sample']={'name':data_name,'vaddr':hex(data_start),'bytes':dsize,'exit':drc}
    if len(records)>=40:break
    time.sleep(.015)
  except Exception as e:
