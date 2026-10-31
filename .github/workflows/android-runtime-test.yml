@@ -13,6 +13,11 @@ on:
         required: false
         default: ''
         type: string
+      config_override_asset:
+        description: Optional candidate ARM64 configuration APK asset in the same private release
+        required: false
+        default: ''
+        type: string
       resign_keystore_asset:
         description: Optional private test keystore; when set, all extracted APKs are re-signed together
         required: false
@@ -40,6 +45,7 @@ jobs:
     env:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
       TEST_BASE_OVERRIDE_ASSET: ${{ inputs.base_override_asset }}
+      TEST_CONFIG_OVERRIDE_ASSET: ${{ inputs.config_override_asset }}
       TEST_RESIGN_KEYSTORE_ASSET: ${{ inputs.resign_keystore_asset }}
       TEST_STOCK_CONTROL: ${{ inputs.stock_control }}
       TEST_DUMP_VM: ${{ inputs.dump_vm }}
@@ -67,6 +73,9 @@ jobs:
           fi
           if [ -n "$TEST_BASE_OVERRIDE_ASSET" ]; then
             gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$TEST_BASE_OVERRIDE_ASSET" --output downloaded-game/candidate-base.apk
+          fi
+          if [ -n "$TEST_CONFIG_OVERRIDE_ASSET" ]; then
+            gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$TEST_CONFIG_OVERRIDE_ASSET" --output downloaded-game/candidate-config.apk
           fi
           if [ -n "$TEST_RESIGN_KEYSTORE_ASSET" ]; then
             gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$TEST_RESIGN_KEYSTORE_ASSET" --output downloaded-game/test-signing.jks

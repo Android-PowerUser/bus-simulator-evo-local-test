@@ -82,7 +82,7 @@ try:
   for name in ['com.Ovilex.BusSimulator2023.apk','config.arm64_v8a.apk','UnityDataAssetPack.apk']:
    z.extract(name,package_dir);apks.append(str(package_dir/name))
  if os.environ.get('TEST_STOCK_CONTROL','').lower()=='true':
-  assert not os.environ.get('TEST_BASE_OVERRIDE_ASSET'),'Stock control and modified base are mutually exclusive'
+  assert not os.environ.get('TEST_BASE_OVERRIDE_ASSET') and not os.environ.get('TEST_CONFIG_OVERRIDE_ASSET'),'Stock control and modified overrides are mutually exclusive'
   manifest=json.loads((package_dir/'stock-original-manifest.json').read_text())
   original_asset=package_dir/'stock-UnityDataAssetPack.apk'
   with zipfile.ZipFile(package_dir/'stock-original-asset-layout.zip') as layout_zip, (package_dir/'UnityDataAssetPack.apk').open('rb') as source, original_asset.open('wb') as out:
@@ -110,6 +110,12 @@ try:
   status['base_override_asset']=os.environ['TEST_BASE_OVERRIDE_ASSET']
   status['base_override_sha256']=hashlib.sha256(candidate.read_bytes()).hexdigest()
   shutil.copyfile(candidate,package_dir/'com.Ovilex.BusSimulator2023.apk')
+ config_candidate=package_dir/'candidate-config.apk'
+ if os.environ.get('TEST_CONFIG_OVERRIDE_ASSET'):
+  assert config_candidate.is_file(),'Requested candidate config override was not downloaded'
+  status['config_override_asset']=os.environ['TEST_CONFIG_OVERRIDE_ASSET']
+  status['config_override_sha256']=hashlib.sha256(config_candidate.read_bytes()).hexdigest()
+  shutil.copyfile(config_candidate,package_dir/'config.arm64_v8a.apk')
  if os.environ.get('TEST_RESIGN_KEYSTORE_ASSET'):
   keystore=package_dir/'test-signing.jks';assert keystore.is_file(),'Requested test keystore was not downloaded'
   status['resign_keystore_asset']=os.environ['TEST_RESIGN_KEYSTORE_ASSET'];save();resign_test_apks(apks,keystore)
