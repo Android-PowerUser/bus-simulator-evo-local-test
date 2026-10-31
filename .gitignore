@@ -1,0 +1,7 @@
+.diagnostics/
+reverse/
+downloaded-game/
+runtime-results/
+runtime-*.zip
+__pycache__/
+*.py[cod]

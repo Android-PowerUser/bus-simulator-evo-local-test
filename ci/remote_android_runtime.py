@@ -2,23 +2,51 @@ import json,os,subprocess,time,traceback,zipfile,shutil,hashlib
 from pathlib import Path
 R=Path(os.environ.get('GITHUB_WORKSPACE','.'));D=R/'runtime-results';D.mkdir(exist_ok=True)
 A=os.environ.get('ANDROID_HOME','/usr/local/lib/android/sdk')+'/platform-tools/adb'
+SERIAL=os.environ.get('ANDROID_SERIAL','emulator-5554')
 PKG='com.Ovilex.BusSimulator2023';ACT=PKG+'/com.google.firebase.MessagingUnityPlayerActivity'
-status={'release_tag':os.environ['TEST_RELEASE_TAG'],'environment':'GitHub Actions Linux / KVM','control_installed':False,'control_launched':False,'game_installed':False,'game_launch_attempted':False,'gameplay_verified':False,'state':'waiting_for_android'}
+status={'release_tag':os.environ['TEST_RELEASE_TAG'],'environment':'GitHub Actions Linux / KVM','android_serial':SERIAL,'control_installed':False,'control_launched':False,'game_installed':False,'game_launch_attempted':False,'gameplay_verified':False,'state':'waiting_for_android'}
 def save(): (D/'status.json').write_text(json.dumps(status,indent=2))
 def adb(args,timeout=30,check=True):
  print(time.strftime('%H:%M:%S'),'ADB',args,flush=True)
- r=subprocess.run([A,'-s','emulator-5554',*args],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=timeout)
+ r=subprocess.run([A,'-s',SERIAL,*args],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=timeout)
  print(r.stdout,flush=True)
  if check and r.returncode:raise RuntimeError(f'ADB exit {r.returncode}: {r.stdout}')
  return r.stdout.strip()
 def shell(cmd,timeout=30,check=True):return adb(['shell',cmd],timeout,check)
 def adb_to_file(args,out_path,timeout=180):
- r=subprocess.run([A,'-s','emulator-5554',*args],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=timeout)
+ r=subprocess.run([A,'-s',SERIAL,*args],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=timeout)
  Path(out_path).write_bytes(r.stdout)
  print(time.strftime('%H:%M:%S'),'ADB->file',args,r.returncode,len(r.stdout),r.stderr[:200],flush=True)
  return r.returncode,len(r.stdout)
 def screen(name):
- with (D/name).open('wb') as f:subprocess.run([A,'-s','emulator-5554','exec-out','screencap','-p'],stdout=f,timeout=30,check=True)
+ with (D/name).open('wb') as f:subprocess.run([A,'-s',SERIAL,'exec-out','screencap','-p'],stdout=f,timeout=30,check=True)
+def install_and_verify(label,args,package,min_paths,timeout):
+ before=shell('pidof system_server')
+ started=time.monotonic()
+ try:result=adb(args,timeout)
+ finally:
+  status[label+'_install_seconds']=round(time.monotonic()-started,3)
+  status['system_server_pid_after_'+label+'_install']=shell('pidof system_server',30,False)
+  save()
+ after=status['system_server_pid_after_'+label+'_install']
+ if not before or after!=before:raise RuntimeError('system_server changed during '+label+' install: '+before+' -> '+after)
+ if 'Success' not in result:raise RuntimeError(label+' install did not report Success')
+ paths=[line[8:] for line in shell('pm path '+package).splitlines() if line.startswith('package:')]
+ status[label+'_package_paths']=paths;save()
+ if len(paths)<min_paths:raise RuntimeError(label+' package verification found '+str(len(paths))+' paths; expected at least '+str(min_paths))
+ return result
+def resign_test_apks(apks,keystore):
+ tools=sorted((Path(os.environ['ANDROID_HOME'])/'build-tools').glob('*/apksigner'))
+ if not tools:raise RuntimeError('apksigner not found')
+ signer=str(tools[-1]);password=os.environ.get('TEST_KEYSTORE_PASSWORD','changeit');alias=os.environ.get('TEST_KEY_ALIAS','repaired')
+ started=time.monotonic()
+ for apk in map(Path,apks):
+  out=apk.with_suffix('.resigned.apk');out.unlink(missing_ok=True)
+  print(time.strftime('%H:%M:%S'),'RESIGN',apk.name,flush=True)
+  subprocess.run([signer,'sign','--ks',str(keystore),'--ks-pass','pass:'+password,'--key-pass','pass:'+password,'--ks-key-alias',alias,'--v1-signing-enabled','true','--v2-signing-enabled','true','--v3-signing-enabled','true','--out',str(out),str(apk)],timeout=300,check=True)
+  out.replace(apk)
+  subprocess.run([signer,'verify','--verbose','--print-certs',str(apk)],timeout=60,check=True)
+ status['all_apks_resigned']=True;status['resign_seconds']=round(time.monotonic()-started,3);save()
 log=None
 try:
  save();adb(['wait-for-device'],180)
@@ -32,13 +60,14 @@ try:
  else:raise RuntimeError('Android did not become fully ready')
  adb(['root'],30,False);time.sleep(3);adb(['wait-for-device'],30)
  log_file=(D/'continuous-logcat.txt').open('w')
- log=subprocess.Popen([A,'-s','emulator-5554','logcat','-b','all','-v','threadtime'],stdout=log_file,stderr=subprocess.STDOUT)
+ log=subprocess.Popen([A,'-s',SERIAL,'logcat','-b','all','-v','threadtime'],stdout=log_file,stderr=subprocess.STDOUT)
  status['system_server_pid_before']=shell('pidof system_server')
  status['supported_abis']=shell('getprop ro.product.cpu.abilist')
  status['native_bridge']=shell('getprop ro.dalvik.vm.native.bridge')
  status['android_sdk']=shell('getprop ro.build.version.sdk')
  shell('settings put global verifier_verify_adb_installs 0; settings put global package_verifier_enable 0',30)
- adb(['install','-r',str(R/'ci/control.apk')],90)
+ status['control_install_transport']='no_streaming'
+ install_and_verify('control',['install','--no-streaming','-r',str(R/'ci/control.apk')],'com.arena.installcontrol',1,90)
  status.update(state='control_installed',control_installed=True);save()
  result=shell('am start -W -n com.arena.installcontrol/android.app.Activity',60)
  assert 'Status: ok' in result,'Control start did not report Status ok'
@@ -81,9 +110,11 @@ try:
   status['base_override_asset']=os.environ['TEST_BASE_OVERRIDE_ASSET']
   status['base_override_sha256']=hashlib.sha256(candidate.read_bytes()).hexdigest()
   shutil.copyfile(candidate,package_dir/'com.Ovilex.BusSimulator2023.apk')
- status['state']='installing_game';save()
- result=adb(['install-multiple','-r','-t','--abi','arm64-v8a',*apks],300)
- assert 'Success' in result,'No game install Success'
+ if os.environ.get('TEST_RESIGN_KEYSTORE_ASSET'):
+  keystore=package_dir/'test-signing.jks';assert keystore.is_file(),'Requested test keystore was not downloaded'
+  status['resign_keystore_asset']=os.environ['TEST_RESIGN_KEYSTORE_ASSET'];save();resign_test_apks(apks,keystore)
+ status['state']='installing_game';status['game_install_transport']='no_streaming';save()
+ install_and_verify('game',['install-multiple','--no-streaming','-r','-t','--abi','arm64-v8a',*apks],PKG,3,420)
  status.update(state='game_installed',game_installed=True);save()
  adb(['logcat','-c'])
  shell('setprop debug.ld.app.com.Ovilex.BusSimulator2023 dlopen,dlsym,dlerror',30,False)

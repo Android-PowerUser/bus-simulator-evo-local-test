@@ -13,6 +13,11 @@ on:
         required: false
         default: ''
         type: string
+      resign_keystore_asset:
+        description: Optional private test keystore; when set, all extracted APKs are re-signed together
+        required: false
+        default: ''
+        type: string
       dump_vm:
         description: Dump the decrypted PairIP VM image from the running original app
         required: false
@@ -31,12 +36,14 @@ concurrency:
 jobs:
   runtime:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     env:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
       TEST_BASE_OVERRIDE_ASSET: ${{ inputs.base_override_asset }}
+      TEST_RESIGN_KEYSTORE_ASSET: ${{ inputs.resign_keystore_asset }}
       TEST_STOCK_CONTROL: ${{ inputs.stock_control }}
       TEST_DUMP_VM: ${{ inputs.dump_vm }}
+      ANDROID_SERIAL: emulator-5554
       ANDROID_AVD_HOME: /home/runner/.android/avd
       ANDROID_USER_HOME: /home/runner/.android
     steps:
@@ -49,7 +56,9 @@ jobs:
         run: |
           set -euxo pipefail
           test -c /dev/kvm
+          test "$(grep -Eoc '(vmx|svm)' /proc/cpuinfo)" -gt 0
           sudo chmod 666 /dev/kvm
+          test -r /dev/kvm -a -w /dev/kvm
           gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.xapk' --dir downloaded-game
           if [ "$TEST_STOCK_CONTROL" = true ]; then
             for name in stock-original-base.apk stock-original-config.apk stock-original-asset-layout.zip stock-original-manifest.json; do
@@ -59,11 +68,14 @@ jobs:
           if [ -n "$TEST_BASE_OVERRIDE_ASSET" ]; then
             gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$TEST_BASE_OVERRIDE_ASSET" --output downloaded-game/candidate-base.apk
           fi
+          if [ -n "$TEST_RESIGN_KEYSTORE_ASSET" ]; then
+            gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$TEST_RESIGN_KEYSTORE_ASSET" --output downloaded-game/test-signing.jks
+          fi
       - name: Prepare Android 15 image with ARM64 translation
         run: |
           set -euxo pipefail
           SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
-          (yes || true) | "$SDKMANAGER" 'platform-tools' 'emulator' 'system-images;android-35;google_apis;x86_64'
+          (yes 2>/dev/null || true) | "$SDKMANAGER" 'platform-tools' 'emulator' 'system-images;android-35;google_apis;x86_64'
           "$ANDROID_HOME/emulator/emulator" -accel-check
           mkdir -p "$ANDROID_AVD_HOME" "$ANDROID_USER_HOME"
           echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name BusRuntime --path "$ANDROID_AVD_HOME/BusRuntime.avd" --package 'system-images;android-35;google_apis;x86_64'
