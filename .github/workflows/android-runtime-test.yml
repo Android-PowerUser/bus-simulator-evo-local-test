@@ -1,0 +1,64 @@
+name: Private Android runtime test
+run-name: Android runtime test - ${{ inputs.release_tag }}
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Private release containing the three-APK XAPK
+        required: true
+        default: local-test-242-v8-lifecycle
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: bus-private-runtime
+  cancel-in-progress: false
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TEST_RELEASE_TAG: ${{ inputs.release_tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify KVM and obtain private test package
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euxo pipefail
+          test -c /dev/kvm
+          sudo chmod 666 /dev/kvm
+          "$ANDROID_HOME/emulator/emulator" -accel-check
+          gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.xapk' --dir downloaded-game
+      - name: Prepare Android 11 image with ARM64 translation
+        run: |
+          set -euxo pipefail
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          "$SDKMANAGER" 'platform-tools' 'emulator' 'system-images;android-30;google_apis;x86_64'
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name BusRuntime --package 'system-images;android-30;google_apis;x86_64'
+          cat >> "$HOME/.android/avd/BusRuntime.avd/config.ini" <<'AVD'
+          hw.cpu.ncore=2
+          hw.ramSize=3072
+          hw.lcd.width=480
+          hw.lcd.height=800
+          hw.lcd.density=160
+          hw.gpu.enabled=yes
+          hw.gpu.mode=swangle
+          hw.keyboard=yes
+          disk.dataPartition.size=6442450944
+          AVD
+      - name: Boot accelerated emulator and test control then game
+        run: |
+          set -euxo pipefail
+          mkdir -p runtime-results
+          "$ANDROID_HOME/platform-tools/adb" start-server
+          nohup "$ANDROID_HOME/emulator/emulator" -avd BusRuntime -no-window -no-audio -no-snapshot -no-boot-anim -accel on -memory 3072 -cores 2 -gpu swangle -feature -Vulkan -camera-back none -camera-front none -no-metrics > runtime-results/emulator.log 2>&1 &
+          python3 ci/remote_android_runtime.py 2>&1 | tee runtime-results/test-console.txt
+      - name: Preserve private logs and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-runtime-${{ github.run_id }}
+          path: runtime-results/
+          retention-days: 7
+          if-no-files-found: warn
