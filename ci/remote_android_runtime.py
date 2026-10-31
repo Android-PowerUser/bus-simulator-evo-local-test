@@ -1,4 +1,4 @@
-import json,os,subprocess,time,traceback,zipfile,shutil,hashlib
+import json,os,subprocess,time,traceback,zipfile,shutil,hashlib,threading
 from pathlib import Path
 R=Path(os.environ.get('GITHUB_WORKSPACE','.'));D=R/'runtime-results';D.mkdir(exist_ok=True)
 A=os.environ.get('ANDROID_HOME','/usr/local/lib/android/sdk')+'/platform-tools/adb'
@@ -20,6 +20,40 @@ def adb_to_file(args,out_path,timeout=180):
  return r.returncode,len(r.stdout)
 def screen(name):
  with (D/name).open('wb') as f:subprocess.run([A,'-s',SERIAL,'exec-out','screencap','-p'],stdout=f,timeout=30,check=True)
+def dump_il2cpp_got_early():
+ # PairIP's injected DT_INIT repairs an intentionally sparse/scrambled PLT/GOT
+ # before ordinary IL2CPP constructors run. Capture that short-lived state.
+ records=[];seen=False;misses=0;deadline=time.monotonic()+35
+ try:
+  while time.monotonic()<deadline:
+   probe=shell("p=$(pidof "+PKG+"); if [ -n \"$p\" ]; then echo PID=$p; grep 'libil2cpp.so' /proc/$p/maps; fi",5,False)
+   lines=probe.splitlines();pid='';base=None
+   for line in lines:
+    if line.startswith('PID='):pid=line[4:].split()[0]
+    elif 'libil2cpp.so' in line:
+     parts=line.split()
+     if len(parts)>=3 and parts[2]=='00000000':base=int(parts[0].split('-')[0],16)
+   if not pid or base is None:
+    if seen:
+     misses+=1
+     if misses>=4:break
+    time.sleep(.04);continue
+   seen=True;misses=0
+   if not records:(D/'il2cpp-early-maps.txt').write_text(probe)
+   # The protected library's .got.plt is at VA 0x54662d8. Two pages
+   # beginning at 0x5466000 contain every live slot needed for recovery.
+   start=base+0x5466000
+   name='il2cpp-got-%03d.bin'%len(records)
+   rc,size=adb_to_file(['exec-out','su','0','dd','if=/proc/'+pid+'/mem','bs=4096','skip='+str(start//4096),'count=2'],D/name,5)
+   data=(D/name).read_bytes() if (D/name).exists() else b''
+   sentinel=data[0x818:0x820].hex() if len(data)>=0x820 else ''
+   records.append({'name':name,'pid':pid,'base':hex(base),'vaddr':hex(start),'bytes':size,'exit':rc,'sentinel_slot_165':sentinel,'t':round(time.monotonic(),6)})
+   if len(records)>=40:break
+   time.sleep(.015)
+ except Exception as e:
+  records.append({'error':type(e).__name__+': '+str(e)})
+ (D/'il2cpp-got-capture.json').write_text(json.dumps(records,indent=2))
+ status['il2cpp_got_snapshots']=len([x for x in records if 'name' in x]);save()
 def install_and_verify(label,args,package,min_paths,timeout):
  before=shell('pidof system_server')
  started=time.monotonic()
@@ -125,33 +159,14 @@ try:
  adb(['logcat','-c'])
  shell('setprop debug.ld.app.com.Ovilex.BusSimulator2023 dlopen,dlsym,dlerror',30,False)
  status.update(state='launching_game',game_launch_attempted=True);save()
+ got_monitor=None
+ if os.environ.get('TEST_DUMP_VM','').lower()=='true':
+  got_monitor=threading.Thread(target=dump_il2cpp_got_early,daemon=True);got_monitor.start()
  launch=shell('am start -W -n '+ACT,120,False)
  (D/'game-launch.txt').write_text(launch);status['launch_command_output']=launch
- if os.environ.get('TEST_DUMP_VM','').lower()=='true':
-  # PairIP runs its decrypted program from a memfd, which shows up as an
-  # anonymous executable mapping. Dump those mappings while the app is alive.
-  time.sleep(20)
-  pid=(shell('pidof '+PKG,30,False) or '').split()
-  status['vm_dump_app_pid']=pid[0] if pid else ''
-  if pid:
-   pid=pid[0]
-   maps=shell('cat /proc/'+pid+'/maps',60,False);(D/'app-maps.txt').write_text(maps)
-   results={}
-   index=0
-   for line in maps.splitlines():
-    parts=line.split()
-    if len(parts)<6 or 'x' not in parts[1]:continue
-    path=parts[-1]
-    if 'memfd' not in path and 'jit' not in path:continue
-    start,end=[int(x,16) for x in parts[0].split('-')]
-    if end-start>64*1024*1024 or end-start<4096:continue
-    name='vm-dump-%02d-%s-%s.bin'%(index,parts[0].replace('-','_'),'memfd' if 'memfd' in path else 'jit')
-    index+=1
-    rc,size=adb_to_file(['exec-out','su','0','dd','if=/proc/'+pid+'/mem','bs=4096','skip='+str(start//4096),'count='+str((end-start)//4096)],D/name,180)
-    results[name]={'maps_line':line.strip(),'vaddr':hex(start),'bytes':size,'exit':rc}
-   status['vm_dumps']=results;status['vm_dump_state']='saved';save()
-   try:screen('game-vm-dump.png')
-   except Exception as e:print('SCREENSHOT_FAILED',str(e),flush=True)
+ if got_monitor:
+  got_monitor.join(8)
+  status['il2cpp_got_monitor_finished']=not got_monitor.is_alive();save()
  for elapsed in [15,45,120]:
   time.sleep(elapsed-(0 if elapsed==15 else 15 if elapsed==45 else 45))
   pid=shell('pidof '+PKG,30,False)
