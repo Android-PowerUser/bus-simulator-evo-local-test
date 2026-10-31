@@ -13,6 +13,11 @@ on:
         required: false
         default: ''
         type: string
+      dump_vm:
+        description: Dump the decrypted PairIP VM image from the running original app
+        required: false
+        default: false
+        type: boolean
       stock_control:
         description: Test cryptographically verified unmodified original instead of the mod
         required: false
@@ -31,6 +36,7 @@ jobs:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
       TEST_BASE_OVERRIDE_ASSET: ${{ inputs.base_override_asset }}
       TEST_STOCK_CONTROL: ${{ inputs.stock_control }}
+      TEST_DUMP_VM: ${{ inputs.dump_vm }}
       ANDROID_AVD_HOME: /home/runner/.android/avd
       ANDROID_USER_HOME: /home/runner/.android
     steps:
