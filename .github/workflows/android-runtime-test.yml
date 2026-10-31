@@ -13,6 +13,11 @@ on:
         required: false
         default: ''
         type: string
+      stock_control:
+        description: Test cryptographically verified unmodified original instead of the mod
+        required: false
+        default: false
+        type: boolean
 permissions:
   contents: write
 concurrency:
@@ -25,6 +30,7 @@ jobs:
     env:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
       TEST_BASE_OVERRIDE_ASSET: ${{ inputs.base_override_asset }}
+      TEST_STOCK_CONTROL: ${{ inputs.stock_control }}
       ANDROID_AVD_HOME: /home/runner/.android/avd
       ANDROID_USER_HOME: /home/runner/.android
     steps:
@@ -39,6 +45,11 @@ jobs:
           test -c /dev/kvm
           sudo chmod 666 /dev/kvm
           gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.xapk' --dir downloaded-game
+          if [ "$TEST_STOCK_CONTROL" = true ]; then
+            for name in stock-original-base.apk stock-original-config.apk stock-original-asset-layout.zip stock-original-manifest.json; do
+              gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$name" --dir downloaded-game
+            done
+          fi
           if [ -n "$TEST_BASE_OVERRIDE_ASSET" ]; then
             gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$TEST_BASE_OVERRIDE_ASSET" --output downloaded-game/candidate-base.apk
           fi
