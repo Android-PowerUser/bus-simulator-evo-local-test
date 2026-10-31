@@ -31,6 +31,7 @@ try:
  status['system_server_pid_before']=shell('pidof system_server')
  status['supported_abis']=shell('getprop ro.product.cpu.abilist')
  status['native_bridge']=shell('getprop ro.dalvik.vm.native.bridge')
+ status['android_sdk']=shell('getprop ro.build.version.sdk')
  shell('settings put global verifier_verify_adb_installs 0; settings put global package_verifier_enable 0',30)
  adb(['install','-r',str(R/'ci/control.apk')],90)
  status.update(state='control_installed',control_installed=True);save()
@@ -51,6 +52,7 @@ try:
  assert 'Success' in result,'No game install Success'
  status.update(state='game_installed',game_installed=True);save()
  adb(['logcat','-c'])
+ shell('setprop debug.ld.app.com.Ovilex.BusSimulator2023 dlopen,dlsym,dlerror',30,False)
  status.update(state='launching_game',game_launch_attempted=True);save()
  launch=shell('am start -W -n '+ACT,120,False)
  (D/'game-launch.txt').write_text(launch);status['launch_command_output']=launch
@@ -76,6 +78,8 @@ finally:
  for name,args in [('final-logcat.txt',['logcat','-b','all','-d']),('kernel.txt',['shell','dmesg']),('processes.txt',['shell','ps -A'])]:
   try:(D/name).write_text(adb(args,30,False))
   except Exception as e:(D/name).write_text(str(e))
+ try:adb(['pull','/data/tombstones',str(D/'tombstones')],60,False)
+ except Exception as e:print('TOMBSTONE_CAPTURE_FAILED',str(e),flush=True)
  save()
  if log:log.terminate()
  print('FINAL_STATUS',json.dumps(status),flush=True)
