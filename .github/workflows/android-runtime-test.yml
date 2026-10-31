@@ -28,13 +28,13 @@ jobs:
           set -euxo pipefail
           test -c /dev/kvm
           sudo chmod 666 /dev/kvm
-          "$ANDROID_HOME/emulator/emulator" -accel-check
           gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.xapk' --dir downloaded-game
       - name: Prepare Android 11 image with ARM64 translation
         run: |
           set -euxo pipefail
           SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
-          "$SDKMANAGER" 'platform-tools' 'emulator' 'system-images;android-30;google_apis;x86_64'
+          (yes || true) | "$SDKMANAGER" 'platform-tools' 'emulator' 'system-images;android-30;google_apis;x86_64'
+          "$ANDROID_HOME/emulator/emulator" -accel-check
           echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name BusRuntime --package 'system-images;android-30;google_apis;x86_64'
           cat >> "$HOME/.android/avd/BusRuntime.avd/config.ini" <<'AVD'
           hw.cpu.ncore=2
