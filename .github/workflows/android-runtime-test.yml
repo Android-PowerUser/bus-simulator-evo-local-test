@@ -8,6 +8,11 @@ on:
         required: true
         default: local-test-242-v8-lifecycle
         type: string
+      base_override_asset:
+        description: Optional candidate base APK asset in the same private release
+        required: false
+        default: ''
+        type: string
 permissions:
   contents: write
 concurrency:
@@ -19,6 +24,7 @@ jobs:
     timeout-minutes: 20
     env:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
+      TEST_BASE_OVERRIDE_ASSET: ${{ inputs.base_override_asset }}
       ANDROID_AVD_HOME: /home/runner/.android/avd
       ANDROID_USER_HOME: /home/runner/.android
     steps:
@@ -33,6 +39,9 @@ jobs:
           test -c /dev/kvm
           sudo chmod 666 /dev/kvm
           gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.xapk' --dir downloaded-game
+          if [ -n "$TEST_BASE_OVERRIDE_ASSET" ]; then
+            gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$TEST_BASE_OVERRIDE_ASSET" --output downloaded-game/candidate-base.apk
+          fi
       - name: Prepare Android 15 image with ARM64 translation
         run: |
           set -euxo pipefail
