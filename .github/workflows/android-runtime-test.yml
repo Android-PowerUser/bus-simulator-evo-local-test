@@ -9,7 +9,7 @@ on:
         default: local-test-242-v8-lifecycle
         type: string
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: bus-private-runtime
   cancel-in-progress: false
@@ -23,6 +23,8 @@ jobs:
       ANDROID_USER_HOME: /home/runner/.android
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Verify KVM and obtain private test package
         env:
           GH_TOKEN: ${{ github.token }}
@@ -31,14 +33,14 @@ jobs:
           test -c /dev/kvm
           sudo chmod 666 /dev/kvm
           gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.xapk' --dir downloaded-game
-      - name: Prepare Android 11 image with ARM64 translation
+      - name: Prepare Android 15 image with ARM64 translation
         run: |
           set -euxo pipefail
           SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
-          (yes || true) | "$SDKMANAGER" 'platform-tools' 'emulator' 'system-images;android-30;google_apis;x86_64'
+          (yes || true) | "$SDKMANAGER" 'platform-tools' 'emulator' 'system-images;android-35;google_apis;x86_64'
           "$ANDROID_HOME/emulator/emulator" -accel-check
           mkdir -p "$ANDROID_AVD_HOME" "$ANDROID_USER_HOME"
-          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name BusRuntime --path "$ANDROID_AVD_HOME/BusRuntime.avd" --package 'system-images;android-30;google_apis;x86_64'
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name BusRuntime --path "$ANDROID_AVD_HOME/BusRuntime.avd" --package 'system-images;android-35;google_apis;x86_64'
           cat >> "$ANDROID_AVD_HOME/BusRuntime.avd/config.ini" <<'AVD'
           hw.cpu.ncore=2
           hw.ramSize=3072
@@ -57,11 +59,17 @@ jobs:
           "$ANDROID_HOME/platform-tools/adb" start-server
           nohup "$ANDROID_HOME/emulator/emulator" -avd BusRuntime -no-window -no-audio -no-snapshot -no-boot-anim -accel on -memory 3072 -cores 2 -gpu swangle -feature -Vulkan -camera-back none -camera-front none -no-metrics > runtime-results/emulator.log 2>&1 &
           python3 ci/remote_android_runtime.py 2>&1 | tee runtime-results/test-console.txt
-      - name: Preserve private logs and screenshots
+      - name: Preserve logs and screenshots in private release
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-runtime-${{ github.run_id }}
-          path: runtime-results/
-          retention-days: 7
-          if-no-files-found: warn
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PYZIP'
+          import os, zipfile
+          from pathlib import Path
+          out=Path('runtime-'+os.environ['GITHUB_RUN_ID']+'.zip')
+          with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED) as z:
+              for p in Path('runtime-results').rglob('*'):
+                  if p.is_file(): z.write(p,str(p))
+          PYZIP
+          gh release upload "$TEST_RELEASE_TAG" "runtime-$GITHUB_RUN_ID.zip" --repo "$GITHUB_REPOSITORY"
