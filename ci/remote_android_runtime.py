@@ -12,6 +12,11 @@ def adb(args,timeout=30,check=True):
  if check and r.returncode:raise RuntimeError(f'ADB exit {r.returncode}: {r.stdout}')
  return r.stdout.strip()
 def shell(cmd,timeout=30,check=True):return adb(['shell',cmd],timeout,check)
+def adb_to_file(args,out_path,timeout=180):
+ r=subprocess.run([A,'-s','emulator-5554',*args],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=timeout)
+ Path(out_path).write_bytes(r.stdout)
+ print(time.strftime('%H:%M:%S'),'ADB->file',args,r.returncode,len(r.stdout),r.stderr[:200],flush=True)
+ return r.returncode,len(r.stdout)
 def screen(name):
  with (D/name).open('wb') as f:subprocess.run([A,'-s','emulator-5554','exec-out','screencap','-p'],stdout=f,timeout=30,check=True)
 log=None
@@ -85,6 +90,31 @@ try:
  status.update(state='launching_game',game_launch_attempted=True);save()
  launch=shell('am start -W -n '+ACT,120,False)
  (D/'game-launch.txt').write_text(launch);status['launch_command_output']=launch
+ if os.environ.get('TEST_DUMP_VM','').lower()=='true':
+  # PairIP runs its decrypted program from a memfd, which shows up as an
+  # anonymous executable mapping. Dump those mappings while the app is alive.
+  time.sleep(20)
+  pid=(shell('pidof '+PKG,30,False) or '').split()
+  status['vm_dump_app_pid']=pid[0] if pid else ''
+  if pid:
+   pid=pid[0]
+   maps=shell('cat /proc/'+pid+'/maps',60,False);(D/'app-maps.txt').write_text(maps)
+   results={}
+   index=0
+   for line in maps.splitlines():
+    parts=line.split()
+    if len(parts)<6 or 'x' not in parts[1]:continue
+    path=parts[-1]
+    if 'memfd' not in path and 'jit' not in path:continue
+    start,end=[int(x,16) for x in parts[0].split('-')]
+    if end-start>64*1024*1024 or end-start<4096:continue
+    name='vm-dump-%02d-%s-%s.bin'%(index,parts[0].replace('-','_'),'memfd' if 'memfd' in path else 'jit')
+    index+=1
+    rc,size=adb_to_file(['exec-out','su','0','dd','if=/proc/'+pid+'/mem','bs=4096','skip='+str(start//4096),'count='+str((end-start)//4096)],D/name,180)
+    results[name]={'maps_line':line.strip(),'vaddr':hex(start),'bytes':size,'exit':rc}
+   status['vm_dumps']=results;status['vm_dump_state']='saved';save()
+   try:screen('game-vm-dump.png')
+   except Exception as e:print('SCREENSHOT_FAILED',str(e),flush=True)
  for elapsed in [15,45,120]:
   time.sleep(elapsed-(0 if elapsed==15 else 15 if elapsed==45 else 45))
   pid=shell('pidof '+PKG,30,False)
