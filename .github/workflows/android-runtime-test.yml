@@ -19,8 +19,8 @@ jobs:
     timeout-minutes: 20
     env:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
-      ANDROID_AVD_HOME: ${{ runner.temp }}/bus-avd
-      ANDROID_USER_HOME: ${{ runner.temp }}/android-user
+      ANDROID_AVD_HOME: /home/runner/.android/avd
+      ANDROID_USER_HOME: /home/runner/.android
     steps:
       - uses: actions/checkout@v4
       - name: Verify KVM and obtain private test package
