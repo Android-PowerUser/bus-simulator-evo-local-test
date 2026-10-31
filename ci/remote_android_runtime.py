@@ -47,6 +47,29 @@ try:
  with zipfile.ZipFile(archive) as z:
   for name in ['com.Ovilex.BusSimulator2023.apk','config.arm64_v8a.apk','UnityDataAssetPack.apk']:
    z.extract(name,package_dir);apks.append(str(package_dir/name))
+ if os.environ.get('TEST_STOCK_CONTROL','').lower()=='true':
+  assert not os.environ.get('TEST_BASE_OVERRIDE_ASSET'),'Stock control and modified base are mutually exclusive'
+  manifest=json.loads((package_dir/'stock-original-manifest.json').read_text())
+  original_asset=package_dir/'stock-UnityDataAssetPack.apk'
+  with zipfile.ZipFile(package_dir/'stock-original-asset-layout.zip') as layout_zip, (package_dir/'UnityDataAssetPack.apk').open('rb') as source, original_asset.open('wb') as out:
+   layout=json.loads(layout_zip.read('layout.json'))
+   for part in layout['parts']:
+    assert out.tell()==part['offset']
+    if part['source']=='inline':out.write(layout_zip.read(part['path']))
+    else:
+     source.seek(part['local_offset']);left=part['size']
+     while left:
+      data=source.read(min(left,4*1024*1024));assert data;out.write(data);left-=len(data)
+   assert out.tell()==layout['size']
+  shutil.copyfile(package_dir/'stock-original-base.apk',package_dir/'com.Ovilex.BusSimulator2023.apk')
+  shutil.copyfile(package_dir/'stock-original-config.apk',package_dir/'config.arm64_v8a.apk')
+  original_asset.replace(package_dir/'UnityDataAssetPack.apk')
+  status['variant']='cryptographically_verified_unmodified_original_control'
+  status['installed_component_sha256']={}
+  for name,expected in manifest['component_sha256'].items():
+   with (package_dir/name).open('rb') as f:actual=hashlib.file_digest(f,'sha256').hexdigest()
+   assert actual==expected,'Original component hash mismatch: '+name
+   status['installed_component_sha256'][name]=actual
  candidate=package_dir/'candidate-base.apk'
  if os.environ.get('TEST_BASE_OVERRIDE_ASSET'):
   assert candidate.is_file(),'Requested candidate override was not downloaded'
