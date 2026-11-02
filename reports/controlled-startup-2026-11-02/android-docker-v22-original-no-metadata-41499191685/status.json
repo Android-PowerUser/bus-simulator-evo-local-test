@@ -1,0 +1,81 @@
+{
+  "release_tag": "local-test-242-v8-lifecycle",
+  "environment": "Docker / KVM / x86_64 API35 / google_apis_playstore / ARM64 native bridge / v22-original-no-metadata",
+  "android_serial": "emulator-5554",
+  "control_installed": true,
+  "control_launched": true,
+  "game_installed": true,
+  "game_launch_attempted": true,
+  "gameplay_verified": false,
+  "state": "app_crashed",
+  "money_abi_experiment": "",
+  "experimental_generic_guard": false,
+  "diagnostic_context_probe": false,
+  "boot_adb_disconnects": 2,
+  "system_server_pid_before": "553",
+  "supported_abis": "x86_64,arm64-v8a",
+  "native_bridge": "libndk_translation.so",
+  "android_sdk": "35",
+  "play_store_package": "package:/product/priv-app/Phonesky/Phonesky.apk\n    versionName=41.3.25-31 [0] [PR] 640531013",
+  "system_image_tag": "google_apis_playstore",
+  "control_ready_generation": "553",
+  "control_install_transport": "no_streaming",
+  "control_install_seconds": 3.083,
+  "system_server_pid_after_control_install": "553",
+  "control_package_paths": [
+    "/data/app/~~9KhzBieNNs_Irqwx0wClmw==/com.arena.installcontrol-8mYg9sf7vRhqMrUo20XmEQ==/base.apk"
+  ],
+  "variant": "genuine_original_signatures_application_metadata_removed_negative_control",
+  "original_source_component_sha256": {
+    "com.Ovilex.BusSimulator2023.apk": "3fdd3863d39e0e251cdfb7dbf421b595069e23681c9c4003c5db4eb8d3ffe388",
+    "config.arm64_v8a.apk": "1ec029e920de71615d8b333a2a3dc2efaaec549ac121d96c632a28c4672d5d2f",
+    "UnityDataAssetPack.apk": "25646655523e4e7d922fe25efa78ea04b8ec49fea9934d5a5e549a30a213a6b1"
+  },
+  "original_application_metadata_removed": {
+    "com.Ovilex.BusSimulator2023.apk": {
+      "removed_application_metadata_only": true,
+      "sha256": "5a854ae81188f9404628840ba54a3d5b866d0a21b03e74c85e794028ee6d1581",
+      "size": 41938,
+      "original_authentication_records_unmodified": true
+    },
+    "config.arm64_v8a.apk": {
+      "removed_application_metadata_only": true,
+      "sha256": "ba4bd0b5a5d5ba04467073b33c5ec20db604fe1a082e3f109d487a22f8ad1952",
+      "size": 40995,
+      "original_authentication_records_unmodified": true
+    },
+    "UnityDataAssetPack.apk": {
+      "removed_application_metadata_only": true,
+      "sha256": "2f28ccfff4752baf785aa304e52ee0493f02b249bc63f480aba1adcad1f04f32",
+      "size": 200,
+      "original_authentication_records_unmodified": true
+    }
+  },
+  "installed_component_sha256": {
+    "com.Ovilex.BusSimulator2023.apk": "8e1bf8cacffebbc8a256d481cab5725494f70583a88d643e4ceea90998614b51",
+    "config.arm64_v8a.apk": "f4ec2b4dff6105119a1a1977a88f23d3e90bf24ae6be483a9f5ea77237aa5bde",
+    "UnityDataAssetPack.apk": "a81be0690af38bbe5f56c9919752e1ee55177b8f73c385a0ded648f2f636e9c0"
+  },
+  "game_ready_generation": "553",
+  "game_install_transport": "no_streaming",
+  "game_install_seconds": 40.607,
+  "system_server_pid_after_game_install": "553",
+  "game_package_paths": [
+    "/data/app/~~R5gxeo7N9YaGxOFdTWbkeg==/com.Ovilex.BusSimulator2023-cp6JBmm21ypXlAj0muruCw==/base.apk",
+    "/data/app/~~R5gxeo7N9YaGxOFdTWbkeg==/com.Ovilex.BusSimulator2023-cp6JBmm21ypXlAj0muruCw==/split_UnityDataAssetPack.apk",
+    "/data/app/~~R5gxeo7N9YaGxOFdTWbkeg==/com.Ovilex.BusSimulator2023-cp6JBmm21ypXlAj0muruCw==/split_config.arm64_v8a.apk"
+  ],
+  "launch_command_output": "Starting: Intent { cmp=com.Ovilex.BusSimulator2023/com.google.firebase.MessagingUnityPlayerActivity }\nStatus: ok\nLaunchState: UNKNOWN (0)\nActivity: com.Ovilex.BusSimulator2023/com.google.firebase.MessagingUnityPlayerActivity\nWaitTime: 4387\nComplete",
+  "all_app_pids_at_15s": "",
+  "app_pid_at_15s": "",
+  "observation_seconds_at_15s": 15.08,
+  "system_server_pid_after": "553",
+  "foreground_activity": "topResumedActivity=ActivityRecord{1bf97f8 u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t7}",
+  "game_fatal_crash_seen": true,
+  "license_check_blocked": false,
+  "app_process_restarted": false,
+  "app_survived_120s": false,
+  "foreground_is_game": false,
+  "runtime_start_verified": false,
+  "app_liveness_verified": false
+}

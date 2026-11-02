@@ -1,0 +1,91 @@
+{
+  "release_tag": "local-test-242-v8-lifecycle",
+  "environment": "Docker / KVM / x86_64 API35 / google_apis_playstore / ARM64 native bridge / v22-resigned-original",
+  "android_serial": "emulator-5554",
+  "control_installed": true,
+  "control_launched": true,
+  "game_installed": true,
+  "game_launch_attempted": true,
+  "gameplay_verified": false,
+  "state": "app_crashed",
+  "money_abi_experiment": "",
+  "experimental_generic_guard": false,
+  "diagnostic_context_probe": false,
+  "boot_adb_disconnects": 1,
+  "system_server_pid_before": "551",
+  "supported_abis": "x86_64,arm64-v8a",
+  "native_bridge": "libndk_translation.so",
+  "android_sdk": "35",
+  "play_store_package": "package:/product/priv-app/Phonesky/Phonesky.apk\n    versionName=41.3.25-31 [0] [PR] 640531013",
+  "system_image_tag": "google_apis_playstore",
+  "control_ready_generation": "551",
+  "control_install_transport": "no_streaming",
+  "control_install_seconds": 1.727,
+  "system_server_pid_after_control_install": "551",
+  "control_package_paths": [
+    "/data/app/~~Wo1Umk_VoJLMqqPir2hChw==/com.arena.installcontrol-oqkxobMLkTO5bg7mVj25TQ==/base.apk"
+  ],
+  "variant": "original_initializers_preserved_resigned_experiment",
+  "original_init_experiment": "v22-resigned-original",
+  "original_source_component_sha256": {
+    "com.Ovilex.BusSimulator2023.apk": "3fdd3863d39e0e251cdfb7dbf421b595069e23681c9c4003c5db4eb8d3ffe388",
+    "config.arm64_v8a.apk": "1ec029e920de71615d8b333a2a3dc2efaaec549ac121d96c632a28c4672d5d2f",
+    "UnityDataAssetPack.apk": "25646655523e4e7d922fe25efa78ea04b8ec49fea9934d5a5e549a30a213a6b1"
+  },
+  "resign_keystore_asset": "repaired-test-signing-v1.jks",
+  "preserved_runtime_metadata": {
+    "com.Ovilex.BusSimulator2023.apk": {
+      "restored": true,
+      "id": "0xfa1cfabe",
+      "size": 41938,
+      "sha256": "5a854ae81188f9404628840ba54a3d5b866d0a21b03e74c85e794028ee6d1581",
+      "old_authentication_records_restored": false,
+      "inserted_before_verity_padding": true
+    },
+    "config.arm64_v8a.apk": {
+      "restored": true,
+      "id": "0xfa1cfabe",
+      "size": 40995,
+      "sha256": "ba4bd0b5a5d5ba04467073b33c5ec20db604fe1a082e3f109d487a22f8ad1952",
+      "old_authentication_records_restored": false,
+      "inserted_before_verity_padding": true
+    },
+    "UnityDataAssetPack.apk": {
+      "restored": true,
+      "id": "0xfa1cfabe",
+      "size": 200,
+      "sha256": "2f28ccfff4752baf785aa304e52ee0493f02b249bc63f480aba1adcad1f04f32",
+      "old_authentication_records_restored": false,
+      "inserted_before_verity_padding": true
+    }
+  },
+  "all_apks_resigned": true,
+  "resign_seconds": 25.616,
+  "installed_component_sha256": {
+    "com.Ovilex.BusSimulator2023.apk": "518fdc3787eb764a1798e704c309209e46ed8318a9ab3c1bad18d93ea2b1fff3",
+    "config.arm64_v8a.apk": "6a01ebc7b758d7b99afd333127c15cf391e7cf0e25b0d6e39f066bf5f080e050",
+    "UnityDataAssetPack.apk": "22f87ca923327fdb24a313777ef35c06a729baacd6f8466fc28fa613962560b3"
+  },
+  "game_ready_generation": "551",
+  "game_install_transport": "no_streaming",
+  "game_install_seconds": 24.826,
+  "system_server_pid_after_game_install": "551",
+  "game_package_paths": [
+    "/data/app/~~E_C_sG2nCrnxvAQiIB38IQ==/com.Ovilex.BusSimulator2023-t3SkbO4bvnWNgmChdldY8Q==/base.apk",
+    "/data/app/~~E_C_sG2nCrnxvAQiIB38IQ==/com.Ovilex.BusSimulator2023-t3SkbO4bvnWNgmChdldY8Q==/split_UnityDataAssetPack.apk",
+    "/data/app/~~E_C_sG2nCrnxvAQiIB38IQ==/com.Ovilex.BusSimulator2023-t3SkbO4bvnWNgmChdldY8Q==/split_config.arm64_v8a.apk"
+  ],
+  "launch_command_output": "Starting: Intent { cmp=com.Ovilex.BusSimulator2023/com.google.firebase.MessagingUnityPlayerActivity }\nStatus: ok\nLaunchState: UNKNOWN (0)\nActivity: com.Ovilex.BusSimulator2023/com.google.firebase.MessagingUnityPlayerActivity\nWaitTime: 3758\nComplete",
+  "all_app_pids_at_15s": "",
+  "app_pid_at_15s": "",
+  "observation_seconds_at_15s": 15.065,
+  "system_server_pid_after": "551",
+  "foreground_activity": "topResumedActivity=ActivityRecord{be91b81 u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t7}",
+  "game_fatal_crash_seen": true,
+  "license_check_blocked": false,
+  "app_process_restarted": false,
+  "app_survived_120s": false,
+  "foreground_is_game": false,
+  "runtime_start_verified": false,
+  "app_liveness_verified": false
+}

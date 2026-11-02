@@ -1,0 +1,92 @@
+INDEPENDENT_CONTROL original_apk=/home/user/.cache/apk-signing-audit/stock-original-base.apk library=/home/user/work-repo/reverse/pairip-inputs/libpairipcore.so resolver_api=23
+JNIEnv->FindClass(java/lang/Float) was called from RX@0x1206751c[libpairipcore.so]0x6751c
+JNIEnv->NewGlobalRef(class java/lang/Float) was called from RX@0x12067578[libpairipcore.so]0x67578
+JNIEnv->GetMethodID(java/lang/Float.<init>(F)V) => 0xcd2ab1b6 was called from RX@0x12067718[libpairipcore.so]0x67718
+JNIEnv->GetMethodID(java/lang/Float.floatValue()F) => 0x6ff98ad7 was called from RX@0x120678a4[libpairipcore.so]0x678a4
+JNIEnv->FindClass(java/lang/Double) was called from RX@0x12067a10[libpairipcore.so]0x67a10
+JNIEnv->NewGlobalRef(class java/lang/Double) was called from RX@0x12067a64[libpairipcore.so]0x67a64
+JNIEnv->GetMethodID(java/lang/Double.<init>(D)V) => 0xf1953c91 was called from RX@0x12067c04[libpairipcore.so]0x67c04
+JNIEnv->GetMethodID(java/lang/Double.doubleValue()D) => 0x8acb0bf9 was called from RX@0x12067d9c[libpairipcore.so]0x67d9c
+JNIEnv->FindClass(java/lang/Long) was called from RX@0x12067ee4[libpairipcore.so]0x67ee4
+JNIEnv->NewGlobalRef(class java/lang/Long) was called from RX@0x12067f38[libpairipcore.so]0x67f38
+JNIEnv->GetMethodID(java/lang/Long.<init>(J)V) => 0xb744a242 was called from RX@0x120680d8[libpairipcore.so]0x680d8
+JNIEnv->GetMethodID(java/lang/Long.longValue()J) => 0x44606195 was called from RX@0x12068250[libpairipcore.so]0x68250
+JNIEnv->FindClass(java/lang/Integer) was called from RX@0x120683c4[libpairipcore.so]0x683c4
+JNIEnv->NewGlobalRef(class java/lang/Integer) was called from RX@0x12068418[libpairipcore.so]0x68418
+JNIEnv->GetMethodID(java/lang/Integer.<init>(I)V) => 0x4c76e5db was called from RX@0x120685b8[libpairipcore.so]0x685b8
+JNIEnv->GetMethodID(java/lang/Integer.intValue()I) => 0x5d9f068b was called from RX@0x1206872c[libpairipcore.so]0x6872c
+JNIEnv->FindClass(java/lang/Short) was called from RX@0x12068888[libpairipcore.so]0x68888
+JNIEnv->NewGlobalRef(class java/lang/Short) was called from RX@0x120688dc[libpairipcore.so]0x688dc
+JNIEnv->GetMethodID(java/lang/Short.<init>(S)V) => 0x5f3e14a3 was called from RX@0x12068a7c[libpairipcore.so]0x68a7c
+JNIEnv->GetMethodID(java/lang/Short.shortValue()S) => 0x8e90e6e4 was called from RX@0x12068c10[libpairipcore.so]0x68c10
+JNIEnv->FindClass(java/lang/Byte) was called from RX@0x12068d60[libpairipcore.so]0x68d60
+JNIEnv->NewGlobalRef(class java/lang/Byte) was called from RX@0x12068db4[libpairipcore.so]0x68db4
+JNIEnv->GetMethodID(java/lang/Byte.<init>(B)V) => 0xd850acc6 was called from RX@0x12068f54[libpairipcore.so]0x68f54
+JNIEnv->GetMethodID(java/lang/Byte.byteValue()B) => 0x6832e5a5 was called from RX@0x120690cc[libpairipcore.so]0x690cc
+JNIEnv->FindClass(java/lang/Character) was called from RX@0x12069260[libpairipcore.so]0x69260
+JNIEnv->NewGlobalRef(class java/lang/Character) was called from RX@0x120692b4[libpairipcore.so]0x692b4
+JNIEnv->GetMethodID(java/lang/Character.<init>(C)V) => 0xb8bf4dc0 was called from RX@0x12069454[libpairipcore.so]0x69454
+JNIEnv->GetMethodID(java/lang/Character.charValue()C) => 0x71f71ced was called from RX@0x120695cc[libpairipcore.so]0x695cc
+JNIEnv->FindClass(java/lang/Boolean) was called from RX@0x1206973c[libpairipcore.so]0x6973c
+JNIEnv->NewGlobalRef(class java/lang/Boolean) was called from RX@0x12069790[libpairipcore.so]0x69790
+JNIEnv->GetMethodID(java/lang/Boolean.<init>(Z)V) => 0x13d20196 was called from RX@0x12069930[libpairipcore.so]0x69930
+JNIEnv->GetMethodID(java/lang/Boolean.booleanValue()Z) => 0x31f67dab was called from RX@0x12069ad4[libpairipcore.so]0x69ad4
+JNIEnv->FindClass(android/content/Intent) was called from RX@0x12085d58[libpairipcore.so]0x85d58
+JNIEnv->NewGlobalRef(class android/content/Intent) was called from RX@0x12085db4[libpairipcore.so]0x85db4
+JNIEnv->GetMethodID(android/content/Intent.<init>(Ljava/lang/String;)V) => 0xc14c8f0a was called from RX@0x12086048[libpairipcore.so]0x86048
+JNIEnv->GetMethodID(android/content/Intent.setFlags(I)Landroid/content/Intent;) => 0xeac747fd was called from RX@0x1208632c[libpairipcore.so]0x8632c
+JNIEnv->GetMethodID(android/content/Intent.getFlags()I) => 0x41b02734 was called from RX@0x120864ac[libpairipcore.so]0x864ac
+JNIEnv->GetMethodID(android/content/Intent.putExtra(Ljava/lang/String;I)Landroid/content/Intent;) => 0x4598310b was called from RX@0x12086874[libpairipcore.so]0x86874
+JNIEnv->GetMethodID(android/content/Intent.putExtra(Ljava/lang/String;Ljava/lang/CharSequence;)Landroid/content/Intent;) => 0x3eebcf34 was called from RX@0x12086c30[libpairipcore.so]0x86c30
+JNIEnv->GetMethodID(android/content/Intent.putExtra(Ljava/lang/String;[B)Landroid/content/Intent;) => 0x3f448971 was called from RX@0x12087018[libpairipcore.so]0x87018
+JNIEnv->GetMethodID(android/content/Intent.hasExtra(Ljava/lang/String;)Z) => 0xb199732a was called from RX@0x12087294[libpairipcore.so]0x87294
+JNIEnv->GetMethodID(android/content/Intent.getIntExtra(Ljava/lang/String;I)I) => 0xddd1beeb was called from RX@0x1208753c[libpairipcore.so]0x8753c
+JNIEnv->GetMethodID(android/content/Intent.getStringExtra(Ljava/lang/String;)Ljava/lang/String;) => 0x50d0196d was called from RX@0x120878ec[libpairipcore.so]0x878ec
+JNIEnv->GetMethodID(android/content/Intent.getByteArrayExtra(Ljava/lang/String;)[B) => 0xf089e310 was called from RX@0x12087be8[libpairipcore.so]0x87be8
+JNIEnv->GetMethodID(android/content/Intent.getAction()Ljava/lang/String;) => 0x97c9cdf4 was called from RX@0x12087e64[libpairipcore.so]0x87e64
+JNIEnv->GetMethodID(android/content/Intent.setPackage(Ljava/lang/String;)Landroid/content/Intent;) => 0xdc07815b was called from RX@0x1208823c[libpairipcore.so]0x8823c
+JNIEnv->GetMethodID(android/content/Intent.getPackage()Ljava/lang/String;) => 0x9401907e was called from RX@0x120884c4[libpairipcore.so]0x884c4
+JNIEnv->GetMethodID(android/content/Intent.setData(Landroid/net/Uri;)Landroid/content/Intent;) => 0xf4fd0ed8 was called from RX@0x1208884c[libpairipcore.so]0x8884c
+JNIEnv->GetMethodID(android/content/Intent.getData()Landroid/net/Uri;) => 0x6d57ceaf was called from RX@0x12088a88[libpairipcore.so]0x88a88
+JNIEnv->FindClass(android/net/Uri) was called from RX@0x12088bf4[libpairipcore.so]0x88bf4
+JNIEnv->NewGlobalRef(class android/net/Uri) was called from RX@0x12088c48[libpairipcore.so]0x88c48
+JNIEnv->GetStaticMethodID(android/net/Uri.parse(Ljava/lang/String;)Landroid/net/Uri;) => 0xbd1820e was called from RX@0x12088fb4[libpairipcore.so]0x88fb4
+JNIEnv->GetMethodID(android/net/Uri.toString()Ljava/lang/String;) => 0xfddb2922 was called from RX@0x12089218[libpairipcore.so]0x89218
+JNIEnv->GetStaticFieldID(android/content/Intent.FLAG_ACTIVITY_NEW_TASKI) => 0x413c8df3 was called from RX@0x1208944c[libpairipcore.so]0x8944c
+JNIEnv->GetStaticFieldID(android/content/Intent.ACTION_VIEWLjava/lang/String;) => 0x31353599 was called from RX@0x120896dc[libpairipcore.so]0x896dc
+JNIEnv->FindClass(android/content/Context) was called from RX@0x1208a44c[libpairipcore.so]0x8a44c
+JNIEnv->NewGlobalRef(class android/content/Context) was called from RX@0x1208a4a8[libpairipcore.so]0x8a4a8
+JNIEnv->GetMethodID(android/content/Context.sendBroadcast(Landroid/content/Intent;)V) => 0xc46b4643 was called from RX@0x1208a800[libpairipcore.so]0x8a800
+JNIEnv->GetMethodID(android/content/Context.startActivity(Landroid/content/Intent;)V) => 0x44d9f3cb was called from RX@0x1208ab1c[libpairipcore.so]0x8ab1c
+JNIEnv->FindClass(com/pairip/VMRunner) was called from RX@0x1208ce58[libpairipcore.so]0x8ce58
+JNIEnv->NewGlobalRef(class com/pairip/VMRunner) was called from RX@0x1208ac20[libpairipcore.so]0x8ac20
+JNIEnv->GetStaticMethodID(com/pairip/VMRunner.invoke(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;) => 0x8be6d930 was called from RX@0x1208af2c[libpairipcore.so]0x8af2c
+JNIEnv->GetStaticMethodID(com/pairip/VMRunner.getContext()Landroid/content/Context;) => 0x2f27c45c was called from RX@0x1208b20c[libpairipcore.so]0x8b20c
+JNIEnv->FindClass(com/pairip/VMRunner) was called from RX@0x1208ce58[libpairipcore.so]0x8ce58
+JNIEnv->RegisterNatives(com/pairip/VMRunner, unidbg@0xe4fff680, 1) was called from RX@0x1208b76c[libpairipcore.so]0x8b76c
+RegisterNative(com/pairip/VMRunner, executeVM([B[Ljava/lang/Object;)Ljava/lang/Object;, RX@0x1206a61c[libpairipcore.so]0x6a61c)
+PHASE_END JNI_OnLoad pc=7ffff0000 sentinel=7ffff0000
+JNI_ONLOAD_COMPLETED backend=com.github.unidbg.arm.backend.Unicorn2Backend@28701274
+Find native function Java_com_pairip_VMRunner_executeVM => RX@0x1206a61c[libpairipcore.so]0x6a61c
+JNIEnv->GetArrayLength([B@292b08d6 => 433322) was called from RX@0x1206a66c[libpairipcore.so]0x6a66c
+JNIEnv->GetByteArrayRegion([B@292b08d6, 0, 433322, RW@0x12400000) was called from RX@0x1206a6ac[libpairipcore.so]0x6a6ac
+[main] INFO com.github.unidbg.linux.ARM64SyscallHandler - fork
+[main] INFO com.github.unidbg.spi.Dlfcn - Find symbol "__system_property_read_callback" failed: handle=0x120c0000, LR=RX@0x1202c6d8[libpairipcore.so]0x2c6d8
+JNIEnv->NewStringUTF("/proc/self/maps") was called from RX@0x12075064[libpairipcore.so]0x75064
+JNIEnv->FindClass(java/io/File) was called from RX@0x1208c804[libpairipcore.so]0x8c804
+JNIEnv->GetMethodID(java/io/File.<init>(Ljava/lang/String;)V) => 0x6f64784 was called from RX@0x1208c510[libpairipcore.so]0x8c510
+JNIEnv->NewObjectA(class java/io/File, <init>("/proc/self/maps") => java.io.File@1165b38) was called from RX@0x1206ffd0[libpairipcore.so]0x6ffd0
+JNIEnv->FindClass(java/io/File) was called from RX@0x1208c804[libpairipcore.so]0x8c804
+JNIEnv->GetMethodID(java/io/File.length()J) => 0x37de7b3a was called from RX@0x1208c510[libpairipcore.so]0x8c510
+JNIEnv->CallLongMethodA(java.io.File@1165b38, length() => 0x0L) was called from RX@0x1206de60[libpairipcore.so]0x6de60
+JNIEnv->NewStringUTF("/proc/self/status") was called from RX@0x12075064[libpairipcore.so]0x75064
+JNIEnv->FindClass(java/io/File) was called from RX@0x1208c804[libpairipcore.so]0x8c804
+JNIEnv->NewObjectA(class java/io/File, <init>("/proc/self/status") => java.io.File@7586beff) was called from RX@0x1206ffd0[libpairipcore.so]0x6ffd0
+JNIEnv->CallLongMethodA(java.io.File@7586beff, length() => 0x0L) was called from RX@0x1206de60[libpairipcore.so]0x6de60
+[main] WARN com.github.unidbg.arm.AbstractARM64Emulator - Read memory failed: address=0xc3ca6da6208a374d, size=8, value=0x0
+[main] WARN com.github.unidbg.AbstractEmulator - emulate RX@0x1206a61c[libpairipcore.so]0x6a61c exception sp=unidbg@0xe4ffeba0, msg=unicorn.UnicornException: Invalid memory read (UC_ERR_READ_UNMAPPED), offset=66ms @ Runnable|Function64 address=0x1206a61c, arguments=[unidbg@0xfffe1640, 941042951, 1011279482, null]
+PHASE_END ERz startup pc=1208d188 sentinel=7ffff0000
+Exception in thread "main" java.lang.IllegalStateException: ERz startup did not reach the return sentinel
+	at PairipNativeControl.requireReturn(PairipNativeControl.java:72)
+	at PairipNativeControl.run(PairipNativeControl.java:83)
+	at PairipNativeControl.main(PairipNativeControl.java:90)

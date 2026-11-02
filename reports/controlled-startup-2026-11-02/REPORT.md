@@ -138,3 +138,59 @@ monotoner Uhr läuft separat; unveränderte VM-Guards.
 Parallel wird ein zweites, unverändertes Android-Nativemodell mit Unidbg
 aufgebaut, um Fehler der handgeschriebenen libc/JNI-Stubs zu isolieren.
 API23-Resolver ist eine Einschränkung, kein Android15-Nachweis.
+
+## v22: Originalsignatur trennt Metadatenverlust von Neusignierung
+
+Run **41499191685**, Commit5358b50: drei APK-Sets erfolgreich installiert,
+aber alle am selben PairIP+55b3c-Pfad abgestürzt. Gleiche X1=9bfa61445886b4d9,
+X23=6aeced7847b53da3; kein Unity-/Gameplaynachweis.
+
+1. Unveränderte Originalinhalte neu signiert, fa1cfabe diesmal korrekt VOR
+   abschließendem Verity-Padding: Crash.
+2. Geld-only mit ursprünglichem Initializer und derselben Metadatenfolge: Crash.
+3. **Nur fa1cfabe aus allen drei authentischen Original-APKs entfernt**:
+   ebenfalls derselbe Crash. Original-v2/v3-Signaturdaten und SourceStamp bleiben
+   unverändert; apksigner bestätigt sie. Keine neue Signeridentität in Kontrolle3.
+
+Damit genügt Metadatenentfernung für diesen Fehler, ohne Neusignierung oder
+Geldänderung. Umgekehrt ist Wiederherstellen dieses Records in anders gepackte,
+neu signierte Dateien noch keine Reparatur. Weitere Verpackungsunterschiede
+bleiben zu kontrollieren. Insbesondere V21s Platzierung NACH Padding war kein
+sauberer Ausschluss der Metadatenhypothese; V22 korrigiert diesen Teil.
+
+### V23: Noch eine reale Verpackungsdifferenz entdeckt
+
+Bisheriger apksigner-Aufruf aktiviert v1 und richtet Dateien neu aus.
+Beim exakten Offline-Nachbau unterscheiden sich deshalb nicht nur Signaturen,
+sondern ab Dateioffset14057 auch ZIP-Header/Payloadpositionen. Das Wiederherstellen
+von dekomprimierten Dateiinhalten beweist keine unveränderte rohe ZIP-Struktur.
+
+`--alignment-preserved true --v1-signing-enabled false` lässt beim Original-Basis-
+APK dagegen den **gesamten 60,309,504Byte langen Präfix vor dem Signing-Block
+bytegleich**, einschließlich sämtlicher lokaler Header und Originaldatei-
+positionen. SHA256=7556a007a75c1bc4c81a70a9494b324a3f6165ac0dff42a0d14dea58b5f215b2.
+Fa1cfabe wird anschließend wieder vor Padding eingesetzt. APK-v2/v3 prüft
+korrekt mit dem neuen Testschlüssel; keine alten Authentisierungsrecords kopiert.
+
+Run41500435000 auf62f3b67 vergleicht diesen kontrollierten Neu-Signer mit dem
+unveränderten Original im selben offiziellen Play-Systemimage. Prüfung bricht
+ab, falls in IRGENDEINEM der3Splits der rohe Präfix nicht bytegleich bleibt.
+**Android-Ergebnis noch ausstehend.** Keine Geldvariante in dieser Isolation.
+
+### Hostmodell: gültiger Zeilenvergleich und unabhängiger Loader
+
+Der streng geprüfte 49/69-A/B mit monotoner Uhr/synthetischem Procmodell endet
+beidseits nach8,751,970Instruktionen und7459VM-Schritten an55b3c, Ziel-R/W0.
+Zeilenkorrektur allein löst diesen Modellfehler nicht.
+
+Unidbg e0d88a900ae9d197c325af8d6a5875ee9958b724 baut mit SHA-geprüftem
+Temurin17.0.21+9. Alte SLF4J-Bindings entfernt, konsistentesAPI/Simple1.7.36.
+**JNI_OnLoad erreicht wirklich Rückkehr-PC7ffff0000** und registriert executeVM
+an+6a61c. ERz-Startup dagegen erreicht nach fork=-ENOSYS/proc-JNI einen anderen
+unmapped-read-Fehler beiPairIP+8d188 (Adressec3ca6da6208a374d), NICHT Rückkehr.
+Der neue PC-Sentinelvertrag verweigert ausdrücklich STARTUP_RETURNED.
+
+API23-Bionic ist unterhalb des Original-minSdk24 und nicht Android15:
+Dieser unabhängige Loader ist nur Bootstrap-/Modell-Diagnose, kein Beweis
+für die Android-Ursache und keine Reparatur. Vollständiges Log und komprimierte
+streng geprüfte Host-A/B-Logs liegen im Unterordnerindependent-native-model.
