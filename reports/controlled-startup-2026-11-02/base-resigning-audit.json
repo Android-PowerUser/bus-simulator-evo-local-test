@@ -1,0 +1,76 @@
+{
+  "original_sha256": "3fdd3863d39e0e251cdfb7dbf421b595069e23681c9c4003c5db4eb8d3ffe388",
+  "resigned_sha256": "df3b9610c4500b2ddde955329ab54ac489552be65fd48e21eaede10501550675",
+  "original_blocks": [
+    {
+      "id": "0x7109871a",
+      "name": "APK Signature Scheme v2",
+      "size": 2623,
+      "sha256": "65d19bfcbf81ae79dcb4886ae83d6b86001a781c32fc1fb1cc463b6c33960aa9"
+    },
+    {
+      "id": "0xf05368c0",
+      "name": "APK Signature Scheme v3",
+      "size": 2623,
+      "sha256": "6b98612fbbf18542cb2e294ef13e6a3fd9bfd568fabeae13038ada02dda2bec3"
+    },
+    {
+      "id": "0x6dff800d",
+      "name": "source stamp",
+      "size": 3057,
+      "sha256": "8bac0cdc7ebfeac1e3180040206cb4e8cb20915f4d74eb843f3ef4b7956e1204"
+    },
+    {
+      "id": "0xfa1cfabe",
+      "name": "unidentified",
+      "size": 41938,
+      "sha256": "5a854ae81188f9404628840ba54a3d5b866d0a21b03e74c85e794028ee6d1581"
+    },
+    {
+      "id": "0x2146444e",
+      "name": "unidentified",
+      "size": 515,
+      "sha256": "5ceab18440cd5e481414108b5eca2047728707430105b49a02a7ad827b2157dc"
+    },
+    {
+      "id": "0x42726577",
+      "name": "verity padding",
+      "size": 2388,
+      "sha256": "b07c714d2d8a99508c69bed6c130eada244ded0a21fc033c41054814e8169327"
+    }
+  ],
+  "resigned_blocks": [
+    {
+      "id": "0x7109871a",
+      "name": "APK Signature Scheme v2",
+      "size": 1412,
+      "sha256": "56113a099ae03bc845796e1c96cd7237a8597c1a50d06ce128b4aa0a8b36f051"
+    },
+    {
+      "id": "0xf05368c0",
+      "name": "APK Signature Scheme v3",
+      "size": 1412,
+      "sha256": "93662cc58005f8402a3bd8cabbe9f1b8c51cbd33a7163e7f11e751c850f7bb5f"
+    },
+    {
+      "id": "0x42726577",
+      "name": "verity padding",
+      "size": 1204,
+      "sha256": "3b17f8b83bec3e72acd0d014f58e7de206106a7644bf3293f93c7456ced47419"
+    }
+  ],
+  "removed_block_ids": [
+    "0x2146444e",
+    "0x6dff800d",
+    "0xfa1cfabe"
+  ],
+  "added_block_ids": [],
+  "payload_entries_before": 1661,
+  "payload_entries_after": 1660,
+  "changed_payloads": [],
+  "removed_payloads": [
+    "stamp-cert-sha256"
+  ],
+  "added_payloads": [],
+  "signature_validity_not_checked_by_this_parser": true
+}

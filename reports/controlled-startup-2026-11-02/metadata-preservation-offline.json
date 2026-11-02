@@ -1,0 +1,11 @@
+{
+  "record": {
+    "restored": true,
+    "id": "0xfa1cfabe",
+    "size": 41938,
+    "sha256": "5a854ae81188f9404628840ba54a3d5b866d0a21b03e74c85e794028ee6d1581",
+    "old_authentication_records_restored": false
+  },
+  "apksigner_verification": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): true\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\nSigner #1 certificate DN: CN=Repaired Local Test Build\nSigner #1 certificate SHA-256 digest: 44bc86620764b23f932bd588b283887f47498df379e8abe1c72362c4948c03a4\nSigner #1 certificate SHA-1 digest: b42a0d7a00d97775a8d04435e8d820bebf4a74cf\nSigner #1 certificate MD5 digest: 2bafa8f08920bb188aa0d38da427bac5\nSigner #1 key algorithm: RSA\nSigner #1 key size (bits): 2048\nSigner #1 public key SHA-256 digest: 965687f54b507b20cf463f8fea4f3908df587e5697f03f30f1ed5ae490ea94e6\nSigner #1 public key SHA-1 digest: 0a275b93b044c5aafca2fad3ef9eb56898f99998\nSigner #1 public key MD5 digest: 49e5f6885d17adf999419d134864b51f\n",
+  "original_authentication_not_spoofed": true
+}

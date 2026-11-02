@@ -85,3 +85,33 @@ beobachtet; v17/v18/v19 weiter keine Reparaturen. Für eine regulär
 reproduzierbare vollständige Spielprüfung ist eine berechtigte,
 angemeldete Play-Umgebung beziehungsweise ein geeigneter autorisierter
 Testbuild nötig. Die vorliegenden Werkzeuge besitzen diese nicht.
+
+
+## v20: Rückkehr zur Originalinitialisierung allein genügt nicht
+
+Run41495056787, Commit56261bf: sogar komplett unveränderte App-Inhalte
+mit bloßer Neusignierung stürzen nach4s in PairIP+0x55b3c ab. Geld-only-
+Variante mit intaktem DT_INIT erreicht exakt denselben ARM64-Fehlerpfad.
+Wieder gleiche ungültige Pfadvariable0x9bfa61445886b4d9 und Hashlänge
+0xffffaa4a wie im Hostemulator. Kein Unity-/IL2CPP-Start in diesen Varianten.
+
+### Neue konkrete Verpackungsdifferenz gefunden
+
+Lokale Neusignierung mit dem identischen Release-Testschlüssel produziert
+**exakt denselben Basis-APK-SHA256** wie beide Actions-Jobs:
+df3b9610c4500b2ddde955329ab54ac489552be65fd48e21eaede10501550675.
+Alle1660 gemeinsamen Nicht-META-INF-Payloads sind unverändert. Entfernt
+wurden aber stamp-cert-sha256 und drei Signing-Block-Einträge, darunter
+**0xfa1cfabe,41938Bytes**. Exakt diese ID liegt in BEIDEN Original-VM-Assets
+als32bitLiteral vor (ERz+0x1de4a,AYum+0xdaa3). Das ist eine konkrete,
+vorher nicht getrennt untersuchte Laufzeitdaten-Differenz.
+
+V21 erhält ausschließlich den opaken App-Datensatz0xfa1cfabe. Keine
+Original-v2/v3-Signatur, kein SourceStamp und kein anderer Authentisierungs-
+Datensatz wird übernommen. APK-Überprüfung nach Wiederherstellung besteht
+weiter mit genau EINEM neuen Test-Signer44bc8662…; kein Original-Signer
+und SourceStamp=false. Dies ist kein positiver Lizenznachweis.
+
+Offline-Roundtrip und37Tests grün. Android-Ergebnis für v21 noch offen;
+fehlende Metadaten sind eine Hypothese, keine bereits bewiesene Reparatur.
+Audit-JSONs dokumentieren entfernte Blöcke und echte APK-Signerprüfung.

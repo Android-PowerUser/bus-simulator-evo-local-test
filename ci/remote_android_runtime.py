@@ -103,7 +103,7 @@ def install_and_verify(label,args,package,min_paths,timeout):
  if allow_restart and final_pid:status['system_server_pid_before']=final_pid
  save()
  return result
-def resign_test_apks(apks,keystore):
+def resign_test_apks(apks,keystore,metadata=None):
  tools=sorted((Path(os.environ['ANDROID_HOME'])/'build-tools').glob('*/apksigner'))
  if not tools:raise RuntimeError('apksigner not found')
  signer=str(tools[-1]);password=os.environ.get('TEST_KEYSTORE_PASSWORD','changeit');alias=os.environ.get('TEST_KEY_ALIAS','repaired')
@@ -113,6 +113,9 @@ def resign_test_apks(apks,keystore):
   print(time.strftime('%H:%M:%S'),'RESIGN',apk.name,flush=True)
   subprocess.run([signer,'sign','--ks',str(keystore),'--ks-pass','pass:'+password,'--key-pass','pass:'+password,'--ks-key-alias',alias,'--v1-signing-enabled','true','--v2-signing-enabled','true','--v3-signing-enabled','true','--out',str(out),str(apk)],timeout=300,check=True)
   out.replace(apk)
+  if metadata is not None:
+   from apk_runtime_metadata import restore
+   status.setdefault('preserved_runtime_metadata',{})[apk.name]=restore(apk,metadata.get(apk.name));save()
   subprocess.run([signer,'verify','--verbose','--print-certs',str(apk)],timeout=60,check=True)
  status['all_apks_resigned']=True;status['resign_seconds']=round(time.monotonic()-started,3);save()
 log=None
@@ -196,14 +199,21 @@ try:
    with (package_dir/name).open('rb') as f:actual=hashlib.file_digest(f,'sha256').hexdigest()
    assert actual==expected,'Original component hash mismatch: '+name
    status['installed_component_sha256'][name]=actual
+ runtime_metadata=None
+ if os.environ.get('TEST_PRESERVE_RUNTIME_METADATA','').lower()=='true':
+  assert os.environ.get('TEST_STOCK_CONTROL','').lower()=='true'
+  from apk_runtime_metadata import extract
+  runtime_metadata={}
+  for name in ('com.Ovilex.BusSimulator2023.apk','config.arm64_v8a.apk','UnityDataAssetPack.apk'):
+   runtime_metadata[name]=extract(package_dir/name)
  original_init_variant=os.environ.get('TEST_ORIGINAL_INIT_VARIANT','')
  if original_init_variant:
-  if original_init_variant not in ('v20-resigned-original','v20-original-init-million'):raise ValueError('Unknown original-init experiment')
+  if original_init_variant not in ('v20-resigned-original','v20-original-init-million','v21-resigned-original','v21-original-init-million'):raise ValueError('Unknown original-init experiment')
   assert os.environ.get('TEST_STOCK_CONTROL','').lower()=='true'
   status['original_init_experiment']=original_init_variant
   status['original_source_component_sha256']=status.pop('installed_component_sha256')
   status['variant']='original_initializers_preserved_resigned_experiment'
-  if original_init_variant=='v20-original-init-million':
+  if original_init_variant.endswith('original-init-million'):
    from build_original_init_money import build
    target=package_dir/'config.arm64_v8a.apk';temporary=package_dir/'money-only-config.apk'
    status['money_only_patch']=build(target,temporary);temporary.replace(target)
@@ -222,7 +232,7 @@ try:
   shutil.copyfile(config_candidate,package_dir/'config.arm64_v8a.apk')
  if os.environ.get('TEST_RESIGN_KEYSTORE_ASSET'):
   keystore=package_dir/'test-signing.jks';assert keystore.is_file(),'Requested test keystore was not downloaded'
-  status['resign_keystore_asset']=os.environ['TEST_RESIGN_KEYSTORE_ASSET'];save();resign_test_apks(apks,keystore)
+  status['resign_keystore_asset']=os.environ['TEST_RESIGN_KEYSTORE_ASSET'];save();resign_test_apks(apks,keystore,runtime_metadata)
   status['installed_component_sha256']={}
   for apk in map(Path,apks):
    with apk.open('rb') as f:status['installed_component_sha256'][apk.name]=hashlib.file_digest(f,'sha256').hexdigest()

@@ -1,0 +1,84 @@
+{
+  "release_tag": "local-test-242-v8-lifecycle",
+  "environment": "Docker / KVM / x86_64 API35 / google_apis_playstore / ARM64 native bridge / v20-original-init-million",
+  "android_serial": "emulator-5554",
+  "control_installed": true,
+  "control_launched": true,
+  "game_installed": true,
+  "game_launch_attempted": true,
+  "gameplay_verified": false,
+  "state": "app_crashed",
+  "money_abi_experiment": "",
+  "experimental_generic_guard": false,
+  "diagnostic_context_probe": false,
+  "boot_adb_disconnects": 1,
+  "system_server_pid_before": "550",
+  "supported_abis": "x86_64,arm64-v8a",
+  "native_bridge": "libndk_translation.so",
+  "android_sdk": "35",
+  "play_store_package": "package:/product/priv-app/Phonesky/Phonesky.apk\n    versionName=41.3.25-31 [0] [PR] 640531013",
+  "system_image_tag": "google_apis_playstore",
+  "control_ready_generation": "550",
+  "control_install_transport": "no_streaming",
+  "control_install_seconds": 3.32,
+  "system_server_pid_after_control_install": "550",
+  "control_package_paths": [
+    "/data/app/~~YyYAiaN4av4UzXGQnIdUrw==/com.arena.installcontrol-B_BlWAL2PU4BkMz0ZIWzpA==/base.apk"
+  ],
+  "variant": "original_initializers_preserved_resigned_experiment",
+  "original_init_experiment": "v20-original-init-million",
+  "original_source_component_sha256": {
+    "com.Ovilex.BusSimulator2023.apk": "3fdd3863d39e0e251cdfb7dbf421b595069e23681c9c4003c5db4eb8d3ffe388",
+    "config.arm64_v8a.apk": "1ec029e920de71615d8b333a2a3dc2efaaec549ac121d96c632a28c4672d5d2f",
+    "UnityDataAssetPack.apk": "25646655523e4e7d922fe25efa78ea04b8ec49fea9934d5a5e549a30a213a6b1"
+  },
+  "money_only_patch": {
+    "experimental": true,
+    "source_sha256": "40c4ae6f4f2563ce0089e7a07055ff6e919ba0390b00610008c5c3fe6061cd61",
+    "sha256": "a8837068f5be5363258494683178e9ada11e615b380af6ec573bf8897c1dbb4b",
+    "money_value": 1000000,
+    "original_dt_init_preserved": true,
+    "data_sections_unmodified": true,
+    "modified_file_ranges": [
+      [
+        39860468,
+        39860476
+      ],
+      [
+        94326720,
+        94326732
+      ]
+    ],
+    "license_checks_bypassed": false
+  },
+  "resign_keystore_asset": "repaired-test-signing-v1.jks",
+  "all_apks_resigned": true,
+  "resign_seconds": 15.388,
+  "installed_component_sha256": {
+    "com.Ovilex.BusSimulator2023.apk": "df3b9610c4500b2ddde955329ab54ac489552be65fd48e21eaede10501550675",
+    "config.arm64_v8a.apk": "f2a6b05c2f7108e15cbb711b9e1527196a13826f50b91bc6b26abe47e67af4f3",
+    "UnityDataAssetPack.apk": "8072cb10d98504528f3fdf1a8ba61c0f86b219e1642863ac9d3bbbc3ae692eae"
+  },
+  "game_ready_generation": "550",
+  "game_install_transport": "no_streaming",
+  "game_install_seconds": 24.204,
+  "system_server_pid_after_game_install": "550",
+  "game_package_paths": [
+    "/data/app/~~jBOiyoNnr4y_fKqeHiftgA==/com.Ovilex.BusSimulator2023-gBug3XVADysSKTRO4Afv0Q==/base.apk",
+    "/data/app/~~jBOiyoNnr4y_fKqeHiftgA==/com.Ovilex.BusSimulator2023-gBug3XVADysSKTRO4Afv0Q==/split_UnityDataAssetPack.apk",
+    "/data/app/~~jBOiyoNnr4y_fKqeHiftgA==/com.Ovilex.BusSimulator2023-gBug3XVADysSKTRO4Afv0Q==/split_config.arm64_v8a.apk"
+  ],
+  "launch_command_output": "Starting: Intent { cmp=com.Ovilex.BusSimulator2023/com.google.firebase.MessagingUnityPlayerActivity }\nStatus: ok\nLaunchState: UNKNOWN (0)\nActivity: com.Ovilex.BusSimulator2023/com.google.firebase.MessagingUnityPlayerActivity\nWaitTime: 1914\nComplete",
+  "all_app_pids_at_15s": "",
+  "app_pid_at_15s": "",
+  "observation_seconds_at_15s": 15.046,
+  "system_server_pid_after": "550",
+  "foreground_activity": "topResumedActivity=ActivityRecord{a79ab2f u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t7}",
+  "game_fatal_crash_seen": true,
+  "license_check_blocked": false,
+  "app_process_restarted": false,
+  "app_survived_120s": false,
+  "foreground_is_game": false,
+  "runtime_start_verified": false,
+  "app_liveness_verified": false
+}
