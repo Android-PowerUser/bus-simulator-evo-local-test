@@ -225,3 +225,32 @@ SHAb62e5738a1c4414a8cb2f3623c572cc2e507623935d0d03f22c9c951a4a65e67.
 Danach fa1cfabe40995Bytes vorPadding restauriert und Signatur nochmals geprüft.
 Run41501612127 aufd893f5b testet das aufAndroid35 gegen unverändertes Original;
 Ergebnis ausstehend.47UnitTests bestanden. Keine APK- oder Gameplayfreigabe.
+
+## V24 Ergebnis: echte ZIP-Isolation korrekt, aber keine Reparatur
+
+41501612127: Alle3Präfixe vor dem Signing-Block sind nachgewiesen bytegleich:
+Basis60309504Bytes,Config39067648Bytes,Assetpack1087021056Bytes. Alle3fa1cfabe-
+Datensätze korrekt vorPadding erhalten. Neue reguläre v2/v3-Prüfung fürAPI24+
+erfolgreich, Installation erfolgreich. Trotzdem erneut PairIP+55b3c nach4s.
+Auch diese sauberere Verpackung ändert den bisherigen nativen Fehlerpfad nicht.
+
+**Gleichzeitiges unverändertes Original hat einen ANDEREN Fehler**:
+überlebt15s, stirbt nach31s im Native-Bridge-/Unity-Pfad statt PairIP55b3c.
+Wie bereits im V23-Originalkontrolljob: PC libndk_translation+2df110,
+Caller Unity+70271c/+70fa40 (BuildIDb9ddb88b41c7d88d). Keine Lizenz-UI in diesen
+zwei frischen Kontrollen. Somit nicht jeden Kontrollfehler als Lizenzblock
+klassifizieren! Auch das Original ist im API35-x86_64/ARM-Übersetzer nicht
+spielbar; ein tatsächlicher ARM64-Vergleich wird nun benötigt.
+
+### Native ARM64-Umgebung als nächste unabhängige Kontrolle
+
+Workflowandroid-arm64-container.yml, Commit727b6ce, Run41502493199: echter
+GitHububuntu-24.04-arm-Host, Redroid14ARM64Container, Binder-Modulprüfung vorab,
+keine ISA-Übersetzung, keine manipulierten ABI-/Installer-/Lizenzwerte und kein
+Play-Account. Adb ausschließlichan127.0.0.1gebunden. Original-APKs werden erst
+nach bestätigtem Android-Boot heruntergeladen und SHA-geprüft installiert.
+Image-RepoDigest wird im Artefakt festgehalten. Ein Kernel-/Binder-/Bootproblem
+ist ausdrücklich Infrastrukturfehler und kein APK-Testbefund. Ergebnis offen.
+
+Redroid dokumentiert ARM64-Container und die Binder-Voraussetzungen:
+[2](https://github.com/remote-android/redroid-doc).
