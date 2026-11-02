@@ -1,0 +1,1 @@
+da71cb68bcc26d72746a9a76192c65642e7a8546deb964ee63ccf950a2219adb  candidate-v17-got-resolver-config.apk
