@@ -22,6 +22,11 @@ on:
         default: false
         required: false
         type: boolean
+      zip_layout_control:
+        description: Exact original raw ZIP layout vs unmodified original (v2/v3 new signer; no old authentication copied)
+        default: false
+        required: false
+        type: boolean
       metadata_packaging_control:
         description: Ordered runtime metadata vs genuine-original-signer metadata-removal negative control
         default: false
@@ -57,12 +62,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: ${{ fromJSON(inputs.metadata_packaging_control && '["v22-original-no-metadata","v22-resigned-original","v22-original-init-million"]' || inputs.original_init_control && inputs.preserve_runtime_metadata && '["v21-resigned-original","v21-original-init-million"]' || inputs.original_init_control && '["v20-resigned-original","v20-original-init-million"]' || inputs.play_store_control && '["stock"]' || inputs.money_abi_control && '["v19-stock-money","v19-million-abi"]' || inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
+        variant: ${{ fromJSON(inputs.zip_layout_control && '["stock","v23-resigned-original"]' || inputs.metadata_packaging_control && '["v22-original-no-metadata","v22-resigned-original","v22-original-init-million"]' || inputs.original_init_control && inputs.preserve_runtime_metadata && '["v21-resigned-original","v21-original-init-million"]' || inputs.original_init_control && '["v20-resigned-original","v20-original-init-million"]' || inputs.play_store_control && '["stock"]' || inputs.money_abi_control && '["v19-stock-money","v19-million-abi"]' || inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
     env:
-      TEST_PRESERVE_RUNTIME_METADATA: ${{ (inputs.preserve_runtime_metadata || inputs.metadata_packaging_control) && 'true' || 'false' }}
+      TEST_PRESERVE_RUNTIME_METADATA: ${{ (inputs.preserve_runtime_metadata || inputs.metadata_packaging_control || inputs.zip_layout_control) && 'true' || 'false' }}
       TEST_UI_SMOKE: ${{ inputs.stock_ui_smoke && 'true' || 'false' }}
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
-      TEST_SYSTEM_IMAGE_TAG: ${{ (inputs.play_store_control || inputs.original_init_control || inputs.metadata_packaging_control) && 'google_apis_playstore' || 'google_apis' }}
+      TEST_SYSTEM_IMAGE_TAG: ${{ (inputs.play_store_control || inputs.original_init_control || inputs.metadata_packaging_control || inputs.zip_layout_control) && 'google_apis_playstore' || 'google_apis' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -86,11 +91,11 @@ jobs:
           set -euo pipefail
           mkdir -p downloaded-game
           gh release download "$TEST_RELEASE_TAG" --pattern '*.xapk' --dir downloaded-game
-          if [[ "$VARIANT" = stock || "$VARIANT" = v2[012]-* ]]; then
+          if [[ "$VARIANT" = stock || "$VARIANT" = v2[0123]-* ]]; then
             for name in stock-original-base.apk stock-original-config.apk stock-original-asset-layout.zip stock-original-manifest.json; do
               gh release download "$TEST_RELEASE_TAG" --pattern "$name" --dir downloaded-game
             done
-            if [[ "$VARIANT" = v2[012]-* ]]; then
+            if [[ "$VARIANT" = v2[0123]-* ]]; then
               gh release download "$TEST_RELEASE_TAG" --pattern 'repaired-test-signing-v1.jks' --output downloaded-game/test-signing.jks
             fi
           else
@@ -130,14 +135,15 @@ jobs:
           rm -rf runtime-results
           mkdir runtime-results
           extra=()
-          if [[ "$VARIANT" = stock || "$VARIANT" = v2[012]-* ]]; then
+          if [[ "$VARIANT" = stock || "$VARIANT" = v2[0123]-* ]]; then
             extra+=(-e TEST_STOCK_CONTROL=true)
             extra+=(-e TEST_UI_SMOKE)
             if [ "$VARIANT" = v22-original-no-metadata ]; then
               extra+=(-e TEST_REMOVE_APP_METADATA=true)
-            elif [[ "$VARIANT" = v2[012]-* ]]; then
+            elif [[ "$VARIANT" = v2[0123]-* ]]; then
               extra+=(-e "TEST_ORIGINAL_INIT_VARIANT=$VARIANT")
               extra+=(-e TEST_PRESERVE_RUNTIME_METADATA)
+              if [ "$VARIANT" = v23-resigned-original ]; then extra+=(-e TEST_PRESERVE_ZIP_LAYOUT=true); fi
               extra+=(-e TEST_RESIGN_KEYSTORE_ASSET=repaired-test-signing-v1.jks)
             fi
             if [ "$TEST_SYSTEM_IMAGE_TAG" = google_apis_playstore ]; then

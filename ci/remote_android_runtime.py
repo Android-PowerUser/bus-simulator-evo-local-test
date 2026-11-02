@@ -111,7 +111,12 @@ def resign_test_apks(apks,keystore,metadata=None):
  for apk in map(Path,apks):
   out=apk.with_suffix('.resigned.apk');out.unlink(missing_ok=True)
   print(time.strftime('%H:%M:%S'),'RESIGN',apk.name,flush=True)
-  subprocess.run([signer,'sign','--ks',str(keystore),'--ks-pass','pass:'+password,'--key-pass','pass:'+password,'--ks-key-alias',alias,'--v1-signing-enabled','true','--v2-signing-enabled','true','--v3-signing-enabled','true','--out',str(out),str(apk)],timeout=300,check=True)
+  preserve_layout=os.environ.get('TEST_PRESERVE_ZIP_LAYOUT','').lower()=='true'
+  signing_options=['--alignment-preserved','true'] if preserve_layout else []
+  subprocess.run([signer,'sign',*signing_options,'--ks',str(keystore),'--ks-pass','pass:'+password,'--key-pass','pass:'+password,'--ks-key-alias',alias,'--v1-signing-enabled','false' if preserve_layout else 'true','--v2-signing-enabled','true','--v3-signing-enabled','true','--out',str(out),str(apk)],timeout=300,check=True)
+  if preserve_layout:
+   from apk_zip_layout import require_identical_zip_prefix
+   status.setdefault('preserved_raw_zip_layout',{})[apk.name]=require_identical_zip_prefix(apk,out);save()
   out.replace(apk)
   if metadata is not None:
    from apk_runtime_metadata import restore
@@ -221,7 +226,7 @@ try:
    runtime_metadata[name]=extract(package_dir/name)
  original_init_variant=os.environ.get('TEST_ORIGINAL_INIT_VARIANT','')
  if original_init_variant:
-  if original_init_variant not in ('v20-resigned-original','v20-original-init-million','v21-resigned-original','v21-original-init-million','v22-resigned-original','v22-original-init-million'):raise ValueError('Unknown original-init experiment')
+  if original_init_variant not in ('v20-resigned-original','v20-original-init-million','v21-resigned-original','v21-original-init-million','v22-resigned-original','v22-original-init-million','v23-resigned-original'):raise ValueError('Unknown original-init experiment')
   assert os.environ.get('TEST_STOCK_CONTROL','').lower()=='true'
   status['original_init_experiment']=original_init_variant
   status['original_source_component_sha256']=status.pop('installed_component_sha256')

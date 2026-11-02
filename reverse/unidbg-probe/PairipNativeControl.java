@@ -7,6 +7,7 @@ import com.github.unidbg.linux.android.dvm.array.*;
 import com.github.unidbg.file.FileResult;
 import com.github.unidbg.linux.file.SimpleFileIO;
 import java.io.File;
+import unicorn.Arm64Const;
 import java.nio.file.Files;
 
 /** Independent, fail-closed JNI/native-loader diagnostic, not a repaired APK.
@@ -64,14 +65,22 @@ public class PairipNativeControl extends AbstractJni {
         // have been observed and modeled. Do not silently return null/false.
         return super.callObjectMethodV(base,object,sig,args);
     }
+    private void requireReturn(String name) {
+        long pc=emulator.getBackend().reg_read(Arm64Const.UC_ARM64_REG_PC).longValue();
+        long expected=emulator.getReturnAddress();
+        System.out.println("PHASE_END "+name+" pc="+Long.toHexString(pc)+" sentinel="+Long.toHexString(expected));
+        if(pc!=expected) throw new IllegalStateException(name+" did not reach the return sentinel");
+    }
     private void run(File library, File asset, boolean startup) throws Exception {
         System.out.println("INDEPENDENT_CONTROL original_apk="+original+" library="+library+" resolver_api=23");
         DalvikModule module=vm.loadLibrary(library,false);
         module.callJNI_OnLoad(emulator);
+        requireReturn("JNI_OnLoad");
         System.out.println("JNI_ONLOAD_COMPLETED backend="+emulator.getBackend());
         if(startup) {
             DvmObject<?> result=vm.resolveClass("com/pairip/VMRunner").callStaticJniMethodObject(
                 emulator,"executeVM([B[Ljava/lang/Object;)Ljava/lang/Object;",new ByteArray(vm,Files.readAllBytes(asset.toPath())),null);
+            requireReturn("ERz startup");
             System.out.println("STARTUP_RETURNED "+result);
         }
         emulator.close();
