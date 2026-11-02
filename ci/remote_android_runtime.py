@@ -113,7 +113,13 @@ def resign_test_apks(apks,keystore,metadata=None):
   print(time.strftime('%H:%M:%S'),'RESIGN',apk.name,flush=True)
   preserve_layout=os.environ.get('TEST_PRESERVE_ZIP_LAYOUT','').lower()=='true'
   signing_options=['--alignment-preserved','true'] if preserve_layout else []
-  subprocess.run([signer,'sign',*signing_options,'--ks',str(keystore),'--ks-pass','pass:'+password,'--key-pass','pass:'+password,'--ks-key-alias',alias,'--v1-signing-enabled','false' if preserve_layout else 'true','--v2-signing-enabled','true','--v3-signing-enabled','true','--out',str(out),str(apk)],timeout=300,check=True)
+  if preserve_layout:
+   jar=Path(signer).parent/'lib/apksigner.jar'
+   subprocess.run(['java','-cp',str(jar)+os.pathsep+str(Path(__file__).resolve().parent.parent/'runtime-signing-classes'),'RawZipSigner',str(keystore),str(apk),str(out)],timeout=300,check=True)
+   status['raw_zip_signing_min_sdk']=24
+   status['raw_zip_original_jar_entries_retained_as_bytes']=True
+  else:
+   subprocess.run([signer,'sign',*signing_options,'--ks',str(keystore),'--ks-pass','pass:'+password,'--key-pass','pass:'+password,'--ks-key-alias',alias,'--v1-signing-enabled','true','--v2-signing-enabled','true','--v3-signing-enabled','true','--out',str(out),str(apk)],timeout=300,check=True)
   if preserve_layout:
    from apk_zip_layout import require_identical_zip_prefix
    status.setdefault('preserved_raw_zip_layout',{})[apk.name]=require_identical_zip_prefix(apk,out);save()
@@ -121,7 +127,7 @@ def resign_test_apks(apks,keystore,metadata=None):
   if metadata is not None:
    from apk_runtime_metadata import restore
    status.setdefault('preserved_runtime_metadata',{})[apk.name]=restore(apk,metadata.get(apk.name));save()
-  subprocess.run([signer,'verify','--verbose','--print-certs',str(apk)],timeout=60,check=True)
+  subprocess.run([signer,'verify',*(['--min-sdk-version','24'] if preserve_layout else []),'--verbose','--print-certs',str(apk)],timeout=60,check=True)
  status['all_apks_resigned']=True;status['resign_seconds']=round(time.monotonic()-started,3);save()
 log=None
 try:
@@ -226,7 +232,7 @@ try:
    runtime_metadata[name]=extract(package_dir/name)
  original_init_variant=os.environ.get('TEST_ORIGINAL_INIT_VARIANT','')
  if original_init_variant:
-  if original_init_variant not in ('v20-resigned-original','v20-original-init-million','v21-resigned-original','v21-original-init-million','v22-resigned-original','v22-original-init-million','v23-resigned-original'):raise ValueError('Unknown original-init experiment')
+  if original_init_variant not in ('v20-resigned-original','v20-original-init-million','v21-resigned-original','v21-original-init-million','v22-resigned-original','v22-original-init-million','v23-resigned-original','v24-resigned-original'):raise ValueError('Unknown original-init experiment')
   assert os.environ.get('TEST_STOCK_CONTROL','').lower()=='true'
   status['original_init_experiment']=original_init_variant
   status['original_source_component_sha256']=status.pop('installed_component_sha256')
