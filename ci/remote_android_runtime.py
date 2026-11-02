@@ -196,6 +196,18 @@ try:
    with (package_dir/name).open('rb') as f:actual=hashlib.file_digest(f,'sha256').hexdigest()
    assert actual==expected,'Original component hash mismatch: '+name
    status['installed_component_sha256'][name]=actual
+ original_init_variant=os.environ.get('TEST_ORIGINAL_INIT_VARIANT','')
+ if original_init_variant:
+  if original_init_variant not in ('v20-resigned-original','v20-original-init-million'):raise ValueError('Unknown original-init experiment')
+  assert os.environ.get('TEST_STOCK_CONTROL','').lower()=='true'
+  status['original_init_experiment']=original_init_variant
+  status['original_source_component_sha256']=status.pop('installed_component_sha256')
+  status['variant']='original_initializers_preserved_resigned_experiment'
+  if original_init_variant=='v20-original-init-million':
+   from build_original_init_money import build
+   target=package_dir/'config.arm64_v8a.apk';temporary=package_dir/'money-only-config.apk'
+   status['money_only_patch']=build(target,temporary);temporary.replace(target)
+  save()
  candidate=package_dir/'candidate-base.apk'
  if os.environ.get('TEST_BASE_OVERRIDE_ASSET'):
   assert candidate.is_file(),'Requested candidate override was not downloaded'
@@ -211,6 +223,10 @@ try:
  if os.environ.get('TEST_RESIGN_KEYSTORE_ASSET'):
   keystore=package_dir/'test-signing.jks';assert keystore.is_file(),'Requested test keystore was not downloaded'
   status['resign_keystore_asset']=os.environ['TEST_RESIGN_KEYSTORE_ASSET'];save();resign_test_apks(apks,keystore)
+  status['installed_component_sha256']={}
+  for apk in map(Path,apks):
+   with apk.open('rb') as f:status['installed_component_sha256'][apk.name]=hashlib.file_digest(f,'sha256').hexdigest()
+  save()
  revalidate_ready_generation('game')
  status['state']='installing_game';status['game_install_transport']='no_streaming';save()
  game_paths=[line[8:] for line in shell('pm path '+PKG,120,False).splitlines() if line.startswith('package:')]

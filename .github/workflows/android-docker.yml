@@ -22,6 +22,11 @@ on:
         default: false
         required: false
         type: boolean
+      original_init_control:
+        description: Compare re-signed original against money-only edit with intact original native initializers (no license bypass)
+        default: false
+        required: false
+        type: boolean
       stock_ui_smoke:
         description: On verified stock only, select button controls if the exact onboarding screen matches
         default: false
@@ -42,11 +47,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: ${{ fromJSON(inputs.play_store_control && '["stock"]' || inputs.money_abi_control && '["v19-stock-money","v19-million-abi"]' || inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
+        variant: ${{ fromJSON(inputs.original_init_control && '["v20-resigned-original","v20-original-init-million"]' || inputs.play_store_control && '["stock"]' || inputs.money_abi_control && '["v19-stock-money","v19-million-abi"]' || inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
     env:
       TEST_UI_SMOKE: ${{ inputs.stock_ui_smoke && 'true' || 'false' }}
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
-      TEST_SYSTEM_IMAGE_TAG: ${{ inputs.play_store_control && 'google_apis_playstore' || 'google_apis' }}
+      TEST_SYSTEM_IMAGE_TAG: ${{ (inputs.play_store_control || inputs.original_init_control) && 'google_apis_playstore' || 'google_apis' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -70,10 +75,13 @@ jobs:
           set -euo pipefail
           mkdir -p downloaded-game
           gh release download "$TEST_RELEASE_TAG" --pattern '*.xapk' --dir downloaded-game
-          if [ "$VARIANT" = stock ]; then
+          if [[ "$VARIANT" = stock || "$VARIANT" = v20-* ]]; then
             for name in stock-original-base.apk stock-original-config.apk stock-original-asset-layout.zip stock-original-manifest.json; do
               gh release download "$TEST_RELEASE_TAG" --pattern "$name" --dir downloaded-game
             done
+            if [[ "$VARIANT" = v20-* ]]; then
+              gh release download "$TEST_RELEASE_TAG" --pattern 'repaired-test-signing-v1.jks' --output downloaded-game/test-signing.jks
+            fi
           else
             gh release download "$TEST_RELEASE_TAG" --pattern 'candidate-v9-native-init-8dbafd23-base.apk' --output downloaded-game/candidate-base.apk
             cp apk/candidate-v17-got-resolver-config.apk downloaded-game/candidate-config.apk
@@ -111,9 +119,13 @@ jobs:
           rm -rf runtime-results
           mkdir runtime-results
           extra=()
-          if [ "$VARIANT" = stock ]; then
+          if [[ "$VARIANT" = stock || "$VARIANT" = v20-* ]]; then
             extra+=(-e TEST_STOCK_CONTROL=true)
             extra+=(-e TEST_UI_SMOKE)
+            if [[ "$VARIANT" = v20-* ]]; then
+              extra+=(-e "TEST_ORIGINAL_INIT_VARIANT=$VARIANT")
+              extra+=(-e TEST_RESIGN_KEYSTORE_ASSET=repaired-test-signing-v1.jks)
+            fi
             if [ "$TEST_SYSTEM_IMAGE_TAG" = google_apis_playstore ]; then
               extra+=(-e ANDROID_SKIP_ADB_ROOT=true)
             fi
