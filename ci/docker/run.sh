@@ -6,7 +6,7 @@ trap cleanup EXIT
 # SDK is supplied read-only by the Actions host; the AVD and application live
 # exclusively in this container. No host adb server or host network is used.
 echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force \
-  --name BusDocker --package 'system-images;android-35;google_apis;x86_64'
+  --name BusDocker --package "system-images;android-35;${TEST_SYSTEM_IMAGE_TAG:-google_apis};x86_64"
 cat >> "$ANDROID_AVD_HOME/BusDocker.avd/config.ini" <<'AVD'
 hw.cpu.ncore=2
 hw.ramSize=3072

@@ -22,6 +22,11 @@ on:
         default: false
         required: false
         type: boolean
+      play_store_control:
+        description: Verified original on official Google Play Store image (no account injected)
+        default: false
+        required: false
+        type: boolean
 permissions:
   contents: read
 jobs:
@@ -32,9 +37,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: ${{ fromJSON(inputs.money_abi_control && '["v19-stock-money","v19-million-abi"]' || inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
+        variant: ${{ fromJSON(inputs.play_store_control && '["stock"]' || inputs.money_abi_control && '["v19-stock-money","v19-million-abi"]' || inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
     env:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
+      TEST_SYSTEM_IMAGE_TAG: ${{ inputs.play_store_control && 'google_apis_playstore' || 'google_apis' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -49,7 +55,7 @@ jobs:
           df -h .
           test -c /dev/kvm
           sudo chmod 666 /dev/kvm
-          (yes || true) | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator' 'build-tools;35.0.0' 'system-images;android-35;google_apis;x86_64'
+          (yes || true) | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator' 'build-tools;35.0.0' "system-images;android-35;$TEST_SYSTEM_IMAGE_TAG;x86_64"
       - name: Download test inputs
         env:
           GH_TOKEN: ${{ github.token }}
@@ -101,6 +107,9 @@ jobs:
           extra=()
           if [ "$VARIANT" = stock ]; then
             extra+=(-e TEST_STOCK_CONTROL=true)
+            if [ "$TEST_SYSTEM_IMAGE_TAG" = google_apis_playstore ]; then
+              extra+=(-e ANDROID_SKIP_ADB_ROOT=true)
+            fi
           else
             extra+=(-e TEST_BASE_OVERRIDE_ASSET=candidate-v9-native-init-8dbafd23-base.apk)
             extra+=(-e TEST_CONFIG_OVERRIDE_ASSET=candidate-v17-got-resolver-config.apk)
@@ -118,8 +127,8 @@ jobs:
           docker run --rm --name bus-emulator --device /dev/kvm --shm-size=2g \
             -v "$ANDROID_HOME:/opt/android-sdk:ro" \
             -v "$GITHUB_WORKSPACE:/workspace" \
-            -e TEST_RELEASE_TAG \
-            -e "TEST_ENVIRONMENT=Docker / KVM / x86_64 API35 / ARM64 native bridge / $VARIANT" \
+            -e TEST_RELEASE_TAG -e TEST_SYSTEM_IMAGE_TAG \
+            -e "TEST_ENVIRONMENT=Docker / KVM / x86_64 API35 / $TEST_SYSTEM_IMAGE_TAG / ARM64 native bridge / $VARIANT" \
             -e ANDROID_BOOT_TIMEOUT=600 -e ANDROID_INSTALL_TIMEOUT=600 \
             -e ANDROID_WAKE_BEFORE_GAME=true "${extra[@]}" bus-android-test
       - name: Upload current-run evidence even on crash

@@ -139,6 +139,8 @@ try:
  status['supported_abis']=shell('getprop ro.product.cpu.abilist')
  status['native_bridge']=shell('getprop ro.dalvik.vm.native.bridge')
  status['android_sdk']=shell('getprop ro.build.version.sdk')
+ status['play_store_package']=shell("pm path com.android.vending; dumpsys package com.android.vending | grep versionName= | head -1",30,False)
+ status['system_image_tag']=os.environ.get('TEST_SYSTEM_IMAGE_TAG','google_apis')
  shell('settings put global verifier_verify_adb_installs 0; settings put global package_verifier_enable 0',30)
  shell('setprop pm.dexopt.install extract; setprop pm.dexopt.post-boot-update extract; setprop pm.dexopt.first-boot extract; setprop dalvik.vm.usejit false; stop vendor.gnss; settings put secure location_mode 0; settings put global system_server_watchdog_timeout_ms 3600000; bmgr enable false',90,False)
  settle=int(os.environ.get('ANDROID_PRECONTROL_SETTLE_SECONDS','0'));time.sleep(settle)
