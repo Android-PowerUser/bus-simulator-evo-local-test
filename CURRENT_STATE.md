@@ -1,3 +1,18 @@
+# Ergänzung: ARM64-Fehlerkontext belegt (2026-11-02)
+
+Neuester Diagnose-Lauf: https://github.com/Android-PowerUser/bus-simulator-evo-local-test/actions/runs/41476111893
+
+- Aktueller Code und kleine Nachweise: `reports/guest-context-2026-11-02/REPORT.md`.
+- Instrumentierung sichert den ursprünglichen ARM64-ucontext vor Unitys Signalweiterleitung. Der ursprüngliche SIGSEGV bleibt unverändert erhalten.
+- Tatsächlicher PC `libil2cpp+0x2329068`: `ldr w8,[x0,#0xc]`, mit **x0=0**. Rücksprung `+0x235e6f4`. Null-GenericContainer im GetFullySharedInst/GetGenericParameterFromIndex-Pfad jetzt durch ursprüngliche Register und ELF geprüft.
+- Decoder berücksichtigt doppelte native-bridge-Mappings. ARM64-ELF-Ausführbarkeit wurde trotz `r--`-Hostmapping geprüft.
+- **Kein reparierter Spielstart, kein Gameplay-Erfolg.** Die Herkunft des ungültigen GenericContainers bleibt zu klären. Es wurde kein RET-Patch als Fix ausgegeben.
+- Erster Diagnoselauf 41474270941 zeigte nur einen schwarzen Bildschirm mit Androids Vollbild-Einführungshinweis. Sein damaliger Liveness-Erfolg ist kein Spielerfolg. Hinweisbehandlung und diagnostische Erfolgskriterien sind korrigiert.
+- **12 Unit-Tests erfolgreich.** Diagnostische Variante nur über Workflow-Input `diagnostic_context=true`, nicht als reparierte APK verteilen.
+- Internetbeschaffung exakter Unity-Symbole und Nachweis gleicher GNU Build ID: `reports/internet-symbols-2026-11-02/RESEARCH.md`.
+
+---
+
 # Neuester Stand: Docker/GitHub Actions — 2026-11-02
 
 **Diese Ergänzung ersetzt für den aktuellen Teststand die darunterliegende historische lokale TCG-Zusammenfassung.**
