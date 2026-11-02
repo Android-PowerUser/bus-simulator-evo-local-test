@@ -194,3 +194,34 @@ API23-Bionic ist unterhalb des Original-minSdk24 und nicht Android15:
 Dieser unabhängige Loader ist nur Bootstrap-/Modell-Diagnose, kein Beweis
 für die Android-Ursache und keine Reparatur. Vollständiges Log und komprimierte
 streng geprüfte Host-A/B-Logs liegen im Unterordnerindependent-native-model.
+
+## V23 hat die geplante Android-Isolation NICHT erreicht
+
+41500435000: Der rohe Basispräfix war korrekt bytegleich. Bei der ARM-Config
+entfernt das offizielle apksigner-CLI aber trotz Alignment-Erhaltung alte
+META-INF/MANIFEST.MF, BNDLTOOL.SF, BNDLTOOL.RSA und stamp-cert-sha256.
+Alle29 erhaltenen lokalen Header bleiben zwar am selben Offset, aber der
+Signing-Block rückt von39067648 nach39063552. Die harte Präfixprüfung hat
+**vor Appinstallation abgebrochen**. Deshalb kein neuer nativer APK-Befund.
+
+### V24: unveränderte ZIP-Sektionen direkt mit Googles Engine signieren
+
+`ci/RawZipSigner.java` nutzt die offizielle DefaultApkSignerEngine aus dem
+SDK35-apksigner.jar, nicht eine selbst implementierte Signatur. Es erzeugt
+neue reguläre v2/v3-Signaturen über die UNVERÄNDERTEN ZIP-Sektionen und ersetzt
+nur den kompletten APK Signing Block. Keine Original-v2/v3/SourceStamp-Records
+werden kopiert oder nachträglich als authentisch ausgegeben. Alte JAR-Metadaten
+bleiben als unveränderte ZIP-Dateien stehen; sie sind nicht der neue APK-Signer.
+
+Diese Verpackungsisolation unterstützt ausdrücklich **API24+**, das minSdk des
+verifizierten Basis-APKs. UnterhalbAPI24 ist sie NICHT gültig: der Standardprüfer
+über die ältere Split-minSdk-Reichweite meldet zurecht unterschiedliche alte
+JAR-/neuev2-Signer. Mit der tatsächlichen App-Untergrenze24 prüft Googles Tool
+v2/v3 korrekt, **genau EINEN neuen Signer44bc8662…**, kein SourceStamp. Diese
+Einschränkung ist ausdrücklich Teil der Kontrolle und wird nicht versteckt.
+
+Offline ARM-Config: Präfix39067648Bytes vollständig bytegleich,
+SHAb62e5738a1c4414a8cb2f3623c572cc2e507623935d0d03f22c9c951a4a65e67.
+Danach fa1cfabe40995Bytes vorPadding restauriert und Signatur nochmals geprüft.
+Run41501612127 aufd893f5b testet das aufAndroid35 gegen unverändertes Original;
+Ergebnis ausstehend.47UnitTests bestanden. Keine APK- oder Gameplayfreigabe.

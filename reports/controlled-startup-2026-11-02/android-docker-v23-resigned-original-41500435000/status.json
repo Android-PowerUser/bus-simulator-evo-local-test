@@ -1,0 +1,55 @@
+{
+  "release_tag": "local-test-242-v8-lifecycle",
+  "environment": "Docker / KVM / x86_64 API35 / google_apis_playstore / ARM64 native bridge / v23-resigned-original",
+  "android_serial": "emulator-5554",
+  "control_installed": true,
+  "control_launched": true,
+  "game_installed": false,
+  "game_launch_attempted": false,
+  "gameplay_verified": false,
+  "state": "failed",
+  "money_abi_experiment": "",
+  "experimental_generic_guard": false,
+  "diagnostic_context_probe": false,
+  "boot_adb_disconnects": 1,
+  "system_server_pid_before": "554",
+  "supported_abis": "x86_64,arm64-v8a",
+  "native_bridge": "libndk_translation.so",
+  "android_sdk": "35",
+  "play_store_package": "package:/product/priv-app/Phonesky/Phonesky.apk\n    versionName=41.3.25-31 [0] [PR] 640531013",
+  "system_image_tag": "google_apis_playstore",
+  "control_ready_generation": "554",
+  "control_install_transport": "no_streaming",
+  "control_install_seconds": 3.096,
+  "system_server_pid_after_control_install": "554",
+  "control_package_paths": [
+    "/data/app/~~oKq0CZWzEkNWI1Dk1xSrVQ==/com.arena.installcontrol-6mXb36hcCY0OETu6XpWDUA==/base.apk"
+  ],
+  "variant": "original_initializers_preserved_resigned_experiment",
+  "original_init_experiment": "v23-resigned-original",
+  "original_source_component_sha256": {
+    "com.Ovilex.BusSimulator2023.apk": "3fdd3863d39e0e251cdfb7dbf421b595069e23681c9c4003c5db4eb8d3ffe388",
+    "config.arm64_v8a.apk": "1ec029e920de71615d8b333a2a3dc2efaaec549ac121d96c632a28c4672d5d2f",
+    "UnityDataAssetPack.apk": "25646655523e4e7d922fe25efa78ea04b8ec49fea9934d5a5e549a30a213a6b1"
+  },
+  "resign_keystore_asset": "repaired-test-signing-v1.jks",
+  "preserved_raw_zip_layout": {
+    "com.Ovilex.BusSimulator2023.apk": {
+      "raw_zip_prefix_unchanged": true,
+      "prefix_size": 60309504,
+      "prefix_sha256": "7556a007a75c1bc4c81a70a9494b324a3f6165ac0dff42a0d14dea58b5f215b2",
+      "original_authentication_transplanted": false
+    }
+  },
+  "preserved_runtime_metadata": {
+    "com.Ovilex.BusSimulator2023.apk": {
+      "restored": true,
+      "id": "0xfa1cfabe",
+      "size": 41938,
+      "sha256": "5a854ae81188f9404628840ba54a3d5b866d0a21b03e74c85e794028ee6d1581",
+      "old_authentication_records_restored": false,
+      "inserted_before_verity_padding": true
+    }
+  },
+  "error": "ValueError: Re-signing moved APK signing-block offset"
+}
