@@ -12,6 +12,11 @@ on:
         default: false
         required: false
         type: boolean
+      generic_container_guard:
+        description: Experimental null-container hypothesis, not a verified repair
+        default: false
+        required: false
+        type: boolean
 permissions:
   contents: read
 jobs:
@@ -22,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: ${{ fromJSON(inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
+        variant: ${{ fromJSON(inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
     env:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
     steps:
@@ -40,7 +45,7 @@ jobs:
           test -c /dev/kvm
           sudo chmod 666 /dev/kvm
           (yes || true) | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator' 'build-tools;35.0.0' 'system-images;android-35;google_apis;x86_64'
-      - name: Download private test inputs
+      - name: Download test inputs
         env:
           GH_TOKEN: ${{ github.token }}
           VARIANT: ${{ matrix.variant }}
@@ -64,6 +69,11 @@ jobs:
           sudo apt-get install -y -qq binutils-aarch64-linux-gnu
           python3 ci/build_context_probe.py downloaded-game/candidate-config.apk downloaded-game/probe-config.apk
           mv downloaded-game/probe-config.apk downloaded-game/candidate-config.apk
+      - name: Build experimental generic-container guard
+        if: matrix.variant == 'v18-nullguard'
+        run: |
+          python3 ci/build_generic_guard.py downloaded-game/candidate-config.apk downloaded-game/guard-config.apk
+          mv downloaded-game/guard-config.apk downloaded-game/candidate-config.apk
       - name: Build emulator container
         run: docker build -t bus-android-test -f ci/docker/Dockerfile ci/docker
       - name: Install and test APK inside Docker with KVM
@@ -84,6 +94,9 @@ jobs:
               extra+=(-e TEST_CONTEXT_PROBE=true)
             fi
             extra+=(-e TEST_RESIGN_KEYSTORE_ASSET=repaired-test-signing-v1.jks)
+            if [ "$VARIANT" = v18-nullguard ]; then
+              extra+=(-e TEST_EXPERIMENTAL_GENERIC_GUARD=true)
+            fi
           fi
           docker run --rm --name bus-emulator --device /dev/kvm --shm-size=2g \
             -v "$ANDROID_HOME:/opt/android-sdk:ro" \

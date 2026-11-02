@@ -36,6 +36,8 @@ parser.add_argument("--presented-native-base", type=lambda value: int(value, 0),
                     help="nonzero PairIP ELF alias reported consistently through procfs and dl_iterate_phdr")
 parser.add_argument("--actual-entry", action="store_true",
                     help="run JNI_OnLoad and the exported DT_INIT ExecuteProgram path")
+parser.add_argument("--dt-init-argument", type=lambda value: int(value, 0), default=None,
+                    help="override the libil2cpp base passed by its real DT_INIT; 0 reproduces the old incorrect null-argument control")
 parser.add_argument("--with-startup", action="store_true",
                     help="execute ERz before AYum in the same initialized process")
 parser.add_argument("--startup-stack", choices=("short", "framework", "framework-core"),
@@ -1630,7 +1632,14 @@ try:
         asset_name = alloc(len(args.asset.name) + 1)
         uc.mem_write(asset_name, args.asset.name.encode() + b"\0")
         program_args = alloc(16)
-        uc.mem_write(program_args, bytes(16))  # DT_INIT's sole null argument
+        # Original DT_INIT executes ADRP x1, <ELF base>; STP x1, x30,
+        # [sp,#-16]!; MOV x1,sp. Its sole argument is the target ELF load
+        # base, NOT NULL. Preserve a zero override only as an explicit control.
+        if args.dt_init_argument is None and not args.target_library:
+            raise RuntimeError("Actual DT_INIT requires --target-library or an explicit --dt-init-argument control")
+        init_argument = args.target_base if args.dt_init_argument is None else args.dt_init_argument
+        uc.mem_write(program_args, struct.pack("<QQ", init_argument, 0))
+        print(f"DT_INIT argument[0]={init_argument:#x}")
         uc.reg_write(UC_ARM64_REG_X0, asset_name)
         uc.reg_write(UC_ARM64_REG_X1, program_args)
         uc.reg_write(UC_ARM64_REG_X2, 1)
