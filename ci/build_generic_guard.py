@@ -11,8 +11,10 @@ sys.path.insert(0,str(ROOT/'reverse/pydeps'))
 from elftools.elf.elffile import ELFFile
 from io import BytesIO
 ENTRY=0x235e66c;CAVE=0x5a08fe0
+EXPECTED='95c3102110f096a3711c80a977d3e9d07371bc4005eae42f1d854af8be978049'
 
 def patch(data):
+ if hashlib.sha256(data).hexdigest()!=EXPECTED:raise ValueError('Unexpected candidate IL2CPP hash')
  e=ELFFile(BytesIO(data));loads=[s for s in e.iter_segments() if s['p_type']=='PT_LOAD']
  def offset(va):
   s=next(s for s in loads if s['p_vaddr']<=va<s['p_vaddr']+s['p_filesz']);return s['p_offset']+va-s['p_vaddr']

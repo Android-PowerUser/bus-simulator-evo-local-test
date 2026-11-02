@@ -1,3 +1,15 @@
+# Aktuell: öffentliches Repository, v18-Hypothese verworfen
+
+- Repository am 2026-11-02 nach ausdrücklicher Zustimmung einschließlich Historie/Release-APKs/Testschlüssel öffentlich geschaltet; unauthentifizierten Zugriff geprüft. Testschlüssel ist offengelegt, nicht produktiv verwenden.
+- Neuester Android-Lauf: https://github.com/Android-PowerUser/bus-simulator-evo-local-test/actions/runs/41484535040 (getesteter Commit `1ef8f14`).
+- v18-nullguard ist eine optionale, quellcode-gestützte Hypothese, **keine Reparatur**. Installation erfolgreich, danach SIGSEGV bei `libil2cpp+0x2327f9c` mit generischem Methodenindex `223202298`.
+- Original-Gastregister belegen: `x20+8*w0` ist exakt die Fehleradresse. Ein Nullguard allein repariert die inkonsistenten Methodenreferenzen nicht.
+- Tatsächlichen Host-Emulatorfehler korrigiert: DT_INIT übergibt ELF-Basis statt NULL. A/B belegt bisher keinen Einfluss auf den gestoppten VM-Pfad. Keine Hash-Guards erzwungen oder entfernt.
+- Bericht mit Nachweisen: `reports/public-actions-2026-11-02/REPORT.md`.
+- 16 Unit-Tests grün; **kein sichtbarer Spielstart und keine reparierte APK belegt**.
+
+---
+
 # Ergänzung: ARM64-Fehlerkontext belegt (2026-11-02)
 
 Neuester Diagnose-Lauf: https://github.com/Android-PowerUser/bus-simulator-evo-local-test/actions/runs/41476111893

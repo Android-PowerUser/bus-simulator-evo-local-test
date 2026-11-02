@@ -1,0 +1,10 @@
+{
+  "index": 223202298,
+  "index_hex": "0xd4dcbfa",
+  "table_base": "0x766690609310",
+  "fault_address": "0x7666facef2e0",
+  "element_size": 8,
+  "verified_address_formula": "table_base + 8 * index == fault_address",
+  "faulting_guest_pc": "libil2cpp.so+0x2327f9c",
+  "instruction": "ldr x19, [x20, w0, sxtw #3]"
+}
