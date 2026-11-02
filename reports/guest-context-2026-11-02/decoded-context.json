@@ -1,0 +1,62 @@
+{
+  "bytes": 4096,
+  "layout": "Android AArch64 ucontext / sigcontext at 0xb0",
+  "fault_address_from_context_not_authoritative": "0x0",
+  "registers": {
+    "x0": "0x0",
+    "x1": "0x0",
+    "x2": "0x73ce47219510",
+    "x3": "0x1",
+    "x4": "0x73ce47219878",
+    "x5": "0x0",
+    "x6": "0x2",
+    "x7": "0xa0f1a24011d",
+    "x8": "0x1",
+    "x9": "0x73ce472196f0",
+    "x10": "0x10",
+    "x11": "0x0",
+    "x12": "0x73d1d09cb29c",
+    "x13": "0x4",
+    "x14": "0x73ce4aaa93c4",
+    "x15": "0x0",
+    "x16": "0x0",
+    "x17": "0x0",
+    "x18": "0x73ce46110000",
+    "x19": "0x73ce4c380d58",
+    "x20": "0x0",
+    "x21": "0x73ce472196e0",
+    "x22": "0x0",
+    "x23": "0x73d1b616f040",
+    "x24": "0x73ce4c9fd508",
+    "x25": "0x2f0",
+    "x26": "0x10",
+    "x27": "0x2f8",
+    "x28": "0x49",
+    "x29": "0x73ce47219700",
+    "x30": "0x73ce495796f4",
+    "sp": "0x73ce472196e0",
+    "pc": "0x73ce49544068",
+    "pstate": "0x0"
+  },
+  "pc_mappings": [
+    {
+      "start": 127329827241984,
+      "end": 127329878503424,
+      "permissions": "r--",
+      "offset": 33378304,
+      "description": "/data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db) (load bias 0x4000)"
+    }
+  ],
+  "pc_in_executable_mapping": false,
+  "pc_library_relative": "0x2329068",
+  "pc_library_base": "0x73ce4721b000",
+  "native_bridge_note": "Translated ARM64 text can be host-mapped r--; validate instruction permissions against guest ELF program headers, not host execute permission alone.",
+  "guest_elf_instruction": {
+    "pc_relative": "0x2329068",
+    "mnemonic": "ldr",
+    "operands": "w8, [x0, #0xc]",
+    "segment_executable": true,
+    "x0": "0x0",
+    "derived_fault_address": "0xc"
+  }
+}

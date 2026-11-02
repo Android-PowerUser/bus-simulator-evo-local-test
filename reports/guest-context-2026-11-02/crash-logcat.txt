@@ -1,0 +1,64 @@
+--------- beginning of crash
+11-02 15:59:38.559  4345  4445 F libc    : Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0xc in tid 4445 (UnityMain), pid 4345 (usSimulator2023)
+11-02 15:59:39.079  4485  4485 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+11-02 15:59:39.079  4485  4485 F DEBUG   : Build fingerprint: 'google/sdk_gphone64_x86_64/emu64xa:15/AE3A.240806.043/12960925:userdebug/dev-keys'
+11-02 15:59:39.079  4485  4485 F DEBUG   : Revision: '0'
+11-02 15:59:39.079  4485  4485 F DEBUG   : ABI: 'x86_64'
+11-02 15:59:39.079  4485  4485 F DEBUG   : Guest architecture: 'arm64'
+11-02 15:59:39.079  4485  4485 F DEBUG   : Timestamp: 2026-11-02 15:59:38.712355170+0000
+11-02 15:59:39.079  4485  4485 F DEBUG   : Process uptime: 9s
+11-02 15:59:39.079  4485  4485 F DEBUG   : Cmdline: com.Ovilex.BusSimulator2023
+11-02 15:59:39.079  4485  4485 F DEBUG   : pid: 4345, tid: 4445, name: UnityMain  >>> com.Ovilex.BusSimulator2023 <<<
+11-02 15:59:39.079  4485  4485 F DEBUG   : uid: 10210
+11-02 15:59:39.079  4485  4485 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x000000000000000c
+11-02 15:59:39.079  4485  4485 F DEBUG   : Cause: null pointer dereference
+11-02 15:59:39.079  4485  4485 F DEBUG   :     rax 0000000000000000  rbx 0000000000000000  rcx 0000000000000000  rdx 0000000000000000
+11-02 15:59:39.079  4485  4485 F DEBUG   :     r8  0000000000000000  r9  0000000000000000  r10 0000000000000000  r11 0000000000000000
+11-02 15:59:39.079  4485  4485 F DEBUG   :     r12 0000000000000000  r13 0000000000000000  r14 0000000000000000  r15 0000000000000000
+11-02 15:59:39.079  4485  4485 F DEBUG   :     rdi 0000000000000000  rsi 0000000000000000
+11-02 15:59:39.079  4485  4485 F DEBUG   :     rbp 0000000000000000  rsp 0000000000000000  rip 0000000000000000
+11-02 15:59:39.079  4485  4485 F DEBUG   : 1 total frames
+11-02 15:59:39.079  4485  4485 F DEBUG   : backtrace:
+11-02 15:59:39.079  4485  4485 F DEBUG   :       #00 pc 0000000000000000  <unknown>
+11-02 15:59:39.086  4485  4485 F DEBUG   :     x0  000000000000000b  x1  000073d1ac1421f0  x2  000073ce6b360b60  x3  0000000000000003
+11-02 15:59:39.086  4485  4485 F DEBUG   :     x4  0000000000000020  x5  8080000000000000  x6  0000000000000010  x7  7f7f7fffff7fffff
+11-02 15:59:39.086  4485  4485 F DEBUG   :     x8  22bdce5fa134ba51  x9  22bdce5fa134ba51  x10 000073d1a92fb788  x11 fffffffffffffffd
+11-02 15:59:39.086  4485  4485 F DEBUG   :     x12 000073d1a92fb8a0  x13 0000000000000015  x14 000073d1a92fb9d8  x15 0000000000000000
+11-02 15:59:39.086  4485  4485 F DEBUG   :     x16 000073ce743fb330  x17 000073ce78110bd8  x18 000073ce46110000  x19 000000000000000b
+11-02 15:59:39.086  4485  4485 F DEBUG   :     x20 000073ce6b360b60  x21 000073d1ac1421f0  x22 000073cece72f620  x23 00000000000000a6
+11-02 15:59:39.086  4485  4485 F DEBUG   :     x24 000073cf826421e0  x25 00000000000880c1  x26 00000000ffffffff  x27 000073ce6b361bc0
+11-02 15:59:39.086  4485  4485 F DEBUG   :     x28 000073d1b616f040  x29 0000000000000000  lr  000073ce61a05d24  sp  000073d1a92fbe30
+11-02 15:59:39.086  4485  4485 F DEBUG   :     pc  000073cece72f620  pst 0000000000000000
+11-02 15:59:39.086  4485  4485 F DEBUG   :   
+11-02 15:59:39.086  4485  4485 F DEBUG   : 24 total frames
+11-02 15:59:39.086  4485  4485 F DEBUG   : backtrace:
+11-02 15:59:39.086  4485  4485 F DEBUG   :       #00 pc 00000000002df620  /system/lib64/libndk_translation.so (offset 0xec000)
+11-02 15:59:39.086  4485  4485 F DEBUG   :       #01 pc 00000000009d6d20  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #02 pc 00000000009e1ff8  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #03 pc 0000000000004018  /system/lib64/arm64/libnative_bridge_vdso.so (BuildId: c7eb2dae1deb0f51d28b7a1c3619dca4)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #04 pc 000000000235e6f0  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #05 pc 000000000235e38c  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #06 pc 000000000230001c  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #07 pc 00000000022ffdac  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #08 pc 0000000002327918  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #09 pc 00000000023093b8  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #10 pc 000000000421bc2c  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #11 pc 00000000040d4a70  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #12 pc 0000000002352f24  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #13 pc 0000000002352e70  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #14 pc 0000000002351340  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #15 pc 000000000236ecc4  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #16 pc 00000000023275a0  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #17 pc 00000000023527b8  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #18 pc 000000000233cabc  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libil2cpp.so (il2cpp_init+28) (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #19 pc 0000000000965c58  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #20 pc 00000000009dff4c  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #21 pc 00000000009e0eac  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #22 pc 00000000009fa720  /data/app/~~_ZJ9n159eb7lIe9VePdK8Q==/com.Ovilex.BusSimulator2023-u4AIuoWkDR7ZI-Kn4YlM_g==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 15:59:39.087  4485  4485 F DEBUG   :       #23 pc 0000000000004018  /system/lib64/arm64/libnative_bridge_vdso.so (BuildId: c7eb2dae1deb0f51d28b7a1c3619dca4)
+11-02 15:59:39.087  4485  4485 F DEBUG   : 1 total frames
+11-02 15:59:39.088  4485  4485 F DEBUG   : backtrace:
+11-02 15:59:39.091  4485  4485 F DEBUG   : 7 total frames
+11-02 15:59:39.092  4485  4485 F DEBUG   : backtrace:
+11-02 15:59:39.092  4485  4485 F DEBUG   : 9 total frames
+11-02 15:59:39.092  4485  4485 F DEBUG   : backtrace:
