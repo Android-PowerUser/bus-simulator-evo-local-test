@@ -1,0 +1,18 @@
+[
+  {
+    "library": "/home/user/.cache/android-arm27-stock/sdk/emulator/lib64/libandroid-emu-shared.so",
+    "symbol": "_ZN7android11crashreport12HangDetector16addWatchedLooperEPNS_4base6LooperENSt3__16chrono8durationIxNS5_5ratioILl1ELl1000EEEEE",
+    "file_offset": "0x2dde40",
+    "before": "554157415641554154534883ec284989",
+    "after": "c34157415641554154534883ec284989",
+    "patch": "return before registering any watched looper"
+  },
+  {
+    "library": "/home/user/.cache/android-arm27-stock/sdk/emulator/lib64/libgfxstream_backend.so",
+    "symbol": "_ZN7android11crashreport12HangDetector16addWatchedLooperEPNS_4base6LooperENSt3__16chrono8durationIxNS5_5ratioILl1ELl1000EEEEE",
+    "file_offset": "0xe68c20",
+    "before": "554157415641554154534883ec284989",
+    "after": "c34157415641554154534883ec284989",
+    "patch": "return before registering any watched looper"
+  }
+]

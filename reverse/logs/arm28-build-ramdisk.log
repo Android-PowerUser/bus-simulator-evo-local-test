@@ -1,0 +1,7 @@
+[05:04:02] == cross-compile initwrap
+[05:04:02] == unpack downloaded ramdisk
+[05:04:02] == preserve image init as /init.real and patch its device-wait timeout
+patch init-required-devices-timeout @ 0x84b8: e0031f2a -> e0030032
+[05:04:02] == install compiled wrapper as /init
+[05:04:02] == repack ramdisk (root-owned)
+[05:04:02] == 20-build-ramdisk done: /home/user/.cache/android-arm27-stock/tcg-build/ramdisk-wrap.img (1883417 bytes)

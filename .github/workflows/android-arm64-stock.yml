@@ -1,0 +1,93 @@
+name: Native ARM64 stock control
+run-name: Native ARM64 stock control - ${{ inputs.release_tag }}
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Private release containing the verified stock package and XAPK
+        required: true
+        default: local-test-242-v8-lifecycle
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: bus-private-native-arm64-stock
+  cancel-in-progress: false
+jobs:
+  stock:
+    # This removes x86_64/Berberis from the experiment. It is a native-ABI
+    # emulator control, not a claim that an emulator equals physical hardware.
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 90
+    env:
+      TEST_RELEASE_TAG: ${{ inputs.release_tag }}
+      TEST_STOCK_CONTROL: true
+      TEST_DUMP_VM: true
+      TEST_ENVIRONMENT: GitHub Actions ARM64 / Android ARM64 (no Berberis)
+      ANDROID_SERIAL: emulator-5554
+      ANDROID_AVD_HOME: /home/runner/.android/avd
+      ANDROID_USER_HOME: /home/runner/.android
+      ANDROID_DEVICE_TIMEOUT: 600
+      ANDROID_BOOT_TIMEOUT: 1200
+      ANDROID_INSTALL_TIMEOUT: 1200
+      ANDROID_LAUNCH_TIMEOUT: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Obtain verified stock package
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euxo pipefail
+          gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.xapk' --dir downloaded-game
+          for name in stock-original-base.apk stock-original-config.apk stock-original-asset-layout.zip stock-original-manifest.json; do
+            gh release download "$TEST_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$name" --dir downloaded-game
+          done
+      - name: Prepare Android 15 ARM64 image
+        run: |
+          set -euxo pipefail
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          (yes 2>/dev/null || true) | "$SDKMANAGER" 'platform-tools' 'emulator' 'system-images;android-35;google_apis;arm64-v8a'
+          if [ -c /dev/kvm ]; then
+            sudo chmod 666 /dev/kvm
+            test -r /dev/kvm -a -w /dev/kvm
+            echo EMULATOR_ACCEL=on >> "$GITHUB_ENV"
+          else
+            echo 'KVM is unavailable; using same-architecture ARM64 TCG without Berberis.'
+            echo EMULATOR_ACCEL=off >> "$GITHUB_ENV"
+          fi
+          mkdir -p "$ANDROID_AVD_HOME" "$ANDROID_USER_HOME"
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name BusStockARM64 --path "$ANDROID_AVD_HOME/BusStockARM64.avd" --package 'system-images;android-35;google_apis;arm64-v8a'
+          cat >> "$ANDROID_AVD_HOME/BusStockARM64.avd/config.ini" <<'AVD'
+          hw.cpu.ncore=2
+          hw.ramSize=3072
+          hw.lcd.width=480
+          hw.lcd.height=800
+          hw.lcd.density=160
+          hw.gpu.enabled=yes
+          hw.gpu.mode=swangle
+          hw.keyboard=yes
+          disk.dataPartition.size=6442450944
+          AVD
+      - name: Boot ARM64 emulator and test unmodified stock
+        run: |
+          set -euxo pipefail
+          mkdir -p runtime-results
+          "$ANDROID_HOME/platform-tools/adb" start-server
+          nohup "$ANDROID_HOME/emulator/emulator" -avd BusStockARM64 -no-window -no-audio -no-snapshot -no-boot-anim -accel "$EMULATOR_ACCEL" -memory 3072 -cores 2 -gpu swangle -feature -Vulkan -camera-back none -camera-front none -no-metrics > runtime-results/emulator.log 2>&1 &
+          python3 ci/remote_android_runtime.py 2>&1 | tee runtime-results/test-console.txt
+      - name: Preserve logs, memory samples, and screenshots in private release
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PYZIP'
+          import os, zipfile
+          from pathlib import Path
+          out=Path('runtime-arm64-stock-'+os.environ['GITHUB_RUN_ID']+'.zip')
+          with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED) as z:
+              for p in Path('runtime-results').rglob('*'):
+                  if p.is_file(): z.write(p,str(p))
+          PYZIP
+          gh release upload "$TEST_RELEASE_TAG" "runtime-arm64-stock-$GITHUB_RUN_ID.zip" --repo "$GITHUB_REPOSITORY" --clobber

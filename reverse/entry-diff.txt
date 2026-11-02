@@ -1,0 +1,59 @@
+stock-original-base.apk entries 1744 size 60525692
+com.Ovilex.BusSimulator2023.apk entries 1743 size 60771389
+candidate-v9-native-init-8dbafd23-base.apk entries 1743 size 60771389
+candidate-v10-bootstrap-82e746c8-base.apk entries 1743 size 60771389
+candidate-stock-resigned-ee90ff2e-ee90ff2e-base.apk entries 1743 size 60484669
+candidate-stock-directsign-bd59e4fe-bd59e4fe-base.apk entries 1746 size 60628228
+
+Changed/missing entries relative to stock:
+
+### com.Ovilex.BusSimulator2023.apk
+AndroidManifest.xml stock= (75696, 2122195065) candidate= (75700, 2122195065) sha ab23168871f8e62c dd2718141ab221a5
+classes.dex stock= (7984688, 2346102777) candidate= (7984688, 2346102777) sha 39d84e89a9878e1e 7b168d0661fe2b9f
+classes10.dex stock= (8053728, 3524053700) candidate= (8155344, 3524053700) sha 1e1967bb42c0d84c df701fcb63ac7325
+classes2.dex stock= (8374496, 1188051914) candidate= (8374496, 1188051914) sha 90dbb04db7fec1aa f086cf4c1df7bad2
+classes3.dex stock= (8137584, 352509239) candidate= (8137584, 352509239) sha 00225ad6bbd34fab efaeb7a9bc98131c
+classes4.dex stock= (8383468, 2033554523) candidate= (8484524, 2033554523) sha 107b6b13842c324f b97497f71c8fe5cd
+classes5.dex stock= (7875612, 2327261199) candidate= (7875612, 2327261199) sha 93d16d912b984efe 22f2924dc7017482
+classes6.dex stock= (7759356, 3807600572) candidate= (7759356, 3807600572) sha 247bd5f5fd963f82 2a980899fbd39d2e
+classes7.dex stock= (8112108, 2868461227) candidate= (8112108, 2868461227) sha 5f9f513ba4976ded fbe69f46a550531b
+classes8.dex stock= (8487556, 2618853246) candidate= (8585752, 2618853246) sha 23ca8135549ac9bd 2e343f27854d00cf
+classes9.dex stock= (7751284, 193543150) candidate= (7857712, 193543150) sha 96567380c43493d9 9fe63e8fc235f824
+stamp-cert-sha256 stock= (32, 1658225270) candidate= None sha 1d9c2a02a93816ff -
+
+### candidate-v9-native-init-8dbafd23-base.apk
+AndroidManifest.xml stock= (75696, 2122195065) candidate= (75700, 2122195065) sha ab23168871f8e62c dd2718141ab221a5
+classes.dex stock= (7984688, 2346102777) candidate= (7984688, 2346102777) sha 39d84e89a9878e1e 7b168d0661fe2b9f
+classes10.dex stock= (8053728, 3524053700) candidate= (8155344, 3524053700) sha 1e1967bb42c0d84c df701fcb63ac7325
+classes2.dex stock= (8374496, 1188051914) candidate= (8374496, 1188051914) sha 90dbb04db7fec1aa f086cf4c1df7bad2
+classes3.dex stock= (8137584, 352509239) candidate= (8137584, 352509239) sha 00225ad6bbd34fab efaeb7a9bc98131c
+classes4.dex stock= (8383468, 2033554523) candidate= (8484524, 2033554523) sha 107b6b13842c324f b97497f71c8fe5cd
+classes5.dex stock= (7875612, 2327261199) candidate= (7875612, 2327261199) sha 93d16d912b984efe 22f2924dc7017482
+classes6.dex stock= (7759356, 3807600572) candidate= (7759356, 3807600572) sha 247bd5f5fd963f82 2a980899fbd39d2e
+classes7.dex stock= (8112108, 2868461227) candidate= (8112108, 2868461227) sha 5f9f513ba4976ded fbe69f46a550531b
+classes8.dex stock= (8487556, 2618853246) candidate= (8585764, 2618853246) sha 23ca8135549ac9bd 7f63bc9b8a5cf836
+classes9.dex stock= (7751284, 193543150) candidate= (7857712, 193543150) sha 96567380c43493d9 9fe63e8fc235f824
+stamp-cert-sha256 stock= (32, 1658225270) candidate= None sha 1d9c2a02a93816ff -
+
+### candidate-v10-bootstrap-82e746c8-base.apk
+AndroidManifest.xml stock= (75696, 2122195065) candidate= (75700, 2122195065) sha ab23168871f8e62c dd2718141ab221a5
+classes.dex stock= (7984688, 2346102777) candidate= (7984688, 2346102777) sha 39d84e89a9878e1e 7b168d0661fe2b9f
+classes10.dex stock= (8053728, 3524053700) candidate= (8155344, 3524053700) sha 1e1967bb42c0d84c 5e3f7a09597207d2
+classes2.dex stock= (8374496, 1188051914) candidate= (8374496, 1188051914) sha 90dbb04db7fec1aa f086cf4c1df7bad2
+classes3.dex stock= (8137584, 352509239) candidate= (8137584, 352509239) sha 00225ad6bbd34fab efaeb7a9bc98131c
+classes4.dex stock= (8383468, 2033554523) candidate= (8484524, 2033554523) sha 107b6b13842c324f b668d0fcd2677495
+classes5.dex stock= (7875612, 2327261199) candidate= (7875612, 2327261199) sha 93d16d912b984efe 22f2924dc7017482
+classes6.dex stock= (7759356, 3807600572) candidate= (7759356, 3807600572) sha 247bd5f5fd963f82 2a980899fbd39d2e
+classes7.dex stock= (8112108, 2868461227) candidate= (8112108, 2868461227) sha 5f9f513ba4976ded fbe69f46a550531b
+classes8.dex stock= (8487556, 2618853246) candidate= (8585764, 2618853246) sha 23ca8135549ac9bd 7f63bc9b8a5cf836
+classes9.dex stock= (7751284, 193543150) candidate= (7857712, 193543150) sha 96567380c43493d9 9fe63e8fc235f824
+stamp-cert-sha256 stock= (32, 1658225270) candidate= None sha 1d9c2a02a93816ff -
+
+### candidate-stock-resigned-ee90ff2e-ee90ff2e-base.apk
+stamp-cert-sha256 stock= (32, 1658225270) candidate= None sha 1d9c2a02a93816ff -
+
+### candidate-stock-directsign-bd59e4fe-bd59e4fe-base.apk
+META-INF/BUS-LOCA.RSA stock= None candidate= (1147, 1320606256) sha - 39e079291c7e3b53
+META-INF/BUS-LOCA.SF stock= None candidate= (208640, 1400171868) sha - c6f2ef7fa4ec0911
+META-INF/MANIFEST.MF stock= None candidate= (208513, 2436075777) sha - c376c8a5c819a61c
+stamp-cert-sha256 stock= (32, 1658225270) candidate= None sha 1d9c2a02a93816ff -

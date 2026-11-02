@@ -1,0 +1,19 @@
+{
+  "release_tag": "local-x86-api35-stock",
+  "environment": "Local x86_64 Android 15 API 35 full-system TCG without KVM; ARM64 app through the image native bridge; original unmodified game APKs",
+  "android_serial": "emulator-5554",
+  "control_installed": false,
+  "control_launched": false,
+  "game_installed": false,
+  "game_launch_attempted": false,
+  "gameplay_verified": false,
+  "state": "failed",
+  "system_server_pid_before": "672",
+  "supported_abis": "x86_64,arm64-v8a",
+  "native_bridge": "libndk_translation.so",
+  "android_sdk": "35",
+  "control_install_transport": "no_streaming",
+  "control_install_seconds": 22.108,
+  "system_server_pid_after_control_install": "672",
+  "error": "RuntimeError: ADB exit 255: ci/control.apk: 1 file pushed, 0 skipped. 1.0 MB/s (8279 bytes in 0.008s)\n\nException occurred while executing 'install':\njava.lang.NullPointerException: Attempt to invoke virtual method 'void android.content.pm.PackageManagerInternal.freeStorage(java.lang.String, long, int)' on a null object reference\n\tat com.android.server.StorageManagerService.allocateBytes(StorageManagerService.java:4205)\n\tat android.os.storage.StorageManager.allocateBytes(StorageManager.java:2321)\n\tat android.os.storage.StorageManager.allocateBytes(StorageManager.java:2400)\n\tat com.android.server.pm.PackageInstallerSession.doWriteInternal(PackageInstallerSession.java:1987)\n\tat com.android.server.pm.PackageInstallerSession.write(PackageInstallerSession.java:1889)\n\tat android.content.pm.PackageInstaller$Session.write(PackageInstaller.java:1619)\n\tat com.android.server.pm.PackageManagerShellCommand.doWriteSplit(PackageManagerShellCommand.java:4218)\n\tat com.android.server.pm.PackageManagerShellCommand.doWriteSplits(PackageManagerShellCommand.java:4167)\n\tat com.android.server.pm.PackageManagerShellCommand.doRunInstall(PackageManagerShellCommand.java:1629)\n\tat com.android.server.pm.PackageManagerShellCommand.runInstall(PackageManagerShellCommand.java:1561)\n\tat com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:245)\n\tat com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)\n\tat android.os.ShellCommand.exec(ShellCommand.java:38)\n\tat com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:6561)\n\tat android.os.Binder.shellCommand(Binder.java:1230)\n\tat android.os.Binder.onTransact(Binder.java:1043)\n\tat android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4620)\n\tat com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:6545)\n\tat android.os.Binder.execTransactInternal(Binder.java:1505)\n\tat android.os.Binder.execTransact(Binder.java:1444)\nPerforming Push Install\n"
+}

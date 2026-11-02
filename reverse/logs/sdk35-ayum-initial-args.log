@@ -1,0 +1,141 @@
+Loaded target /home/user/.cache/bus-recovery/runtime/libil2cpp.so at 0x10000000, image end 0x15a2c1f0
+JNI FindClass 'java/lang/Float'
+JNI GetMethodID '<init>' '(F)V'
+JNI GetMethodID 'floatValue' '()F'
+JNI FindClass 'java/lang/Double'
+JNI GetMethodID '<init>' '(D)V'
+JNI GetMethodID 'doubleValue' '()D'
+JNI FindClass 'java/lang/Long'
+JNI GetMethodID '<init>' '(J)V'
+JNI GetMethodID 'longValue' '()J'
+JNI FindClass 'java/lang/Integer'
+JNI GetMethodID '<init>' '(I)V'
+JNI GetMethodID 'intValue' '()I'
+JNI FindClass 'java/lang/Short'
+JNI GetMethodID '<init>' '(S)V'
+JNI GetMethodID 'shortValue' '()S'
+JNI FindClass 'java/lang/Byte'
+JNI GetMethodID '<init>' '(B)V'
+JNI GetMethodID 'byteValue' '()B'
+JNI FindClass 'java/lang/Character'
+JNI GetMethodID '<init>' '(C)V'
+JNI GetMethodID 'charValue' '()C'
+JNI FindClass 'java/lang/Boolean'
+JNI GetMethodID '<init>' '(Z)V'
+JNI GetMethodID 'booleanValue' '()Z'
+JNI FindClass 'android/content/Intent'
+JNI GetMethodID '<init>' '(Ljava/lang/String;)V'
+JNI GetMethodID 'setFlags' '(I)Landroid/content/Intent;'
+JNI GetMethodID 'getFlags' '()I'
+JNI GetMethodID 'putExtra' '(Ljava/lang/String;I)Landroid/content/Intent;'
+JNI GetMethodID 'putExtra' '(Ljava/lang/String;Ljava/lang/CharSequence;)Landroid/content/Intent;'
+JNI GetMethodID 'putExtra' '(Ljava/lang/String;[B)Landroid/content/Intent;'
+JNI GetMethodID 'hasExtra' '(Ljava/lang/String;)Z'
+JNI GetMethodID 'getIntExtra' '(Ljava/lang/String;I)I'
+JNI GetMethodID 'getStringExtra' '(Ljava/lang/String;)Ljava/lang/String;'
+JNI GetMethodID 'getByteArrayExtra' '(Ljava/lang/String;)[B'
+JNI GetMethodID 'getAction' '()Ljava/lang/String;'
+JNI GetMethodID 'setPackage' '(Ljava/lang/String;)Landroid/content/Intent;'
+JNI GetMethodID 'getPackage' '()Ljava/lang/String;'
+JNI GetMethodID 'setData' '(Landroid/net/Uri;)Landroid/content/Intent;'
+JNI GetMethodID 'getData' '()Landroid/net/Uri;'
+JNI FindClass 'android/net/Uri'
+JNI GetStaticMethodID 'parse' '(Ljava/lang/String;)Landroid/net/Uri;'
+JNI GetMethodID 'toString' '()Ljava/lang/String;'
+JNI GetStaticFieldID 'FLAG_ACTIVITY_NEW_TASK' 'I'
+JNI GetStaticFieldID 'ACTION_VIEW' 'Ljava/lang/String;'
+JNI FindClass 'android/content/Context'
+JNI GetMethodID 'sendBroadcast' '(Landroid/content/Intent;)V'
+JNI GetMethodID 'startActivity' '(Landroid/content/Intent;)V'
+JNI FindClass 'com/pairip/VMRunner'
+JNI GetStaticMethodID 'invoke' '(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;'
+JNI GetStaticMethodID 'getContext' '()Landroid/content/Context;'
+JNI FindClass 'com/pairip/VMRunner'
+JNI RegisterNatives count=1
+JNI_OnLoad returned 0x10006
+JNI NewStringUTF 'AYum7gkZqbCjV2Br'
+JNI FindClass 'java/lang/Object'
+JNI NewObjectArray handle=0x300a9000 length=1 initial=0x0
+JNI NewLong handle=0x300aa000 args=['0x0']
+JNI SetObjectArrayElement array=0x300a9000 index=0 value=0x300aa000 instance={'class': 805396480, 'constructor': b'<init>', 'args': [0]}
+JNI CallStaticObjectMethod index=115 method=(805920768, b'invoke', b'(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;')
+JNI GetArrayLength array=0x20020000 -> 313347
+JNI GetArrayLength array=0x300a9000 -> 1
+JNI GetObjectArrayElement array=0x300a9000 index=0 -> 0x300aa000 instance={'class': 805396480, 'constructor': b'<init>', 'args': [0]}
+VM     1 dispatch=0x30a74 opcode=0x98 pc_after_opcode=0x2fb58
+VM     2 dispatch=0x30a74 opcode=0x98 pc_after_opcode=0x3cdb5
+VM     3 dispatch=0x30a74 opcode=0x98 pc_after_opcode=0x388ce
+VM     4 dispatch=0x30a74 opcode=0x98 pc_after_opcode=0x128fb
+VM     5 dispatch=0x30a74 opcode=0x98 pc_after_opcode=0x447c6
+VM     6 dispatch=0x30a74 opcode=0x8d pc_after_opcode=0x2ddd7
+VM     7 dispatch=0x3db64 opcode=0x8d pc_after_opcode=0x2ddd7
+TLS_ORIGINAL thread=main descriptor=0x982c8 size=0x8 pointer=0x300fa008
+TLS_ORIGINAL thread=main descriptor=0x98328 size=0x4 pointer=0x300fb008
+VM     8 dispatch=0x30a74 opcode=0x5e pc_after_opcode=0x10a86
+VM     9 dispatch=0x3db64 opcode=0x5e pc_after_opcode=0x10a86
+VM    10 dispatch=0x30a74 opcode=0x0f pc_after_opcode=0x19e81
+VM    11 dispatch=0x3db64 opcode=0x0f pc_after_opcode=0x19e81
+VM    12 dispatch=0x30a74 opcode=0xa2 pc_after_opcode=0xef01
+VM    13 dispatch=0x3db64 opcode=0xa2 pc_after_opcode=0xef01
+VM    14 dispatch=0x30a74 opcode=0x29 pc_after_opcode=0x2509f
+CONTROL_FIELDS 0:0x52ca 1:0x0 2:0xc28f88d8 3:0x2832d617 4:0x2c95b 5:0x2 6:0x155a6 7:0x2ddd5 8:0x8a128657 9:0x8f63345c 10:0x101d5 11:0x1 12:0x155a6 13:0x155a6 14:0x20008910
+CONTROL_HASH first=0xd7cd29e87f047e03/0x2832d617c28f88d8 second=0x709ccba34deee392/0x8f63345c8a128657 target=0x155a6
+CONTROL_CONTEXT vm_pc=0x2509f raw_xor=True raw_first=True raw_second=True
+VM    15 dispatch=0x30a74 opcode=0x5e pc_after_opcode=0x155a8
+VM    16 dispatch=0x3db64 opcode=0x5e pc_after_opcode=0x155a8
+VM    17 dispatch=0x30a74 opcode=0x90 pc_after_opcode=0x1853f
+VM    18 dispatch=0x3db64 opcode=0x90 pc_after_opcode=0x1853f
+VM    19 dispatch=0x30a74 opcode=0xb5 pc_after_opcode=0x37aa8
+VM    20 dispatch=0x3db64 opcode=0xb5 pc_after_opcode=0x37aa8
+VM    21 dispatch=0x30a74 opcode=0xac pc_after_opcode=0x15b1
+CONTROL_FIELDS 0:0x44330 1:0x0 2:0xf32dcdf 3:0xd89c5818 4:0x3b092 5:0x3 6:0x1696d 7:0x2ddd5 8:0xf272f553 9:0x2729f2e7 10:0x46421 11:0x3 12:0x136 13:0x35c3f 14:0xff7fffff
+CONTROL_HASH first=0x2763a7e7f2a1f228/0xd89c58180f32dcdf second=0x2729f2e7f272f553/0x2729f2e7f272f553 target=0x136
+CONTROL_CONTEXT vm_pc=0x15b1 raw_xor=True raw_first=True raw_second=True
+VM    22 dispatch=0x30a74 opcode=0x79 pc_after_opcode=0x138
+VM    23 dispatch=0x3db64 opcode=0x79 pc_after_opcode=0x138
+VM    24 dispatch=0x30a74 opcode=0x8e pc_after_opcode=0xbfe8
+VM_VAR_WRITE address=0x300b6cf7 vm_offset=0xbcf7 size=4 value=0x1 pc=0x31754 lr=0x3171c vm_steps=24 vm_pc=0xbfe8
+VM    25 dispatch=0x30a74 opcode=0x8d pc_after_opcode=0x25840
+VM    26 dispatch=0x3db64 opcode=0x8d pc_after_opcode=0x25840
+VM    27 dispatch=0x30a74 opcode=0x8d pc_after_opcode=0x18010
+VM    28 dispatch=0x3db64 opcode=0x8d pc_after_opcode=0x18010
+VM    29 dispatch=0x30a74 opcode=0x0c pc_after_opcode=0x428ec
+VM    30 dispatch=0x3db64 opcode=0x0c pc_after_opcode=0x428ec
+INTERRUPT 2 pc=0x17090 lr=0x2eca8 syscall=0x71 args=0x1 0x401ef1d8 0xffffffee 0xfc8af00
+RARE_CALL clock_gettime clock=0x1 value=1.000000000 vm_steps=30 insns=36988
+SYSCALL result=0x0
+VM_VAR_WRITE address=0x300b6cf7 vm_offset=0xbcf7 size=4 value=0x1 pc=0x57a64 lr=0x100000001b3 vm_steps=30 vm_pc=0x428ec
+VM    31 dispatch=0x30a74 opcode=0xb7 pc_after_opcode=0x3ad4
+VM    32 dispatch=0x3db64 opcode=0xb7 pc_after_opcode=0x3ad4
+VM    33 dispatch=0x30a74 opcode=0x2d pc_after_opcode=0x2f200
+VM    34 dispatch=0x3db64 opcode=0x2d pc_after_opcode=0x2f200
+VM_VAR_WRITE address=0x300b6cf7 vm_offset=0xbcf7 size=4 value=0x3ad2 pc=0x4bde8 lr=0x100000001b3 vm_steps=34 vm_pc=0x2f200
+VM    35 dispatch=0x30a74 opcode=0x5e pc_after_opcode=0x1b941
+VM    36 dispatch=0x3db64 opcode=0x5e pc_after_opcode=0x1b941
+VM    37 dispatch=0x30a74 opcode=0xa2 pc_after_opcode=0x26b2a
+VM    38 dispatch=0x3db64 opcode=0xa2 pc_after_opcode=0x26b2a
+VM    39 dispatch=0x30a74 opcode=0xa2 pc_after_opcode=0x4afd1
+VM    40 dispatch=0x3db64 opcode=0xa2 pc_after_opcode=0x4afd1
+VM_VAR_WRITE address=0x300b6cf7 vm_offset=0xbcf7 size=4 value=0x2 pc=0x62328 lr=0x100000001b3 vm_steps=40 vm_pc=0x4afd1
+VM    41 dispatch=0x30a74 opcode=0xa2 pc_after_opcode=0x41462
+VM    42 dispatch=0x3db64 opcode=0xa2 pc_after_opcode=0x41462
+VM    43 dispatch=0x30a74 opcode=0xb7 pc_after_opcode=0x32e1a
+VM    44 dispatch=0x3db64 opcode=0xb7 pc_after_opcode=0x32e1a
+VM    45 dispatch=0x30a74 opcode=0x2d pc_after_opcode=0x26049
+VM    46 dispatch=0x3db64 opcode=0x2d pc_after_opcode=0x26049
+VM    47 dispatch=0x30a74 opcode=0x5e pc_after_opcode=0x47bcf
+VM    48 dispatch=0x3db64 opcode=0x5e pc_after_opcode=0x47bcf
+VM    49 dispatch=0x30a74 opcode=0x17 pc_after_opcode=0x4949e
+VM    50 dispatch=0x30a74 opcode=0x17 pc_after_opcode=0x14ad8
+VM    51 dispatch=0x30a74 opcode=0x17 pc_after_opcode=0x4087b
+VM    52 dispatch=0x30a74 opcode=0x17 pc_after_opcode=0x3ce4a
+VM    53 dispatch=0x30a74 opcode=0x4e pc_after_opcode=0x170e0
+CONTROL_FIELDS 0:0xb6ba 1:0x0 2:0xea5c7bd1 3:0x433ed5f7 4:0x3778c 5:0x3 6:0x2e81b 7:0x4697f 8:0x64c2120a 9:0x349c8ba3 10:0x494d0 11:0x1 12:0x35210 13:0x4a0f0 14:0x6400c910
+CONTROL_HASH first=0x433ed5f7895ab5ba/0x433ed5f7ea5c7bd1 second=0x349c8ba364c2120a/0x349c8ba364c2120a target=0x35210
+CONTROL_CONTEXT vm_pc=0x170e0 raw_xor=True raw_first=True raw_second=True
+VM    54 dispatch=0x30a74 opcode=0x5a pc_after_opcode=0x35212
+VM    55 dispatch=0x3db64 opcode=0x5a pc_after_opcode=0x35212
+completed pc=0x60680 insns=511511 vm_steps=55
+RARE_CALL_COUNTS clock_gettime=1
+target memory accesses: reads=0 writes=0
+wrote mutable VM image: reverse/build/v18/emulated-vm-image.bin

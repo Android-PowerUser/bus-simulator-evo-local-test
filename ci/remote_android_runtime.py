@@ -4,9 +4,10 @@ R=Path(os.environ.get('GITHUB_WORKSPACE','.'));D=R/'runtime-results';D.mkdir(exi
 A=os.environ.get('ANDROID_HOME','/usr/local/lib/android/sdk')+'/platform-tools/adb'
 SERIAL=os.environ.get('ANDROID_SERIAL','emulator-5554')
 PKG='com.Ovilex.BusSimulator2023';ACT=PKG+'/com.google.firebase.MessagingUnityPlayerActivity'
-status={'release_tag':os.environ['TEST_RELEASE_TAG'],'environment':'GitHub Actions Linux / KVM','android_serial':SERIAL,'control_installed':False,'control_launched':False,'game_installed':False,'game_launch_attempted':False,'gameplay_verified':False,'state':'waiting_for_android'}
+status={'release_tag':os.environ['TEST_RELEASE_TAG'],'environment':os.environ.get('TEST_ENVIRONMENT','GitHub Actions Linux / KVM'),'android_serial':SERIAL,'control_installed':False,'control_launched':False,'game_installed':False,'game_launch_attempted':False,'gameplay_verified':False,'state':'waiting_for_android'}
 def save(): (D/'status.json').write_text(json.dumps(status,indent=2))
 def adb(args,timeout=30,check=True):
+ timeout=max(timeout,int(os.environ.get('ANDROID_MIN_ADB_TIMEOUT','0')))
  print(time.strftime('%H:%M:%S'),'ADB',args,flush=True)
  r=subprocess.run([A,'-s',SERIAL,*args],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=timeout)
  print(r.stdout,flush=True)
@@ -19,7 +20,7 @@ def adb_to_file(args,out_path,timeout=180):
  print(time.strftime('%H:%M:%S'),'ADB->file',args,r.returncode,len(r.stdout),r.stderr[:200],flush=True)
  return r.returncode,len(r.stdout)
 def screen(name):
- with (D/name).open('wb') as f:subprocess.run([A,'-s',SERIAL,'exec-out','screencap','-p'],stdout=f,timeout=30,check=True)
+ with (D/name).open('wb') as f:subprocess.run([A,'-s',SERIAL,'exec-out','screencap','-p'],stdout=f,timeout=int(os.environ.get('ANDROID_SCREENSHOT_TIMEOUT','30')),check=True)
 def dump_il2cpp_got_early():
  # PairIP's injected DT_INIT repairs an intentionally sparse/scrambled PLT/GOT
  # before ordinary IL2CPP constructors run. Capture that short-lived state.
@@ -63,20 +64,40 @@ def dump_il2cpp_got_early():
   records.append({'error':type(e).__name__+': '+str(e)})
  (D/'il2cpp-got-capture.json').write_text(json.dumps(records,indent=2))
  status['il2cpp_got_snapshots']=len([x for x in records if 'name' in x]);save()
+def revalidate_ready_generation(label):
+ expected=status.get('system_server_pid_before','')
+ current=shell('pidof system_server',60,False)
+ if not expected or current!=expected:
+  raise RuntimeError('system_server generation changed before '+label+': '+expected+' -> '+current)
+ ready=shell('getprop sys.boot_completed; pm path android; service check settings; service check activity; service check window',120)
+ if not ready.startswith('1\n') or 'package:/system/' not in ready or not all(x in ready for x in ['Service settings: found','Service activity: found','Service window: found']):
+  raise RuntimeError('Framework not fully ready immediately before '+label)
+ status[label+'_ready_generation']=current;save()
+
 def install_and_verify(label,args,package,min_paths,timeout):
+ allow_restart=os.environ.get('ANDROID_ALLOW_INSTALL_RESTART','').lower()=='true'
  before=shell('pidof system_server')
  started=time.monotonic()
- try:result=adb(args,timeout)
+ try:result=adb(args,timeout,check=not allow_restart)
  finally:
   status[label+'_install_seconds']=round(time.monotonic()-started,3)
   status['system_server_pid_after_'+label+'_install']=shell('pidof system_server',30,False)
   save()
  after=status['system_server_pid_after_'+label+'_install']
- if not before or after!=before:raise RuntimeError('system_server changed during '+label+' install: '+before+' -> '+after)
- if 'Success' not in result:raise RuntimeError(label+' install did not report Success')
- paths=[line[8:] for line in shell('pm path '+package).splitlines() if line.startswith('package:')]
- status[label+'_package_paths']=paths;save()
- if len(paths)<min_paths:raise RuntimeError(label+' package verification found '+str(len(paths))+' paths; expected at least '+str(min_paths))
+ if not allow_restart and (not before or after!=before):raise RuntimeError('system_server changed during '+label+' install: '+before+' -> '+after)
+ if 'Success' not in result and not (allow_restart and 'Broken pipe' in result):raise RuntimeError(label+' install did not report Success')
+ if before!=after and allow_restart:status[label+'_install_restart_accepted']=before+' -> '+after;save()
+ deadline=time.monotonic()+int(os.environ.get('ANDROID_PACKAGE_REGISTER_TIMEOUT','600') if allow_restart else '0')
+ while True:
+  paths=[line[8:] for line in shell('pm path '+package,120,False).splitlines() if line.startswith('package:')]
+  if len(paths)>=min_paths:break
+  if not allow_restart or time.monotonic()>=deadline:raise RuntimeError(label+' package verification found '+str(len(paths))+' paths; expected at least '+str(min_paths))
+  time.sleep(5)
+ status[label+'_package_paths']=paths
+ final_pid=shell('pidof system_server',120,False)
+ status['system_server_pid_after_'+label+'_install']=final_pid
+ if allow_restart and final_pid:status['system_server_pid_before']=final_pid
+ save()
  return result
 def resign_test_apks(apks,keystore):
  tools=sorted((Path(os.environ['ANDROID_HOME'])/'build-tools').glob('*/apksigner'))
@@ -92,16 +113,22 @@ def resign_test_apks(apks,keystore):
  status['all_apks_resigned']=True;status['resign_seconds']=round(time.monotonic()-started,3);save()
 log=None
 try:
- save();adb(['wait-for-device'],180)
- end=time.monotonic()+240
+ save();adb(['wait-for-device'],int(os.environ.get('ANDROID_DEVICE_TIMEOUT','180')))
+ end=time.monotonic()+int(os.environ.get('ANDROID_BOOT_TIMEOUT','240'))
+ next_watchdog_write=0
  while time.monotonic()<end:
   try:
-   ready=shell('getprop sys.boot_completed; pm path android; service check media.audio_policy',20)
-   if ready.startswith('1\n') and 'package:/system/' in ready and 'media.audio_policy: found' in ready:break
+   ready=shell('getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window',int(os.environ.get('ANDROID_READY_TIMEOUT','20')))
+   required_boot='' if os.environ.get('ANDROID_PACKAGE_READY','').lower()=='true' else '1\n'
+   if ready.startswith(required_boot) and 'package:/system/' in ready and all(x in ready for x in ['media.audio_policy: found','Service settings: found','Service activity: found','Service window: found']):break
   except subprocess.TimeoutExpired:pass
+  if 'ready' in locals() and 'Service settings: found' in ready and time.monotonic()>=next_watchdog_write:
+   shell('settings put global system_server_watchdog_timeout_ms 3600000',60,False)
+   next_watchdog_write=time.monotonic()+15
   time.sleep(3)
  else:raise RuntimeError('Android did not become fully ready')
- adb(['root'],30,False);time.sleep(3);adb(['wait-for-device'],30)
+ if os.environ.get('ANDROID_SKIP_ADB_ROOT','').lower()!='true' and 'uid=0' not in shell('id',30,False):
+  adb(['root'],30,False);time.sleep(3);adb(['wait-for-device'],30)
  log_file=(D/'continuous-logcat.txt').open('w')
  log=subprocess.Popen([A,'-s',SERIAL,'logcat','-b','all','-v','threadtime'],stdout=log_file,stderr=subprocess.STDOUT)
  status['system_server_pid_before']=shell('pidof system_server')
@@ -109,17 +136,26 @@ try:
  status['native_bridge']=shell('getprop ro.dalvik.vm.native.bridge')
  status['android_sdk']=shell('getprop ro.build.version.sdk')
  shell('settings put global verifier_verify_adb_installs 0; settings put global package_verifier_enable 0',30)
+ shell('setprop pm.dexopt.install extract; setprop pm.dexopt.post-boot-update extract; setprop pm.dexopt.first-boot extract; setprop dalvik.vm.usejit false; stop vendor.gnss; settings put secure location_mode 0; settings put global system_server_watchdog_timeout_ms 3600000; bmgr enable false',90,False)
+ settle=int(os.environ.get('ANDROID_PRECONTROL_SETTLE_SECONDS','0'));time.sleep(settle)
+ status['system_server_pid_before']=shell('pidof system_server');save()
+ revalidate_ready_generation('control')
  status['control_install_transport']='no_streaming'
- install_and_verify('control',['install','--no-streaming','-r',str(R/'ci/control.apk')],'com.arena.installcontrol',1,90)
+ control_paths=[line[8:] for line in shell('pm path com.arena.installcontrol',90,False).splitlines() if line.startswith('package:')]
+ if os.environ.get('ANDROID_REUSE_CONTROL_INSTALL','').lower()=='true' and control_paths:
+  status['control_package_paths']=control_paths;status['control_install_reused']=True
+  status['system_server_pid_after_control_install']=shell('pidof system_server',60,False);save()
+ else:
+  install_and_verify('control',['install','--no-streaming','-r',str(R/'ci/control.apk')],'com.arena.installcontrol',1,int(os.environ.get('ANDROID_CONTROL_INSTALL_TIMEOUT','90')))
  status.update(state='control_installed',control_installed=True);save()
- result=shell('am start -W -n com.arena.installcontrol/android.app.Activity',60)
+ result=shell('am start -W -n com.arena.installcontrol/android.app.Activity',int(os.environ.get('ANDROID_CONTROL_LAUNCH_TIMEOUT','60')))
  assert 'Status: ok' in result,'Control start did not report Status ok'
  time.sleep(10);assert shell('pidof com.arena.installcontrol'), 'Control process did not survive'
  assert shell('pidof system_server')==status['system_server_pid_before'],'System restarted during control'
  screen('control.png');status.update(state='control_passed',control_launched=True);save()
  shell('am force-stop com.arena.installcontrol')
  if 'arm64-v8a' not in status['supported_abis']:raise RuntimeError('System image lacks advertised ARM64 native translation')
- package_dir=R/'downloaded-game';apks=[]
+ package_dir=Path(os.environ.get('TEST_PACKAGE_DIR',str(R/'downloaded-game')));package_dir.mkdir(parents=True,exist_ok=True);apks=[]
  archive=next(package_dir.glob('*.xapk'))
  with zipfile.ZipFile(archive) as z:
   for name in ['com.Ovilex.BusSimulator2023.apk','config.arm64_v8a.apk','UnityDataAssetPack.apk']:
@@ -162,16 +198,29 @@ try:
  if os.environ.get('TEST_RESIGN_KEYSTORE_ASSET'):
   keystore=package_dir/'test-signing.jks';assert keystore.is_file(),'Requested test keystore was not downloaded'
   status['resign_keystore_asset']=os.environ['TEST_RESIGN_KEYSTORE_ASSET'];save();resign_test_apks(apks,keystore)
+ revalidate_ready_generation('game')
  status['state']='installing_game';status['game_install_transport']='no_streaming';save()
- install_and_verify('game',['install-multiple','--no-streaming','-r','-t','--abi','arm64-v8a',*apks],PKG,3,420)
+ game_paths=[line[8:] for line in shell('pm path '+PKG,120,False).splitlines() if line.startswith('package:')]
+ reused_game=False
+ if os.environ.get('ANDROID_REUSE_GAME_INSTALL','').lower()=='true' and len(game_paths)>=3:
+  identity=shell("dumpsys package "+PKG+" | grep -E 'versionCode=|versionName=|codePath=|primaryCpuAbi='",120,False)
+  (D/'game-package-identity.txt').write_text(identity)
+  if '1.27.42' not in identity:raise RuntimeError('Reused game package is not version 1.27.42')
+  status['game_package_paths']=game_paths;status['game_install_reused_after_outer_timeout']=True
+  status['game_install_transport']='completed_before_adb_return_verified_next_boot'
+  status['system_server_pid_after_game_install']=shell('pidof system_server',60,False)
+  reused_game=True;save()
+ if not reused_game:
+  install_and_verify('game',['install-multiple','--no-streaming','-r','-t','--abi','arm64-v8a',*apks],PKG,3,int(os.environ.get('ANDROID_INSTALL_TIMEOUT','420')))
  status.update(state='game_installed',game_installed=True);save()
  adb(['logcat','-c'])
  shell('setprop debug.ld.app.com.Ovilex.BusSimulator2023 dlopen,dlsym,dlerror',30,False)
  status.update(state='launching_game',game_launch_attempted=True);save()
+ if os.environ.get('ANDROID_WAKE_BEFORE_GAME','').lower()=='true':shell('input keyevent 224',120,False)
  got_monitor=None
  if os.environ.get('TEST_DUMP_VM','').lower()=='true':
   got_monitor=threading.Thread(target=dump_il2cpp_got_early,daemon=True);got_monitor.start()
- launch=shell('am start -W -n '+ACT,120,False)
+ launch=shell('am start -W -n '+ACT,int(os.environ.get('ANDROID_LAUNCH_TIMEOUT','120')),False)
  (D/'game-launch.txt').write_text(launch);status['launch_command_output']=launch
  if got_monitor:
   got_monitor.join(8)

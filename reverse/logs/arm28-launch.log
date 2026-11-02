@@ -1,0 +1,3 @@
+[05:04:03] == launch qemu (TCG, CORES=1 MEM=1024MiB) -> /home/user/.cache/android-arm27-stock/tcg-build/emu.log
+[05:04:03] == 30-launch done: qemu pid 103784. Follow with: tail -f /home/user/.cache/android-arm27-stock/tcg-build/emu.log
+[05:04:03]    next: scripts/40-bringup.sh

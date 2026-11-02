@@ -1,0 +1,52 @@
+[
+  {
+    "name": "skipVerify",
+    "matches": 1,
+    "required": true,
+    "applied": true,
+    "file_offset": "0x13abfc4",
+    "before": "e20315aa",
+    "after": "22008052"
+  },
+  {
+    "name": "PROC_START short-timeout immediate",
+    "matches": 1,
+    "required": true,
+    "applied": true,
+    "file_offset": "0x10cb454",
+    "before": "03e284d2",
+    "after": "e3ff9fd2"
+  },
+  {
+    "name": "PROC_START long branch",
+    "matches": 1,
+    "required": true,
+    "applied": true,
+    "file_offset": "0x10cb450",
+    "before": "77000035",
+    "after": "03000014"
+  },
+  {
+    "name": "Finalizer 10s to 1h",
+    "matches": 1,
+    "required": false,
+    "applied": true,
+    "file_offset": "0x182db0",
+    "before": "02809cd26281aaf24200c0f2",
+    "after": "020094d20217a6f2c268c0f2"
+  },
+  {
+    "name": "Watchdog.run return",
+    "file_offset": "0x7be950",
+    "before": "f00b40d11f0240b9",
+    "after": "c0035fd61f2003d5",
+    "applied": true
+  },
+  {
+    "name": "GnssLocationProvider.isSupported return false",
+    "file_offset": "0x1314d00",
+    "before": "f00b40d11f0240b9",
+    "after": "00008052c0035fd6",
+    "applied": true
+  }
+]

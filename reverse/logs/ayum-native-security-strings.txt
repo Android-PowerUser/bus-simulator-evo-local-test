@@ -1,0 +1,88 @@
+0x300ace16	QSUc
+0x300b7ff5	xPSu\
+0x300b8628	4f'sU
+0x300b8958	suf
+0x300bd42a	uSU
+0x300be871	SuP
+0x300bfb36	Su{
+0x300c31e3	RsUj
+0x300c4c42	YSUo
+0x300cb132	jsU
+0x300cb316	SU%
+0x300d4d86	*WsUy
+0x300ebd0e	g4Su:[
+0x30121002	/proc/self/maps
+0x30147002	/proc/self/status
+0x30149036	TracerPid:
+0x3014c002	TracerPid:
+0x30153002	TracerPid:
+0x3015a002	TracerPid:
+0x30161002	TracerPid:
+0x30166000	TracerPid:
+0x30168002	TracerPid:
+0x3016f002	TracerPid:
+0x30176002	TracerPid:
+0x301a7002	/proc/self/maps
+0x301a9069	11fd9000-150bc000 r-xp 01fd5000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301a90ce	150bf000-15468000 rw-p 050b7000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301a9133	1546b000-159fa000 rw-p 0545f000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301a9198	15a00000-15a01000 rw-p 059f0000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301a91fd	15a08000-15a09000 r-xp 059f4000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301a9262	15a10000-15a25000 r--p 059f8000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301a92c7	15a2c000-15a2d000 rw-p 05a10000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301a932c	00000000-0009b000 r-xp 00000000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libpairipcore.so
+0x301aa000	10000000-11fd6000 r--p 00000000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301ae000	11fd9000-150bc000 r-xp 01fd5000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301b2002	/data/local/tmp/
+0x301b4002	/data/local/traces/
+0x301b6002	/data/data/com.android.shell/
+0x301b7000	/data/data/com.android.shell/
+0x301b9002	/data/user_de/0/com.android.shell/
+0x301ba000	/data/user_de/0/com.android.shell/
+0x301be000	150bf000-15468000 rw-p 050b7000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301c2000	1546b000-159fa000 rw-p 0545f000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301c6000	15a00000-15a01000 rw-p 059f0000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301ca000	15a08000-15a09000 r-xp 059f4000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301ce002	/data/local/tmp/
+0x301d0002	/data/local/traces/
+0x301d2002	/data/data/com.android.shell/
+0x301d3000	/data/data/com.android.shell/
+0x301d5002	/data/user_de/0/com.android.shell/
+0x301d6000	/data/user_de/0/com.android.shell/
+0x301da000	15a10000-15a25000 r--p 059f8000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301de000	15a2c000-15a2d000 rw-p 05a10000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x301e2000	00000000-0009b000 r-xp 00000000 00:00 0 /data/app/com.Ovilex.BusSimulator2023/lib/arm64/libpairipcore.so
+0x301e6002	/data/local/tmp/
+0x301e8002	/data/local/traces/
+0x301ea002	/data/data/com.android.shell/
+0x301eb000	/data/data/com.android.shell/
+0x301ed002	/data/user_de/0/com.android.shell/
+0x301ee000	/data/user_de/0/com.android.shell/
+0x301fd002	/system/
+0x30205000	/data/app/com.Ovilex.BusSimulator2023/
+0x30216002	dl_iterate_phdrj@/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libpairipcore.sop
+0x3021b00c	dl_iterate_phdrj@/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libpairipcore.sop
+0x30223000	/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libmain.so
+0x30225000	/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libmain.so
+0x30229000	/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libunity.so
+0x3022b000	/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libunity.so
+0x3022e000	/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x30230000	/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libil2cpp.so
+0x30234000	/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libpairipcore.so
+0x30236000	/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libpairipcore.so
+0x30239000	/system/lib64/liblog.so
+0x3023b000	/system/lib64/liblog.so
+0x30285002	()[Ljava/lang/StackTraceElement;
+0x30286000	()[Ljava/lang/StackTraceElement;
+0x3028a002	getStackTrace
+0x3028b002	()[Ljava/lang/StackTraceElement;
+0x3028c000	()[Ljava/lang/StackTraceElement;
+0x30298002	java/lang/StackTraceElement
+0x30299000	java/lang/StackTraceElement
+0x302c8002	()[Ljava/lang/StackTraceElement;
+0x302c9000	()[Ljava/lang/StackTraceElement;
+0x302f7002	android/os/Debug
+0x302fa002	isDebuggerConnected
+0x30302002	android/os/Debug
+0x30304002	waitingForDebugger
+0x303250dc	dl_iterate_phdrj@/data/app/com.Ovilex.BusSimulator2023/lib/arm64/libpairipcore.sop

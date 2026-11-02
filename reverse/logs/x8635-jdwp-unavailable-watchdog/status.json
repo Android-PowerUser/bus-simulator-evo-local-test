@@ -1,0 +1,12 @@
+{
+  "release_tag": "local-x86-api35-stock",
+  "environment": "Local x86_64 Android 15 API 35 full-system TCG without KVM; ARM64 app through the image native bridge; original unmodified game APKs",
+  "android_serial": "emulator-5554",
+  "control_installed": false,
+  "control_launched": false,
+  "game_installed": false,
+  "game_launch_attempted": false,
+  "gameplay_verified": false,
+  "state": "failed",
+  "error": "RuntimeError: Android did not become fully ready"
+}

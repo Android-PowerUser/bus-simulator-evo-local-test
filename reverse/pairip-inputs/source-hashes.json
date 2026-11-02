@@ -1,0 +1,14 @@
+{
+  "source": "https://d.apkpure.net/b/XAPK/com.Ovilex.BusSimulator2023?version=latest",
+  "version": "1.27.42 (242)",
+  "apk_sha256": {
+    "com.Ovilex.BusSimulator2023.apk": "3fdd3863d39e0e251cdfb7dbf421b595069e23681c9c4003c5db4eb8d3ffe388",
+    "config.arm64_v8a.apk": "1ec029e920de71615d8b333a2a3dc2efaaec549ac121d96c632a28c4672d5d2f"
+  },
+  "raw_file_sha256": {
+    "AYum7gkZqbCjV2Br": "c0c6f91c1a4117846628387513d835a9f37657de6bf7193384eb487464856560",
+    "ERzS3xEHg1Vs5U4O": "07b657a353e7ea2c3a36f61dc4b3f64f5cd9b7a0f36eb7bd08a5c31776b51155",
+    "libil2cpp.so": "40c4ae6f4f2563ce0089e7a07055ff6e919ba0390b00610008c5c3fe6061cd61",
+    "libpairipcore.so": "fa1d6af102b96fd9a79b86850cb935de16228ab26a0606e049c25bb986c6a7e2"
+  }
+}

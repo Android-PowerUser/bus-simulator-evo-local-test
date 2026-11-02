@@ -1,0 +1,97 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 124560759565,
+      "run_id": 41209308037,
+      "workflow_name": "Android runtime test - local-test-242-v8-lifecycle",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Android-PowerUser/bus-simulator-evo-local-test/actions/runs/41209308037",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVc_S1s8AAAAdAGZbDQ",
+      "head_sha": "fb4a5c2f813854201d0e8ab0a6eb791561fb2016",
+      "url": "https://api.github.com/repos/Android-PowerUser/bus-simulator-evo-local-test/actions/jobs/124560759565",
+      "html_url": "https://github.com/Android-PowerUser/bus-simulator-evo-local-test/actions/runs/41209308037/job/124560759565",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-31T14:15:46Z",
+      "started_at": "2026-10-31T14:15:50Z",
+      "completed_at": "2026-10-31T14:20:39Z",
+      "name": "runtime",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-31T14:15:51Z",
+          "completed_at": "2026-10-31T14:15:51Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-31T14:15:51Z",
+          "completed_at": "2026-10-31T14:15:52Z"
+        },
+        {
+          "name": "Verify KVM and obtain private test package",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-31T14:15:52Z",
+          "completed_at": "2026-10-31T14:16:04Z"
+        },
+        {
+          "name": "Prepare Android 15 image with ARM64 translation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-31T14:16:04Z",
+          "completed_at": "2026-10-31T14:17:25Z"
+        },
+        {
+          "name": "Boot accelerated emulator and test control then game",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5,
+          "started_at": "2026-10-31T14:17:25Z",
+          "completed_at": "2026-10-31T14:20:35Z"
+        },
+        {
+          "name": "Preserve logs and screenshots in private release",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-31T14:20:35Z",
+          "completed_at": "2026-10-31T14:20:36Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-31T14:20:36Z",
+          "completed_at": "2026-10-31T14:20:37Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-31T14:20:37Z",
+          "completed_at": "2026-10-31T14:20:37Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Android-PowerUser/bus-simulator-evo-local-test/check-runs/124560759565",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000004831,
+      "runner_name": "GitHub Actions 1000004831",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

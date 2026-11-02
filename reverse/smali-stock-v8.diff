@@ -1,0 +1,115 @@
+diff -ru reverse/smali/stock/classes10/com/google/firebase/MessagingUnityPlayerActivity.smali reverse/smali/v8/classes10/com/google/firebase/MessagingUnityPlayerActivity.smali
+--- reverse/smali/stock/classes10/com/google/firebase/MessagingUnityPlayerActivity.smali	2026-10-31 14:11:40.473712088 +0000
++++ reverse/smali/v8/classes10/com/google/firebase/MessagingUnityPlayerActivity.smali	2026-10-31 14:11:47.993712088 +0000
+@@ -66,39 +66,28 @@
+ .end method
+ 
+ .method protected onCreate(Landroid/os/Bundle;)V
+-    .registers 8
++    .registers 3
+ 
+     #@0
+-    const v2, 0x2
++    iget-object v0, p0, Lcom/unity3d/player/UnityPlayerActivity;->mUnityPlayer:Lcom/unity3d/player/UnityPlayer;
+ 
+-    #@3
+-    new-array v1, v2, [Ljava/lang/Object;
++    #@2
++    if-eqz v0, :cond_a
+ 
+-    #@5
+-    const v2, 0x0
++    #@4
++    invoke-virtual {v0}, Lcom/unity3d/player/UnityPlayer;->quit()V
++
++    #@7
++    const/4 v0, 0x0
+ 
+     #@8
+-    aput-object p0, v1, v2
++    iput-object v0, p0, Lcom/unity3d/player/UnityPlayerActivity;->mUnityPlayer:Lcom/unity3d/player/UnityPlayer;
+ 
+     #@a
+-    const v2, 0x1
++    :cond_a
++    invoke-super {p0, p1}, Lcom/unity3d/player/UnityPlayerActivity;->onCreate(Landroid/os/Bundle;)V
+ 
+     #@d
+-    aput-object p1, v1, v2
+-
+-    #@f
+-    sget-object v0, Lio/bidmachine/media3/exoplayer/offline/cB/YGASMcfGjKN;->WovVaIdNF:Ljava/lang/reflect/Method;
+-
+-    #@11
+-    const/4 v3, 0x0
+-
+-    #@12
+-    invoke-virtual {v0, v3, v1}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+-
+-    #@15
+-    move-result-object v0
+-
+-    #@16
+     return-void
+ .end method
+ 
+diff -ru reverse/smali/stock/classes8/com/safedk/android/SafeDKApplication.smali reverse/smali/v8/classes8/com/safedk/android/SafeDKApplication.smali
+--- reverse/smali/stock/classes8/com/safedk/android/SafeDKApplication.smali	2026-10-31 14:11:45.669712088 +0000
++++ reverse/smali/v8/classes8/com/safedk/android/SafeDKApplication.smali	2026-10-31 14:11:53.169712088 +0000
+@@ -14,7 +14,13 @@
+     .registers 1
+ 
+     #@0
+-    invoke-static {}, Lcom/pairip/StartupLauncher;->launch()V
++    nop
++
++    #@1
++    nop
++
++    #@2
++    nop
+ 
+     #@3
+     .line 15
+@@ -160,32 +166,23 @@
+ 
+ # virtual methods
+ .method public onCreate()V
+-    .registers 7
++    .registers 2
+ 
+     #@0
+-    const v2, 0x1
++    invoke-super {p0}, Landroid/app/Application;->onCreate()V
+ 
+     #@3
+-    new-array v1, v2, [Ljava/lang/Object;
++    invoke-virtual {p0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+ 
+-    #@5
+-    const v2, 0x0
++    #@6
++    move-result-object v0
+ 
+-    #@8
+-    aput-object p0, v1, v2
++    #@7
++    sput-object v0, Lcom/safedk/android/SafeDKApplication;->context:Landroid/content/Context;
+ 
+-    #@a
+-    sget-object v0, Lcom/google/android/gms/ads/appopen/Gd/lplwsKKkSF;->fNwUrD:Ljava/lang/reflect/Method;
++    #@9
++    invoke-static {v0, p0}, Lcom/safedk/android/SafeDK;->a(Landroid/content/Context;Landroid/app/Application;)V
+ 
+     #@c
+-    const/4 v3, 0x0
+-
+-    #@d
+-    invoke-virtual {v0, v3, v1}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+-
+-    #@10
+-    move-result-object v0
+-
+-    #@11
+     return-void
+ .end method

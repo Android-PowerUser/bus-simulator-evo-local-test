@@ -1,0 +1,1 @@
+/home/user/.cache/android-arm27-stock/bus-evo-1.27.42.xapk: OK

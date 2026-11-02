@@ -1,0 +1,77 @@
+.class Lcom/pairip/VMRunner$1;
+.super Ljava/lang/Object;
+.source "VMRunner.java"
+
+# interfaces
+.implements Ljava/lang/Runnable;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/pairip/VMRunner;->createInvokeRunnable(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Runnable;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x0
+    name = null
+.end annotation
+
+
+# instance fields
+.field final synthetic val$args:[Ljava/lang/Object;
+
+.field final synthetic val$vmByteCodeFile:Ljava/lang/String;
+
+
+# direct methods
+.method constructor <init>(Ljava/lang/String;[Ljava/lang/Object;)V
+    .registers 3
+    .annotation system Ldalvik/annotation/MethodParameters;
+        accessFlags = {
+            0x1010,
+            0x1010
+        }
+        names = {
+            "val$vmByteCodeFile",
+            "val$args"
+        }
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()V"
+        }
+    .end annotation
+
+    #@0
+    .line 85
+    iput-object p1, p0, Lcom/pairip/VMRunner$1;->val$vmByteCodeFile:Ljava/lang/String;
+
+    #@2
+    iput-object p2, p0, Lcom/pairip/VMRunner$1;->val$args:[Ljava/lang/Object;
+
+    #@4
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    #@7
+    return-void
+.end method
+
+
+# virtual methods
+.method public run()V
+    .registers 3
+
+    #@0
+    .line 88
+    iget-object v0, p0, Lcom/pairip/VMRunner$1;->val$vmByteCodeFile:Ljava/lang/String;
+
+    #@2
+    iget-object v1, p0, Lcom/pairip/VMRunner$1;->val$args:[Ljava/lang/Object;
+
+    #@4
+    invoke-static {v0, v1}, Lcom/pairip/VMRunner;->invoke(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;
+
+    #@7
+    return-void
+.end method

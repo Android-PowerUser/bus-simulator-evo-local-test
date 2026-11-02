@@ -1,0 +1,112 @@
+openjdk version "25.0.5" 2026-10-20
+OpenJDK Runtime Environment (build 25.0.5+8-1-deb13u1-Debian)
+OpenJDK 64-Bit Server VM (build 25.0.5+8-1-deb13u1-Debian, mixed mode)
+INFO  Using log config file: jar:file:/home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /home/user/.config/ghidra/ghidra_11.3.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /home/user/.config/ghidra/ghidra_11.3.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1054 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (SSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (ApplicationTrustManagerFactory)  
+INFO  Headless startup complete (2831 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 57 extension points (18 false positives) (ClassSearcher)  
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldOffset has been called by org.apache.felix.framework.util.SecureAction (file:/home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/Base/lib/org.apache.felix.framework-7.0.5.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.felix.framework.util.SecureAction
+WARNING: sun.misc.Unsafe::staticFieldOffset will be removed in a future release
+INFO  HEADLESS Script Paths:
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/Jython/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /home/user/.cache/ghidra/ghidra_11.3.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /home/user/.cache/ghidra/projects/Pairip (HeadlessAnalyzer)  
+INFO  Creating project: /home/user/.cache/ghidra/projects/Pairip (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /home/user/.cache/ghidra/projects/Pairip (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///home/user/bus-simulator-evo-local-test/reverse/apkmirror-1.27.42/arm64/lib/arm64-v8a/libpairipcore.so (HeadlessAnalyzer)  
+INFO  Using Loader: Executable and Linking Format (ELF) (AutoImporter)  
+INFO  Using Language/Compiler: AARCH64:LE:64:v8A:default (AutoImporter)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib/x86_64-linux-gnu/jni, /usr/lib/x86_64-linux-gnu, /usr/lib/jni] (AutoImporter)  
+INFO  Additional info:
+Loading file:///home/user/bus-simulator-evo-local-test/reverse/apkmirror-1.27.42/arm64/lib/arm64-v8a/libpairipcore.so?MD5=ff815b144f95dd6d4e082026cebd16cc...
+Setting block .data.rel.ro to read-only
+Setting block .fini_array to read-only
+Setting block .init_array to read-only
+Setting block .dynamic to read-only
+Failed to parse and markup ELF Note starting at 00100238
+------------------------------------------------
+
+Linking the External Programs of 'libpairipcore.so' to imported libraries...
+  [libdl.so] -> not found in project
+  [libc.so] -> not found in project
+  [libm.so] -> not found in project
+  [liblog.so] -> not found in project
+------------------------------------------------
+
+Resolving External Symbols of [/libpairipcore.so] - 69 unresolved symbols, no external libraries configured - skipping
+ (AutoImporter)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///home/user/bus-simulator-evo-local-test/reverse/apkmirror-1.27.42/arm64/lib/arm64-v8a/libpairipcore.so (HeadlessAnalyzer)  
+WARN  Decompiling 0018dfa0, pcode error at 0019a188: Unable to disassemble EXTERNAL block location: 0019a188 (DecompileCallback)  
+ERROR VarnodeContext: out of address spaces at @0014615b for: d27-0014615b (VarnodeContext)  
+INFO  Packed database cache: /var/tmp/user-ghidra/packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib_64 (ApplyDataArchiveAnalyzer)  
+ERROR VarnodeContext: out of address spaces at @0014615b for: d27-0014615b (VarnodeContext)  
+INFO  -----------------------------------------------------
+    AARCH64 ELF PLT Thunks                     0.205 secs
+    ASCII Strings                              0.374 secs
+    Apply Data Archives                        0.637 secs
+    Basic Constant Reference Analyzer         10.649 secs
+    Call Convention ID                         0.011 secs
+    Call-Fixup Installer                       0.017 secs
+    Create Address Tables                      0.127 secs
+    Create Address Tables - One Time           0.180 secs
+    Create Function                            0.184 secs
+    Data Reference                             0.212 secs
+    Decompiler Switch Analysis               219.866 secs
+    Demangler GNU                              0.033 secs
+    Disassemble                                0.154 secs
+    Disassemble Entry Points                   2.303 secs
+    Embedded Media                             0.019 secs
+    External Entry References                  0.001 secs
+    Function Start Search                      0.110 secs
+    Function Start Search After Code           0.052 secs
+    Function Start Search After Data           0.036 secs
+    Function Start Search delayed - One Time   0.018 secs
+    GCC Exception Handlers                     1.444 secs
+    Non-Returning Functions - Discovered       0.419 secs
+    Non-Returning Functions - Known            0.003 secs
+    Reference                                  0.285 secs
+    Shared Return Calls                        0.162 secs
+    Stack                                      9.611 secs
+    Subroutine References                      0.169 secs
+    Subroutine References - One Time           0.003 secs
+-----------------------------------------------------
+     Total Time   247 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///home/user/bus-simulator-evo-local-test/reverse/apkmirror-1.27.42/arm64/lib/arm64-v8a/libpairipcore.so (HeadlessAnalyzer)  
+INFO  REPORT: Save succeeded for: /libpairipcore.so (Pairip:/libpairipcore.so) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

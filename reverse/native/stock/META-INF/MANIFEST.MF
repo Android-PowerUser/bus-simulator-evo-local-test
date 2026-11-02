@@ -1,0 +1,92 @@
+Manifest-Version: 1.0
+
+Name: AndroidManifest.xml
+SHA1-Digest: +H7SJZU95U0SvwKOdZ9z/UmmiEk=
+
+Name: lib/arm64-v8a/libFirebaseCppAnalytics.so
+SHA1-Digest: RFt99N9FV678489hrwH62TfKN/g=
+
+Name: lib/arm64-v8a/libFirebaseCppApp-12_10_1.so
+SHA1-Digest: 2/sX+pyiGm4FrBWJ8XPQWwrDpf0=
+
+Name: lib/arm64-v8a/libFirebaseCppAuth.so
+SHA1-Digest: ptTjUTvge2m8kfBag2fMlGhdJBY=
+
+Name: lib/arm64-v8a/libFirebaseCppCrashlytics.so
+SHA1-Digest: SB1dEDhulPlyPfGCvGtkv35yGz8=
+
+Name: lib/arm64-v8a/libFirebaseCppDatabase.so
+SHA1-Digest: n4z0m4obSMZRjo4YGJtsFIyHF+Q=
+
+Name: lib/arm64-v8a/libFirebaseCppDynamicLinks.so
+SHA1-Digest: 4zdjSV/++tlw4f3pHy3I5CsLTV0=
+
+Name: lib/arm64-v8a/libFirebaseCppInstallations.so
+SHA1-Digest: rwApYkyt0sjit/FbTXIXVJ3zT+s=
+
+Name: lib/arm64-v8a/libFirebaseCppMessaging.so
+SHA1-Digest: gmZu0JCZJyP43Fpo1K5aHILQXWc=
+
+Name: lib/arm64-v8a/libFirebaseCppRemoteConfig.so
+SHA1-Digest: aZyuD/WqxPt6tQV69GKtkWxqnlQ=
+
+Name: lib/arm64-v8a/lib_burst_generated.so
+SHA1-Digest: HZCSG8JzX1qpKsGnKP8BDnsEqYY=
+
+Name: lib/arm64-v8a/libapminsighta.so
+SHA1-Digest: Gyn2scvjiVR8eJLCd4w5ubOMMDk=
+
+Name: lib/arm64-v8a/libapminsightb.so
+SHA1-Digest: gRCG8XnFDUCCHizlhz1tHJVm978=
+
+Name: lib/arm64-v8a/libapplovin-native-crash-reporter.so
+SHA1-Digest: qmJbO8GdFOYTgw5Prbg1Mcj8a2M=
+
+Name: lib/arm64-v8a/libbuffer_pgl.so
+SHA1-Digest: o/v79+leONpdRWmXYinBjHFvOvQ=
+
+Name: lib/arm64-v8a/libcrashlytics-common.so
+SHA1-Digest: ESVMpJcwi4WSEosGfX/YQx8hyxk=
+
+Name: lib/arm64-v8a/libcrashlytics-handler.so
+SHA1-Digest: flk2cLX04uPi5ro9sM3w92FdtyU=
+
+Name: lib/arm64-v8a/libcrashlytics-trampoline.so
+SHA1-Digest: c1qlNbyUsjo6AqgkjH8rr39jK4o=
+
+Name: lib/arm64-v8a/libcrashlytics.so
+SHA1-Digest: XqU4Dxglg/iTpO0PXkS/HmVbr9o=
+
+Name: lib/arm64-v8a/libdatastore_shared_counter.so
+SHA1-Digest: CV4WlQQMDBlkJLNYR0xKgZjKOsk=
+
+Name: lib/arm64-v8a/libfile_lock_pgl.so
+SHA1-Digest: +HurTfz9JtX8QM2j4O/xTcKCSMk=
+
+Name: lib/arm64-v8a/libgadsme.so
+SHA1-Digest: ZyS5/UQC7ChnMyhedFowlqJ4vNs=
+
+Name: lib/arm64-v8a/libil2cpp.so
+SHA1-Digest: DGs2fIXYFbMwbAEsgTa4ERumNzU=
+
+Name: lib/arm64-v8a/libmain.so
+SHA1-Digest: jm/WMYYoNimOFRukR7JRG8Rm0aI=
+
+Name: lib/arm64-v8a/libnms.so
+SHA1-Digest: PMeSibH1n+W8V4g8nnA0DFlDvJI=
+
+Name: lib/arm64-v8a/libpairipcore.so
+SHA1-Digest: BPidsCDRGNkbQCXotDyKrUO0tkg=
+
+Name: lib/arm64-v8a/libpglarmor.so
+SHA1-Digest: oiu7Dh8jMzBRTU5nPQj91WlOI/U=
+
+Name: lib/arm64-v8a/libtt_ugen_layout.so
+SHA1-Digest: uobzNFwfpcD8rnJkT28mKCHOMAM=
+
+Name: lib/arm64-v8a/libunity.so
+SHA1-Digest: WY+Z13R9r3QzPTG4jws2K8oBMLM=
+
+Name: stamp-cert-sha256
+SHA1-Digest: 5vTkm69vqAbusD/fho7oWwc7j+I=
+

@@ -1,0 +1,19 @@
+{
+  "release_tag": "local-arm28-native-stock",
+  "environment": "Local x86_64 host / native ARM64 Android 9 API 28 full-system TCG; no Berberis; TCG boot/timeout workarounds; original game APKs",
+  "android_serial": "emulator-5554",
+  "control_installed": false,
+  "control_launched": false,
+  "game_installed": false,
+  "game_launch_attempted": false,
+  "gameplay_verified": false,
+  "state": "waiting_for_android",
+  "system_server_pid_before": "1951",
+  "supported_abis": "arm64-v8a",
+  "native_bridge": "0",
+  "android_sdk": "28",
+  "control_install_transport": "no_streaming",
+  "control_install_seconds": 28.508,
+  "system_server_pid_after_control_install": "2162",
+  "control_install_restart_accepted": "1951 -> 2162"
+}

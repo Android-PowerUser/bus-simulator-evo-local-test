@@ -1,0 +1,1 @@
+/home/user/.cache/android-arm64/emulator-16489710/emulator/qemu/linux-x86_64/qemu-system-aarch64: error while loading shared libraries: libQt6WebChannelAndroidEmu.so.6: cannot open shared object file: No such file or directory

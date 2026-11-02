@@ -1,0 +1,138 @@
+void com.android.server.Watchdog.run() (dex_method_idx=19667)
+    DEX CODE:
+      0x0000: 1200                     	| const/4 v0, #+0
+      0x0001: 0101                     	| move v1, v0
+      0x0002: 7100 0df3 0000           	| invoke-static {}, java.util.List java.util.Collections.emptyList() // method@62221
+      0x0005: 53d2 7027                	| iget-wide v2, v13, J com.android.server.Watchdog.mWatchdogTimeoutMillis // field@10096
+      0x0007: 1604 0400                	| const-wide/16 v4, #+4
+      0x0009: 9e04 0204                	| div-long v4, v2, v4
+      0x000b: 54d6 6c27                	| iget-object v6, v13, Ljava/lang/Object; com.android.server.Watchdog.mLock // field@10092
+      0x000d: 1d06                     	| monitor-enter v6
+      0x000e: 0107                     	| move v7, v0
+      0x000f: 54d8 6a27                	| iget-object v8, v13, Ljava/util/ArrayList; com.android.server.Watchdog.mHandlerCheckers // field@10090
+      0x0011: 6e10 bef2 0800           	| invoke-virtual {v8}, int java.util.ArrayList.size() // method@62142
+      0x0014: 0a08                     	| move-result v8
+      0x0015: 3587 2d00                	| if-ge v7, v8, +45
+      0x0017: 54d8 6a27                	| iget-object v8, v13, Ljava/util/ArrayList; com.android.server.Watchdog.mHandlerCheckers // field@10090
+      0x0019: 6e20 b2f2 7800           	| invoke-virtual {v8, v7}, java.lang.Object java.util.ArrayList.get(int) // method@62130
+      0x001c: 0c08                     	| move-result-object v8
+      0x001d: 1f08 cc0e                	| check-cast v8, com.android.server.Watchdog$HandlerCheckerAndTimeout // type@TypeIndex[3788]
+      0x001f: 6e10 a94c 0800           	| invoke-virtual {v8}, com.android.server.Watchdog$HandlerChecker com.android.server.Watchdog$HandlerCheckerAndTimeout.checker() // method@19625
+      0x0022: 0c09                     	| move-result-object v9
+      0x0023: 6e10 aa4c 0800           	| invoke-virtual {v8}, java.util.Optional com.android.server.Watchdog$HandlerCheckerAndTimeout.customTimeoutMillis() // method@19626
+      0x0026: 0c08                     	| move-result-object v8
+      0x0027: 600a 2a09                	| sget  v10, I android.os.Build.HW_TIMEOUT_MULTIPLIER // field@2346
+      0x0029: 81aa                     	| int-to-long v10, v10
+      0x002a: bd2a                     	| mul-long/2addr v10, v2
+      0x002b: 7120 d0f0 ba00           	| invoke-static {v10, v11}, java.lang.Long java.lang.Long.valueOf(long) // method@61648
+      0x002e: 0c0a                     	| move-result-object v10
+      0x002f: 6e20 dbf3 a800           	| invoke-virtual {v8, v10}, java.lang.Object java.util.Optional.orElse(java.lang.Object) // method@62427
+      0x0032: 0c08                     	| move-result-object v8
+      0x0033: 1f08 d725                	| check-cast v8, java.lang.Long // type@TypeIndex[9687]
+      0x0035: 6e10 c5f0 0800           	| invoke-virtual {v8}, long java.lang.Long.longValue() // method@61637
+      0x0038: 0b0a                     	| move-result-wide v10
+      0x0039: 6e30 a64c a90b           	| invoke-virtual {v9, v10, v11}, void com.android.server.Watchdog$HandlerChecker.scheduleCheckLocked(long) // method@19622
+      0x003c: d807 0701                	| add-int/lit8 v7, v7, #+1
+      0x003e: 28d1                     	| goto -47
+      0x003f: 0d0d                     	| move-exception v13
+      0x0040: 2900 1c01                	| goto/16 +284
+      0x0042: 7100 ab2c 0000           	| invoke-static {}, long android.os.SystemClock.uptimeMillis() // method@11435
+      0x0045: 0b02                     	| move-result-wide v2
+      0x0046: 0109                     	| move v9, v0
+      0x0047: 0447                     	| move-wide v7, v4
+      0x0048: 160a 0000                	| const-wide/16 v10, #+0
+      0x004a: 310a 070a                	| cmp-long v10, v7, v10
+      0x004c: 122b                     	| const/4 v11, #+2
+      0x004d: 3d0a 2400                	| if-lez v10, +36
+      0x004f: 7100 5828 0000           	| invoke-static {}, boolean android.os.Debug.isDebuggerConnected() // method@10328
+      0x0052: 0a0a                     	| move-result v10
+      0x0053: 380a 0300                	| if-eqz v10, +3
+      0x0055: 01b9                     	| move v9, v11
+      0x0056: 54da 6c27                	| iget-object v10, v13, Ljava/lang/Object; com.android.server.Watchdog.mLock // field@10092
+      0x0058: 6e30 f4f0 7a08           	| invoke-virtual {v10, v7, v8}, void java.lang.Object.wait(long) // method@61684
+      0x005b: 2807                     	| goto +7
+      0x005c: 0d07                     	| move-exception v7
+      0x005d: 1a08 45a7                	| const-string v8, "Watchdog" // string@42821
+      0x005f: 7120 f531 7800           	| invoke-static {v8, v7}, int android.util.Log.wtf(java.lang.String, java.lang.Throwable) // method@12789
+      0x0062: 7100 5828 0000           	| invoke-static {}, boolean android.os.Debug.isDebuggerConnected() // method@10328
+      0x0065: 0a07                     	| move-result v7
+      0x0066: 3807 0300                	| if-eqz v7, +3
+      0x0068: 01b9                     	| move v9, v11
+      0x0069: 7100 ab2c 0000           	| invoke-static {}, long android.os.SystemClock.uptimeMillis() // method@11435
+      0x006c: 0b07                     	| move-result-wide v7
+      0x006d: bc27                     	| sub-long/2addr v7, v2
+      0x006e: 9c07 0407                	| sub-long v7, v4, v7
+      0x0070: 28d8                     	| goto -40
+      0x0071: 6e10 c04c 0d00           	| invoke-virtual {v13}, int com.android.server.Watchdog.evaluateCheckerCompletionLocked() // method@19648
+      0x0074: 0a02                     	| move-result v2
+      0x0075: 3902 0400                	| if-nez v2, +4
+      0x0077: 1e06                     	| monitor-exit v6
+      0x0078: 2889                     	| goto -119
+      0x0079: 1213                     	| const/4 v3, #+1
+      0x007a: 3332 0400                	| if-ne v2, v3, +4
+      0x007c: 1e06                     	| monitor-exit v6
+      0x007d: 2885                     	| goto -123
+      0x007e: 33b2 2100                	| if-ne v2, v11, +33
+      0x0080: 3901 1c00                	| if-nez v1, +28
+      0x0082: 1a01 45a7                	| const-string v1, "Watchdog" // string@42821
+      0x0084: 1a02 38a6                	| const-string v2, "WAITED_UNTIL_PRE_WATCHDOG" // string@42552
+      0x0086: 7120 5332 2100           	| invoke-static {v1, v2}, int android.util.Slog.i(java.lang.String, java.lang.String) // method@12883
+      0x0089: 6e20 c14c bd00           	| invoke-virtual {v13, v11}, java.util.ArrayList com.android.server.Watchdog.getCheckersWithStateLocked(int) // method@19649
+      0x008c: 0c01                     	| move-result-object v1
+      0x008d: 6e20 bd4c 1d00           	| invoke-virtual {v13, v1}, java.lang.String com.android.server.Watchdog.describeCheckersLocked(java.util.List) // method@19645
+      0x0090: 0c02                     	| move-result-object v2
+      0x0091: 2204 6326                	| new-instance v4, java.util.ArrayList // type@TypeIndex[9827]
+      0x0093: 54d5 6b27                	| iget-object v5, v13, Ljava/util/List; com.android.server.Watchdog.mInterestingJavaPids // field@10091
+      0x0095: 7020 a7f2 5400           	| invoke-direct {v4, v5}, void java.util.ArrayList.<init>(java.util.Collection) // method@62119
+      0x0098: 0135                     	| move v5, v3
+      0x0099: 0747                     	| move-object v7, v4
+      0x009a: 0154                     	| move v4, v5
+      0x009b: 281d                     	| goto +29
+      0x009c: 1e06                     	| monitor-exit v6
+      0x009d: 2900 65ff                	| goto/16 -155
+      0x009f: 1232                     	| const/4 v2, #+3
+      0x00a0: 6e20 c14c 2d00           	| invoke-virtual {v13, v2}, java.util.ArrayList com.android.server.Watchdog.getCheckersWithStateLocked(int) // method@19649
+      0x00a3: 0c02                     	| move-result-object v2
+      0x00a4: 6e20 bd4c 2d00           	| invoke-virtual {v13, v2}, java.lang.String com.android.server.Watchdog.describeCheckersLocked(java.util.List) // method@19645
+      0x00a7: 0c03                     	| move-result-object v3
+      0x00a8: 55d4 6827                	| iget-boolean v4, v13, Z com.android.server.Watchdog.mAllowRestart // field@10088
+      0x00aa: 2205 6326                	| new-instance v5, java.util.ArrayList // type@TypeIndex[9827]
+      0x00ac: 54d7 6b27                	| iget-object v7, v13, Ljava/util/List; com.android.server.Watchdog.mInterestingJavaPids // field@10091
+      0x00ae: 7020 a7f2 7500           	| invoke-direct {v5, v7}, void java.util.ArrayList.<init>(java.util.Collection) // method@62119
+      0x00b1: 0757                     	| move-object v7, v5
+      0x00b2: 0145                     	| move v5, v4
+      0x00b3: 0104                     	| move v4, v0
+      0x00b4: 073c                     	| move-object v12, v3
+      0x00b5: 0113                     	| move v3, v1
+      0x00b6: 0721                     	| move-object v1, v2
+      0x00b7: 07c2                     	| move-object v2, v12
+      0x00b8: 1e06                     	| monitor-exit v6
+      0x00b9: 6e40 c84c 4d72           	| invoke-virtual {v13, v4, v2, v7}, void com.android.server.Watchdog.logWatchog(boolean, java.lang.String, java.util.ArrayList) // method@19656
+      0x00bc: 3804 0500                	| if-eqz v4, +5
+      0x00be: 0131                     	| move v1, v3
+      0x00bf: 2900 43ff                	| goto/16 -189
+      0x00c1: 54d3 6c27                	| iget-object v3, v13, Ljava/lang/Object; com.android.server.Watchdog.mLock // field@10092
+      0x00c3: 1d03                     	| monitor-enter v3
+      0x00c4: 54d4 6927                	| iget-object v4, v13, Landroid/app/IActivityController; com.android.server.Watchdog.mController // field@10089
+      0x00c6: 1e03                     	| monitor-exit v3
+      0x00c7: 3804 1d00                	| if-eqz v4, +29
+      0x00c9: 1a03 45a7                	| const-string v3, "Watchdog" // string@42821
+      0x00cb: 1a06 2990                	| const-string v6, "Reporting stuck state to activity controller" // string@36905
+      0x00cd: 7120 5332 6300           	| invoke-static {v3, v6}, int android.util.Slog.i(java.lang.String, java.lang.String) // method@12883
+      0x00d0: 1a03 7594                	| const-string v3, "Service dumps disabled due to hung system process." // string@38005
+      0x00d2: 7110 c127 0300           	| invoke-static {v3}, void android.os.Binder.setDumpDisabled(java.lang.String) // method@10177
+      0x00d5: 7220 bb02 2400           	| invoke-interface {v4, v2}, int android.app.IActivityController.systemNotResponding(java.lang.String) // method@699
+      0x00d8: 0a03                     	| move-result v3
+      0x00d9: 3a03 0b00                	| if-ltz v3, +11
+      0x00db: 1a03 45a7                	| const-string v3, "Watchdog" // string@42821
+      0x00dd: 1a04 9c34                	| const-string v4, "Activity controller requested to coninue to wait" // string@13468
+      0x00df: 7120 5332 4300           	| invoke-static {v3, v4}, int android.util.Slog.i(java.lang.String, java.lang.String) // method@12883
+      0x00e2: 2900 1fff                	| goto/16 -225
+      0x00e4: 7100 5828 0000           	| invoke-static {}, boolean android.os.Debug.isDebuggerConnected() // method@10328
+      0x00e7: 0a03                     	| move-result v3
+      0x00e8: 3803 0300                	| if-eqz v3, +3
+      0x00ea: 01b9                     	| move v9, v11
+      0x00eb: 34b9 0b00                	| if-lt v9, v11, +11
+      0x00ed: 1a01 45a7                	| const-string v1, "Watchdog" // string@42821
+      0x00ef: 1a02 5544                	| const-string v2, "Debugger connected: Watchdog is *not* killing the system process" // string@17493
+      0x00f1: 7120 5832 2100           	| invoke-static {v1, v2}, int android.util.Sl

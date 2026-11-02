@@ -1,0 +1,318 @@
+15:55:19 ADB ['wait-for-device']
+
+15:55:19 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:55:27 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:55:36 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:55:44 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:55:52 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:55:59 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:56:07 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:56:15 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:56:23 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:56:32 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:56:39 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: not found
+Service window: not found
+
+15:56:46 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+cmd: Can't find service: package
+Service media.audio_policy: not found
+Service settings: not found
+Service activity: found
+Service window: not found
+
+15:56:57 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: not found
+Service activity: found
+Service window: not found
+
+15:57:04 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:57:10 ADB ['shell', 'settings put global system_server_watchdog_timeout_ms 3600000']
+
+15:57:15 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:57:24 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:57:30 ADB ['shell', 'settings put global system_server_watchdog_timeout_ms 3600000']
+
+15:57:35 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:57:44 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:57:51 ADB ['shell', 'settings put global system_server_watchdog_timeout_ms 3600000']
+
+15:57:56 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:58:06 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:58:11 ADB ['shell', 'settings put global system_server_watchdog_timeout_ms 3600000']
+
+15:58:17 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:58:26 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:58:32 ADB ['shell', 'settings put global system_server_watchdog_timeout_ms 3600000']
+
+15:58:36 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:58:48 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:59:00 ADB ['shell', 'settings put global system_server_watchdog_timeout_ms 3600000']
+
+15:59:07 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:59:20 ADB ['shell', 'settings put global system_server_watchdog_timeout_ms 3600000']
+
+15:59:30 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+15:59:46 ADB ['shell', 'settings put global system_server_watchdog_timeout_ms 3600000']
+
+15:59:54 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+0
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+16:00:06 ADB ['shell', 'settings put global system_server_watchdog_timeout_ms 3600000']
+
+16:00:14 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window']
+1
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+Service settings: found
+Service activity: found
+Service window: found
+
+16:00:34 ADB ['shell', 'id']
+uid=0(root) gid=0(root) groups=0(root),1004(input),1007(log),1011(adb),1015(sdcard_rw),1028(sdcard_r),1078(ext_data_rw),1079(ext_obb_rw),3001(net_bt_admin),3002(net_bt),3003(inet),3006(net_bw_stats),3009(readproc),3011(uhid),3012(readtracefs) context=u:r:su:s0
+
+16:00:38 ADB ['shell', 'pidof system_server']
+684
+
+16:00:54 ADB ['shell', 'getprop ro.product.cpu.abilist']
+x86_64,arm64-v8a
+
+16:01:00 ADB ['shell', 'getprop ro.dalvik.vm.native.bridge']
+libndk_translation.so
+
+16:01:05 ADB ['shell', 'getprop ro.build.version.sdk']
+35
+
+16:01:09 ADB ['shell', 'settings put global verifier_verify_adb_installs 0; settings put global package_verifier_enable 0']
+
+16:01:26 ADB ['shell', 'setprop pm.dexopt.install extract; setprop pm.dexopt.post-boot-update extract; setprop pm.dexopt.first-boot extract; setprop dalvik.vm.usejit false; stop vendor.gnss; settings put secure location_mode 0; settings put global system_server_watchdog_timeout_ms 3600000; bmgr enable false']
+Unable to stop service 'vendor.gnss'
+See dmesg for error reason.
+Backup Manager now disabled
+
+16:03:01 ADB ['shell', 'pidof system_server']
+684
+
+16:03:08 ADB ['shell', 'pidof system_server']
+684
+
+16:03:14 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check settings; service check activity; service check window']
+1
+package:/system/framework/framework-res.apk
+Service settings: found
+Service activity: found
+Service window: found
+
+16:03:29 ADB ['shell', 'pm path com.arena.installcontrol']
+package:/data/app/~~bn_QXvybv7VKLlNAv5xGXw==/com.arena.installcontrol-r26H8fL8raqFZEpRRzBexg==/base.apk
+
+16:03:34 ADB ['shell', 'pidof system_server']
+684
+
+16:03:38 ADB ['shell', 'am start -W -n com.arena.installcontrol/android.app.Activity']
+Starting: Intent { cmp=com.arena.installcontrol/android.app.Activity }
+Status: ok
+LaunchState: COLD
+Activity: com.arena.installcontrol/android.app.Activity
+TotalTime: 65108
+WaitTime: 66607
+Complete
+
+16:05:04 ADB ['shell', 'pidof com.arena.installcontrol']
+1992
+
+16:05:06 ADB ['shell', 'pidof system_server']
+684
+
+16:05:23 ADB ['shell', 'am force-stop com.arena.installcontrol']
+
+16:05:47 ADB ['shell', 'pidof system_server']
+684
+
+16:05:57 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check settings; service check activity; service check window']
+1
+package:/system/framework/framework-res.apk
+Service settings: found
+Service activity: found
+Service window: found
+
+16:06:21 ADB ['shell', 'pm path com.Ovilex.BusSimulator2023']
+
+16:06:26 ADB ['shell', 'pidof system_server']
+684
+
+16:06:29 ADB ['install-multiple', '--no-streaming', '-r', '-t', '--abi', 'arm64-v8a', '/home/user/.cache/android-arm27-stock/original-xapk/com.Ovilex.BusSimulator2023.apk', '/home/user/.cache/android-arm27-stock/original-xapk/config.arm64_v8a.apk', '/home/user/.cache/android-arm27-stock/original-xapk/UnityDataAssetPack.apk']

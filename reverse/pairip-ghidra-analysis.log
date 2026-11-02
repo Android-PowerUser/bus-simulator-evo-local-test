@@ -1,0 +1,24 @@
+Starting Ghidra (Headless)...
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.jpype.JPypeContext in an unnamed module (file:/home/user/.local/lib/python3.13/site-packages/org.jpype.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+Finished starting Ghidra
+Importing project at '/home/user/.cache/ghidra/projects'...
+Starting switch namespace lookup...
+Finished namespace analysis:
+  Found 0xba switch cases with 1 default cases!
+Only one dispatcher switch was recovered; continuing with it.
+  > vm_dispatch_0 is at 0x00130a74
+Could not locate vm_dispatch_1; continuing with the recovered switch dispatcher 
+only.
+Decompiling pairipvm::VMDispatch0...
+Finished decompiling
+Analyzing case addresses...
+Resolved 0 out of 186 opcodes so far!
+Missing 186 out of 186 opcodes
+Skipping vm_dispatch_1 AST analysis because that helper was not recovered.
+Finished analysis:
+  > Total   opcodes: 0x0
+  > Missing opcodes: 0

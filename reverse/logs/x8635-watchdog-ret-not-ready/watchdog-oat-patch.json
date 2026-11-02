@@ -1,0 +1,9 @@
+{
+  "method": "void com.android.server.Watchdog.run()",
+  "code_offset": "0x236870",
+  "oat_data_file_offset": "0x4000",
+  "method_file_offset": "0x23a870",
+  "before": "4885842400e0ffff4157415641554154",
+  "after": "c385842400e0ffff4157415641554154",
+  "patch": "x86_64 ret at void method entry"
+}

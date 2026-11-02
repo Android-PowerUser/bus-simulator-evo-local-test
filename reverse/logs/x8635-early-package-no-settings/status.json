@@ -1,0 +1,16 @@
+{
+  "release_tag": "local-x86-berberis-stock",
+  "environment": "Local x86_64 Android 15 API 35 full-system TCG without KVM; ARM64 app through Berberis; original unmodified game APKs",
+  "android_serial": "emulator-5554",
+  "control_installed": false,
+  "control_launched": false,
+  "game_installed": false,
+  "game_launch_attempted": false,
+  "gameplay_verified": false,
+  "state": "failed",
+  "system_server_pid_before": "675",
+  "supported_abis": "x86_64,arm64-v8a",
+  "native_bridge": "libndk_translation.so",
+  "android_sdk": "35",
+  "error": "RuntimeError: ADB exit 20: cmd: Can't find service: settings\ncmd: Can't find service: settings\n"
+}

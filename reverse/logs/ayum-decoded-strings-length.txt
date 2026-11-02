@@ -1,0 +1,3 @@
+0x015d9d: toupper_l
+0x018e9d: dup2
+0x030b14: rmdir

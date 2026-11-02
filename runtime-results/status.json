@@ -1,0 +1,24 @@
+{
+  "release_tag": "local-x86-api35-stock",
+  "environment": "Local x86_64 Android 15 API 35 full-system TCG without KVM; ARM64 app through the image native bridge; original unmodified game APKs",
+  "android_serial": "emulator-5554",
+  "control_installed": true,
+  "control_launched": true,
+  "game_installed": false,
+  "game_launch_attempted": false,
+  "gameplay_verified": false,
+  "state": "installing_game",
+  "system_server_pid_before": "684",
+  "supported_abis": "x86_64,arm64-v8a",
+  "native_bridge": "libndk_translation.so",
+  "android_sdk": "35",
+  "control_ready_generation": "684",
+  "control_install_transport": "no_streaming",
+  "control_package_paths": [
+    "/data/app/~~bn_QXvybv7VKLlNAv5xGXw==/com.arena.installcontrol-r26H8fL8raqFZEpRRzBexg==/base.apk"
+  ],
+  "control_install_reused": true,
+  "system_server_pid_after_control_install": "684",
+  "game_ready_generation": "684",
+  "game_install_transport": "no_streaming"
+}

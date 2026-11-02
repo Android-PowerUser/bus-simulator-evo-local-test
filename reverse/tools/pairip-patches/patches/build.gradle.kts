@@ -1,0 +1,38 @@
+group = "app.patches.sjshb57"
+
+patches {
+    about {
+        name = "Pairip Patches"
+        description = "Restores obfuscated and code-extracted apps (pairip deobfuscation, method inlining, and more)"
+        source = "git@github.com/sjshb57/pairip-patches.git"
+        author = "sjshb57"
+        contact = "na"
+        website = "na"
+        license = "GPLv3"
+    }
+}
+
+// Separate configuration so gson is available at runtime for the
+// generatePatchesList task but never bundled into the APK.
+val patchListGeneratorClasspath = configurations.create("patchListGeneratorClasspath")
+
+dependencies {
+    compileOnly(libs.gson)
+    patchListGeneratorClasspath(libs.gson)
+}
+
+tasks {
+    register<JavaExec>("generatePatchesList") {
+        description = "Build patch with patch list"
+
+        dependsOn(build)
+
+        classpath = sourceSets["main"].runtimeClasspath + patchListGeneratorClasspath
+        mainClass.set("util.PatchListGeneratorKt")
+    }
+
+    // Used by gradle-semantic-release-plugin.
+    publish {
+        dependsOn("generatePatchesList")
+    }
+}

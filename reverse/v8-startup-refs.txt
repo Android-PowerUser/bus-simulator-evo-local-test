@@ -1,0 +1,5 @@
+reverse/extracted/v8/classes4.dex	Lcom/pairip/StartupLauncher;->launch[]V	CONST_CLASS	Lcom/pairip/StartupLauncher;
+reverse/extracted/v8/classes4.dex	Lcom/pairip/StartupLauncher;->launch[]V	SGET_BOOLEAN	Lcom/pairip/StartupLauncher;->launchCalled:Z
+reverse/extracted/v8/classes4.dex	Lcom/pairip/StartupLauncher;->launch[]V	SPUT_BOOLEAN	Lcom/pairip/StartupLauncher;->launchCalled:Z
+reverse/extracted/v8/classes4.dex	Lcom/pairip/StartupLauncher;->launch[]V	SGET_OBJECT	Lcom/pairip/StartupLauncher;->startupProgramName:Ljava/lang/String;
+reverse/extracted/v8/classes4.dex	Lcom/pairip/StartupLauncher;->launch[]V	INVOKE_STATIC	Lcom/pairip/VMRunner;->invoke(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;

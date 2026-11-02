@@ -1,0 +1,17 @@
+[05:04:00] == emulator binary patches
+skip  soundhw-pci-abort @ 0xb7ce7c: already patched
+skip  emu-keep-initramfs: already patched
+skip  heapsize-cap: already patched
+[05:04:00] == kernel patch
+skip  kernel-keep-initramfs: already patched
+[05:04:01] == guest fstab device string -> /dev/block/vde
+skip  fstab-dev-vde: already patched
+skip  fstab-dev-vde: already patched
+skip  fstab-dev-vde: already patched
+skip  fstab-dev-vde: already patched
+skip  fstab-dev-vde: already patched
+[05:04:01] == rebuild vendor image (raw ext4 on vde)
+[05:04:01]    vendor.img is already raw ext4; re-validating patches on it
+skip  vendor-forceencrypt: already patched
+[05:04:02]    vendor.img is now raw ext4 (100663296 bytes), crash-loop HALs disabled
+[05:04:02] == 10-patch-image done

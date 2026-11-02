@@ -1,0 +1,19 @@
+{
+  "release_tag": "local-x86-api28-stock",
+  "environment": "Local x86_64 Android 9 API 28 full-system TCG without KVM; ARM64 app through the image native bridge; original unmodified game APKs",
+  "android_serial": "emulator-5554",
+  "control_installed": false,
+  "control_launched": false,
+  "game_installed": false,
+  "game_launch_attempted": false,
+  "gameplay_verified": false,
+  "state": "failed",
+  "system_server_pid_before": "1997",
+  "supported_abis": "x86_64,x86",
+  "native_bridge": "0",
+  "android_sdk": "28",
+  "control_install_transport": "no_streaming",
+  "control_install_seconds": 99.69,
+  "system_server_pid_after_control_install": "",
+  "error": "RuntimeError: ADB exit 224: ci/control.apk: 1 file pushed, 0 skipped. 0.6 MB/s (8279 bytes in 0.013s)\nPerforming Push Install\ncmd: Failure calling service package: Broken pipe (32)\n"
+}

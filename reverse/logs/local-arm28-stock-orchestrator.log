@@ -1,0 +1,233 @@
+=== [1/8] Dependencies and API-28 build tools 2026-11-01T05:03:58+00:00 ===
+=== [2/8] Verified boot-image patches 2026-11-01T05:04:00+00:00 ===
+[05:04:00] == emulator binary patches
+skip  soundhw-pci-abort @ 0xb7ce7c: already patched
+skip  emu-keep-initramfs: already patched
+skip  heapsize-cap: already patched
+[05:04:00] == kernel patch
+skip  kernel-keep-initramfs: already patched
+[05:04:01] == guest fstab device string -> /dev/block/vde
+skip  fstab-dev-vde: already patched
+skip  fstab-dev-vde: already patched
+skip  fstab-dev-vde: already patched
+skip  fstab-dev-vde: already patched
+skip  fstab-dev-vde: already patched
+[05:04:01] == rebuild vendor image (raw ext4 on vde)
+[05:04:01]    vendor.img is already raw ext4; re-validating patches on it
+skip  vendor-forceencrypt: already patched
+[05:04:02]    vendor.img is now raw ext4 (100663296 bytes), crash-loop HALs disabled
+[05:04:02] == 10-patch-image done
+[05:04:02] == cross-compile initwrap
+[05:04:02] == unpack downloaded ramdisk
+[05:04:02] == preserve image init as /init.real and patch its device-wait timeout
+patch init-required-devices-timeout @ 0x84b8: e0031f2a -> e0030032
+[05:04:02] == install compiled wrapper as /init
+[05:04:02] == repack ramdisk (root-owned)
+[05:04:02] == 20-build-ramdisk done: /home/user/.cache/android-arm27-stock/tcg-build/ramdisk-wrap.img (1883417 bytes)
+=== [3/8] Signature-located TCG framework patches 2026-11-01T05:04:02+00:00 ===
+[
+  {
+    "name": "skipVerify",
+    "matches": 1,
+    "required": true,
+    "applied": true,
+    "file_offset": "0x13abfc4",
+    "before": "e20315aa",
+    "after": "22008052"
+  },
+  {
+    "name": "PROC_START short-timeout immediate",
+    "matches": 1,
+    "required": true,
+    "applied": true,
+    "file_offset": "0x10cb454",
+    "before": "03e284d2",
+    "after": "e3ff9fd2"
+  },
+  {
+    "name": "PROC_START long branch",
+    "matches": 1,
+    "required": true,
+    "applied": true,
+    "file_offset": "0x10cb450",
+    "before": "77000035",
+    "after": "03000014"
+  },
+  {
+    "name": "Finalizer 10s to 1h",
+    "matches": 1,
+    "required": false,
+    "applied": true,
+    "file_offset": "0x182db0",
+    "before": "02809cd26281aaf24200c0f2",
+    "after": "020094d20217a6f2c268c0f2"
+  },
+  {
+    "name": "Watchdog.run return",
+    "file_offset": "0x7be950",
+    "before": "f00b40d11f0240b9",
+    "after": "c0035fd61f2003d5",
+    "applied": true
+  },
+  {
+    "name": "GnssLocationProvider.isSupported return false",
+    "file_offset": "0x1314d00",
+    "before": "f00b40d11f0240b9",
+    "after": "00008052c0035fd6",
+    "applied": true
+  }
+]
+=== [4/8] Launch native ARM64 QEMU 2026-11-01T05:04:03+00:00 ===
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi       251Mi       1.7Gi        28Mi        69Mi       1.7Gi
+Swap:          2.0Gi       333Mi       1.7Gi
+[05:04:03] == launch qemu (TCG, CORES=1 MEM=1024MiB) -> /home/user/.cache/android-arm27-stock/tcg-build/emu.log
+[05:04:03] == 30-launch done: qemu pid 103784. Follow with: tail -f /home/user/.cache/android-arm27-stock/tcg-build/emu.log
+[05:04:03]    next: scripts/40-bringup.sh
+=== [5/8] Guest bring-up to systemReady 2026-11-01T05:04:08+00:00 ===
+[05:04:08] == wait for adb device
+[05:04:46] == adb root ok
+/home/user/.cache/android-arm27-stock/android-arm-tcg/src/sleeper.sh: 1 file pushed, 0 skipped. 0.8 MB/s (489 bytes in 0.001s)
+/home/user/.cache/android-arm27-stock/tcg-build/dex/stub.dex: 1 file pushed, 0 skipped. 0.6 MB/s (3372 bytes in 0.005s)
+/home/user/.cache/android-arm27-stock/tcg-build/dex/wdctl.dex: 1 file pushed, 0 skipped. 14.4 MB/s (3852 bytes in 0.000s)
+/home/user/.cache/android-arm27-stock/tcg-build/oat/services.odex: 1 file pushed, 0 skipped. 6.1 MB/s (23871008 bytes in 3.718s)
+/home/user/.cache/android-arm27-stock/tcg-build/oat/boot-core-libart.oat: 1 file pushed, 0 skipped. 932.0 MB/s (1921888 bytes in 0.002s)
+[05:04:54] == run guest bring-up
++ >>/data/local/tmp/bringup.log 
++ 2>&1 
++ exec
++ cat /proc/uptime
++ echo '== bringup start uptime=53.37 0.59'
++ setenforce 0
++ getenforce
++ echo 'enforce=Permissive'
++ stop tombstoned
++ '[' -e /system/bin/statsd ']'
++ grep -q ' /system/bin/statsd ' /proc/mounts
++ mount -o bind /data/local/tmp/sleeper.sh /system/bin/statsd
++ '[' -e /system/bin/storaged ']'
++ grep -q ' /system/bin/storaged ' /proc/mounts
++ mount -o bind /data/local/tmp/sleeper.sh /system/bin/storaged
++ '[' -e /vendor/bin/hw/android.hardware.audio@2.0-service ']'
++ grep -q ' /vendor/bin/hw/android.hardware.audio@2.0-service ' /proc/mounts
++ mount -o bind /data/local/tmp/sleeper.sh /vendor/bin/hw/android.hardware.audio@2.0-service
++ '[' -e /vendor/bin/hw/android.hardware.broadcastradio@1.1-service ']'
++ grep -q ' /vendor/bin/hw/android.hardware.broadcastradio@1.1-service ' /proc/mounts
++ mount -o bind /data/local/tmp/sleeper.sh /vendor/bin/hw/android.hardware.broadcastradio@1.1-service
++ '[' -e /vendor/bin/hw/android.hardware.media.omx@1.0-service ']'
++ grep -q ' /vendor/bin/hw/android.hardware.media.omx@1.0-service ' /proc/mounts
++ mount -o bind /data/local/tmp/sleeper.sh /vendor/bin/hw/android.hardware.media.omx@1.0-service
++ '[' -e /vendor/bin/hw/hardware.google.media.c2@1.0-service ']'
++ grep -q ' /vendor/bin/hw/hardware.google.media.c2@1.0-service ' /proc/mounts
++ mount -o bind /data/local/tmp/sleeper.sh /vendor/bin/hw/hardware.google.media.c2@1.0-service
++ 2>/dev/null 
++ stop statsd
++ 2>/dev/null 
++ stop storaged
++ 2>/dev/null 
++ stop vendor.audio-hal-2-0
++ 2>/dev/null 
++ stop broadcastradio-hal
++ 2>/dev/null 
++ stop vendor.media.omx
++ 2>/dev/null 
++ stop hardware-google-media-c2-hal-1-0
++ echo ' services libart'
++ grep -q services
++ '[' -f /data/local/tmp/services.odex ']'
++ grep -q ' /system/framework/oat/arm64/services.odex ' /proc/mounts
++ mount -o bind /data/local/tmp/services.odex /system/framework/oat/arm64/services.odex
++ echo 'bound patched services.odex'
++ echo ' services libart'
++ grep -q libart
++ '[' -f /data/local/tmp/boot-core-libart.oat ']'
++ grep -q ' /system/framework/arm64/boot-core-libart.oat ' /proc/mounts
++ mount -o bind /data/local/tmp/boot-core-libart.oat /system/framework/arm64/boot-core-libart.oat
++ echo 'bound patched boot-core-libart.oat'
++ >/data/local/tmp/svc.list 
++ echo storaged
++ running Stub
++ pidof app_process64
++ return 1
++ echo 'stub started pid 1628'
++ >/data/local/tmp/stub.log 
++ setprop pm.dexopt.install extract
++ 2>&1 
++ </dev/null 
++ CLASSPATH=/data/local/tmp/stub.dex setsid /system/bin/app_process64 /system/bin Stub
++ setprop pm.dexopt.post-boot-update extract
++ setprop pm.dexopt.boot extract
++ setprop pm.dexopt.first-boot extract
++ setprop dalvik.vm.usejit false
++ cat /proc/uptime
++ echo 'restart zygote at uptime=78.09 0.59'
++ stop zygote
++ start zygote
++ running WdCtl
++ pidof app_process64
++ 2>/dev/null 
++ grep -q WdCtl /proc/1628/cmdline
++ return 1
++ echo 'wdctl started pid 1667'
++ >/data/local/tmp/wdctl.log 
++ 2>&1 
++ </dev/null 
++ CLASSPATH=/data/local/tmp/wdctl.dex setsid /system/bin/app_process64 /system/bin WdCtl
++ cat /proc/uptime
++ echo '== bringup done uptime=91.69 0.59'
+[05:05:35] == wait for package service (systemReady)
+[05:05:58] == READY: package service up (systemReady reached)
+[05:06:15] == 40-bringup done
+arm64-v8a
+0
+28
+Linux localhost 4.4.302-gcc24b0a8f68a #1 SMP PREEMPT Thu Mar 16 16:57:48 UTC 2023 aarch64
+Service package: found
+Service media.audio_policy: found
+
+=== [6/8] Original APK staging and identity 2026-11-01T05:06:17+00:00 ===
+/home/user/.cache/android-arm27-stock/bus-evo-1.27.42.xapk: OK
+=== [7/8] Original stock install and launch 2026-11-01T05:06:19+00:00 ===
+05:06:19 ADB ['wait-for-device']
+
+05:06:19 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy']
+
+cmd: Can't find service: package
+Service media.audio_policy: found
+
+05:06:35 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy']
+
+cmd: Can't find service: package
+Service media.audio_policy: found
+
+05:06:42 ADB ['shell', 'getprop sys.boot_completed; pm path android; service check media.audio_policy']
+
+package:/system/framework/framework-res.apk
+Service media.audio_policy: found
+
+05:06:46 ADB ['shell', 'pidof system_server']
+1951
+
+05:06:48 ADB ['shell', 'getprop ro.product.cpu.abilist']
+arm64-v8a
+
+05:06:49 ADB ['shell', 'getprop ro.dalvik.vm.native.bridge']
+0
+
+05:06:50 ADB ['shell', 'getprop ro.build.version.sdk']
+28
+
+05:06:51 ADB ['shell', 'settings put global verifier_verify_adb_installs 0; settings put global package_verifier_enable 0']
+
+05:06:55 ADB ['shell', 'pidof system_server']
+1951
+
+05:06:56 ADB ['install', '--no-streaming', '-r', 'ci/control.apk']
+ci/control.apk: 1 file pushed, 0 skipped. 14.0 MB/s (8279 bytes in 0.001s)
+Performing Push Install
+cmd: Failure calling service package: Broken pipe (32)
+
+05:07:25 ADB ['shell', 'pidof system_server']
+2162
+
+05:07:27 ADB ['shell', 'pm path com.arena.installcontrol']

@@ -1,0 +1,871 @@
+[ 1051.606755] do_syscall_64+0x4a/0xa0
+[ 1051.606837] ? irqentry_exit+0x16/0x60
+[ 1051.606876] entry_SYSCALL_64_after_hwframe+0x78/0xe2
+[ 1051.606964] RIP: 0033:0x71597adaa497
+[ 1051.607220] Code: 00 00 00 b8 00 00 00 00 0f 05 48 3d 01 f0 ff ff 72 09 f7 d8 89 c7 e8 c8 fa ff ff c3 0f 1f 80 00 00 00 00 b8 01 00 00 00 0f 05 <48> 3d 01 f0 ff ff 72 09 f7 d8 89 c7 e8 a8 fa ff ff c3 0f 1f 80 00
+[ 1051.607327] RSP: 002b:00007155bcf98ff8 EFLAGS: 00000213 ORIG_RAX: 0000000000000001
+[ 1051.607740] RAX: ffffffffffffffda RBX: 0000715898f078f0 RCX: 000071597adaa497
+[ 1051.607788] RDX: 0000000000000001 RSI: 00007157c8eaeac0 RDI: 00000000000001bb
+[ 1051.607826] RBP: 00000000000001bb R08: ffffffffffffffff R09: 00007157c8eaeb00
+[ 1051.607865] R10: 0000000000000002 R11: 0000000000000213 R12: 0000000000000000
+[ 1051.607903] R13: 000000007014d798 R14: 0000000000000000 R15: 00007155bcf990ec
+[ 1051.607974] </TASK>
+[ 1051.608401] Sending NMI from CPU 1 to CPUs 0:
+[ 1051.609150] NMI backtrace for cpu 0
+[ 1051.609903] CPU: 0 PID: 4304 Comm: service Tainted: G           OE      6.6.50-android15-8-g8adecb593e9b-ab12525588 #1 03466743f55c4b5f087fe5c3134f2e4d2835d3e1
+[ 1051.610238] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.11.1-0-g0551a4be2c-prebuilt.qemu-project.org 04/01/2014
+[ 1051.610314] RIP: 0033:0x7440e112177b
+[ 1051.610747] Code: 0f 84 19 01 00 00 85 db 0f 84 24 01 00 00 45 85 ed 74 52 45 39 6e 30 75 65 49 8b 46 38 49 8b 4e 40 48 85 c0 0f 84 ca 00 00 00 <0f> b6 70 04 40 80 e6 0f 48 8b b9 00 01 00 00 48 03 78 08 40 80 fe
+[ 1051.610848] RSP: 002b:00007ffcfd407710 EFLAGS: 00000206
+[ 1051.611398] RAX: 00007440d784dbb8 RBX: 0000000100000007 RCX: 00007440e0f01f10
+[ 1051.611413] RDX: 000000000000002b RSI: 0000000000000002 RDI: 00007440e0f01f10
+[ 1051.611423] RBP: 00007440db95fb51 R08: 0000000000008240 R09: 00007440db95f000
+[ 1051.611433] R10: 00007440e10df9e0 R11: 00007440e10483e8 R12: 00007440db960190
+[ 1051.611442] R13: 0000000000000001 R14: 00007ffcfd407798 R15: 0000000000000001
+[ 1051.611462] FS:  00007440e0d8dfb8 GS:  0000000000000000
+[ 1053.782522] servicemanager: Caller(pid=3484,uid=1000,sid=u:r:system_server:s0) Could not find android.hardware.input.processor.IInputProcessor/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1055.222060] binder_alloc: 3484: binder_alloc_buf, no vma
+[ 1055.222247] binder_debug: 51 callbacks suppressed
+[ 1055.223768] binder_alloc: 3484: binder_alloc_buf, no vma
+[ 1055.223883] binder: cannot allocate buffer: vma cleared, target dead or dying
+[ 1055.224009] binder: 4167:4167 transaction call to 3484:0 failed 112669/29189/-3, size 820-16 line 3544
+[ 1055.222297] binder: cannot allocate buffer: vma cleared, target dead or dying
+[ 1055.226309] binder: 4167:4318 transaction call to 3484:0 failed 112668/29189/-3, size 100-0 line 3544
+[ 1055.233899] binder_alloc: 3484: binder_alloc_buf, no vma
+[ 1055.234015] binder: cannot allocate buffer: vma cleared, target dead or dying
+[ 1055.234059] binder: 4167:4318 transaction async to 3484:0 failed 112671/29189/-3, size 92-0 line 3544
+[ 1055.989600] binder: release 3484:3507 transaction 112585 in, still active
+[ 1055.989827] binder: send failed reply for transaction 112585 to 4313:4313
+[ 1056.071664] binder: send failed reply for transaction 112622 to 4294:4294
+[ 1056.071852] binder: send failed reply for transaction 112651 to 3999:3999
+[ 1056.464685] servicemanager: Caller(pid=3359,uid=1047,sid=u:r:cameraserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1056.483559] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1056.523872] servicemanager: Caller(pid=3359,uid=1047,sid=u:r:cameraserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1056.625470] init: Service 'zygote' (pid 3357) received signal 9
+[ 1056.626008] init: Sending signal 9 to service 'zygote' (pid 3357) process group...
+[ 1056.647097] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_0/pid_3357
+[ 1056.740046] init: starting service 'exec 26 (/system/bin/vdc volume abort_fuse)'...
+[ 1056.831107] init: ... started service 'exec 26 (/system/bin/vdc volume abort_fuse)' has pid 4325
+[ 1056.894190] init: Command 'exec_background - system system -- /system/bin/vdc volume abort_fuse' action=onrestart (<Service 'zygote' onrestart>:1) took 100ms and succeeded
+[ 1056.906605] init: Command 'write /sys/power/state on' action=onrestart (<Service 'zygote' onrestart>:2) took 8ms and failed: Unable to write to file '/sys/power/state': Unable to write file contents: Invalid argument
+[ 1056.908491] init: Sending signal 9 to service 'audioserver' (pid 3358) process group...
+[ 1056.964078] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1041/pid_3358
+[ 1056.976294] init: Command 'restart audioserver' action=onrestart (<Service 'zygote' onrestart>:4) took 67ms and succeeded
+[ 1056.976734] init: Sending signal 9 to service 'cameraserver' (pid 3359) process group...
+[ 1057.042768] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1047/pid_3359
+[ 1057.055393] init: Command 'restart cameraserver' action=onrestart (<Service 'zygote' onrestart>:5) took 78ms and succeeded
+[ 1057.055858] init: Sending signal 9 to service 'media' (pid 3360) process group...
+[ 1057.108778] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1013/pid_3360
+[ 1057.130394] init: Command 'restart media' action=onrestart (<Service 'zygote' onrestart>:6) took 71ms and succeeded
+[ 1057.131114] init: Command 'restart --only-if-running media.tuner' action=onrestart (<Service 'zygote' onrestart>:7) took 0ms and failed: service media.tuner not found
+[ 1057.131432] init: Sending signal 9 to service 'netd' (pid 3361) process group...
+[ 1057.183118] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_0/pid_3361
+[ 1057.198053] init: Command 'restart netd' action=onrestart (<Service 'zygote' onrestart>:8) took 66ms and succeeded
+[ 1057.198417] init: Sending signal 9 to service 'wificond' (pid 3362) process group...
+[ 1057.223399] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1010/pid_3362
+[ 1057.255140] init: Service 'audioserver' (pid 3358) received signal 9
+[ 1057.255414] init: Sending signal 9 to service 'audioserver' (pid 3358) process group...
+[ 1057.256126] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1041/pid_3358/cgroup.kill: No such file or directory
+[ 1057.256713] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1041/pid_3358/cgroup.procs: No such file or directory
+[ 1057.262780] init: Sending signal 9 to service 'vendor.audio-hal' (pid 3364) process group...
+[ 1057.290771] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1041/pid_3364
+[ 1057.300560] init: Command 'restart vendor.audio-hal-aidl' action=onrestart (<Service 'audioserver' onrestart>:2) took 0ms and failed: service vendor.audio-hal-aidl not found
+[ 1057.306083] init: Command 'restart vendor.audio-effect-hal-aidl' action=onrestart (<Service 'audioserver' onrestart>:3) took 5ms and failed: service vendor.audio-effect-hal-aidl not found
+[ 1057.306460] init: Command 'restart vendor.audio-hal-4-0-msd' action=onrestart (<Service 'audioserver' onrestart>:4) took 0ms and failed: service vendor.audio-hal-4-0-msd not found
+[ 1057.306759] init: Command 'restart audio_proxy_service' action=onrestart (<Service 'audioserver' onrestart>:5) took 0ms and failed: service audio_proxy_service not found
+[ 1057.323830] init: Service 'cameraserver' (pid 3359) received signal 9
+[ 1057.324069] init: Sending signal 9 to service 'cameraserver' (pid 3359) process group...
+[ 1057.324658] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1047/pid_3359/cgroup.kill: No such file or directory
+[ 1057.330796] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1047/pid_3359/cgroup.procs: No such file or directory
+[ 1057.346596] init: Service 'media' (pid 3360) received signal 9
+[ 1057.346915] init: Sending signal 9 to service 'media' (pid 3360) process group...
+[ 1057.347483] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1013/pid_3360/cgroup.kill: No such file or directory
+[ 1057.347876] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1013/pid_3360/cgroup.procs: No such file or directory
+[ 1057.359083] init: Service 'netd' (pid 3361) received signal 9
+[ 1057.359309] init: Sending signal 9 to service 'netd' (pid 3361) process group...
+[ 1057.359858] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_0/pid_3361/cgroup.kill: No such file or directory
+[ 1057.360214] libprocessgroup: Failed to open /sys/fs/cgroup/uid_0/pid_3361/cgroup.procs: No such file or directory
+[ 1057.362215] init: Command 'restart zygote_secondary' action=onrestart (<Service 'netd' onrestart>:2) took 0ms and failed: service zygote_secondary not found
+[ 1057.374268] init: Service 'wificond' (pid 3362) received signal 9
+[ 1057.374502] init: Sending signal 9 to service 'wificond' (pid 3362) process group...
+[ 1057.375117] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1010/pid_3362/cgroup.kill: No such file or directory
+[ 1057.381967] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1010/pid_3362/cgroup.procs: No such file or directory
+[ 1057.391689] init: Service 'vendor.audio-hal' (pid 3364) received signal 9
+[ 1057.392075] init: Sending signal 9 to service 'vendor.audio-hal' (pid 3364) process group...
+[ 1057.414978] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1041/pid_3364/cgroup.kill: No such file or directory
+[ 1057.416161] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1041/pid_3364/cgroup.procs: No such file or directory
+[ 1057.462427] init: Untracked pid 3999 received signal 9
+[ 1057.462900] init: Untracked pid 3999 did not have an associated service entry and will not be reaped
+[ 1057.464104] init: Untracked pid 4093 received signal 9
+[ 1057.464401] init: Untracked pid 4093 did not have an associated service entry and will not be reaped
+[ 1057.477495] init: Untracked pid 4294 received signal 9
+[ 1057.477878] init: Untracked pid 4294 did not have an associated service entry and will not be reaped
+[ 1057.479386] init: Untracked pid 3369 received signal 9
+[ 1057.479556] init: Untracked pid 3369 did not have an associated service entry and will not be reaped
+[ 1057.480077] init: Untracked pid 3370 received signal 9
+[ 1057.480240] init: Untracked pid 3370 did not have an associated service entry and will not be reaped
+[ 1057.487884] init: processing action (init.svc.media=*) from (/system/etc/init/mediaserver.rc:1)
+[ 1057.517979] init: starting service 'zygote'...
+[ 1057.535474] init: Created socket '/dev/socket/zygote', mode 660, user 0, group 1000
+[ 1057.544283] init: Created socket '/dev/socket/usap_pool_primary', mode 660, user 0, group 1000
+[ 1057.635526] init: ... started service 'zygote' has pid 4328
+[ 1057.650058] init: starting service 'audioserver'...
+[ 1057.741354] init: ... started service 'audioserver' has pid 4329
+[ 1057.743048] init: starting service 'cameraserver'...
+[ 1057.849679] init: ... started service 'cameraserver' has pid 4330
+[ 1057.851304] init: starting service 'media'...
+[ 1057.993663] servicemanager: Notifying android.hardware.biometrics.face.IFace/virtual they don't (previously: do) have clients when we now have no record of a client
+[ 1058.015002] init: ... started service 'media' has pid 4331
+[ 1058.016705] init: starting service 'netd'...
+[ 1058.029490] servicemanager: Notifying android.hardware.biometrics.fingerprint.IFingerprint/default they don't (previously: do) have clients when we now have no record of a client
+[ 1058.030228] servicemanager: Notifying android.hardware.gnss.IGnss/default they don't (previously: do) have clients when we now have no record of a client
+[ 1058.036796] servicemanager: Caller(pid=4255,uid=1021,sid=u:r:hal_gnss_default:s0) Unregistering android.hardware.gnss.IGnss/default
+[ 1058.073387] BpBinder: onLastStrongRef automatically unlinking death recipients: 
+[ 1058.074587] servicemanager: Caller(pid=3854,uid=1000,sid=u:r:hal_fingerprint_default:s0) Unregistering android.hardware.biometrics.fingerprint.IFingerprint/default
+[ 1058.074939] BpBinder: onLastStrongRef automatically unlinking death recipients: 
+[ 1058.116765] init: Created socket '/dev/socket/dnsproxyd', mode 660, user 0, group 3003
+[ 1058.148541] init: Created socket '/dev/socket/mdns', mode 660, user 0, group 1000
+[ 1058.171435] init: Created socket '/dev/socket/fwmarkd', mode 660, user 0, group 3003
+[ 1058.329863] init: ... started service 'netd' has pid 4332
+[ 1058.331610] init: starting service 'wificond'...
+[ 1058.557916] init: ... started service 'wificond' has pid 4333
+[ 1058.559575] init: starting service 'vendor.audio-hal'...
+[ 1058.750193] init: ... started service 'vendor.audio-hal' has pid 4334
+[ 1058.751767] init: Service 'vendor.biometrics.fingerprint-service.ranchu' (pid 3854) exited with status 0 oneshot service took 108.388000 seconds in background
+[ 1058.752094] init: Sending signal 9 to service 'vendor.biometrics.fingerprint-service.ranchu' (pid 3854) process group...
+[ 1058.764003] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_3854
+[ 1058.802452] init: Service 'vendor.gnss.ranchu' (pid 4255) exited with status 0 oneshot service took 21.743000 seconds in background
+[ 1058.802795] init: Sending signal 9 to service 'vendor.gnss.ranchu' (pid 4255) process group...
+[ 1058.804330] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1021/pid_4255
+[ 1058.840606] init: Service 'exec 26 (/system/bin/vdc volume abort_fuse)' (pid 4325) exited with status 0 oneshot service took 2.080000 seconds in background
+[ 1058.853373] init: Sending signal 9 to service 'exec 26 (/system/bin/vdc volume abort_fuse)' (pid 4325) process group...
+[ 1058.854919] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_4325
+[ 1058.873700] init: processing action (init.svc.media=*) from (/system/etc/init/mediaserver.rc:1)
+[ 1058.882458] init: processing action (init.svc.audioserver=running) from (/system/etc/init/audioserver.rc:37)
+[ 1058.882942] init: service 'vendor.audio-hal' requested start, but it is already running (flags: 4)
+[ 1058.883544] init: Command 'start vendor.audio-hal-aidl' action=init.svc.audioserver=running (/system/etc/init/audioserver.rc:39) took 0ms and failed: service vendor.audio-hal-aidl not found
+[ 1058.884275] init: Command 'start vendor.audio-effect-hal-aidl' action=init.svc.audioserver=running (/system/etc/init/audioserver.rc:40) took 0ms and failed: service vendor.audio-effect-hal-aidl not found
+[ 1058.884694] init: Command 'start vendor.audio-hal-4-0-msd' action=init.svc.audioserver=running (/system/etc/init/audioserver.rc:41) took 0ms and failed: service vendor.audio-hal-4-0-msd not found
+[ 1058.889460] init: Command 'start audio_proxy_service' action=init.svc.audioserver=running (/system/etc/init/audioserver.rc:42) took 0ms and failed: service audio_proxy_service not found
+[ 1058.890155] init: processing action (init.svc.media=*) from (/system/etc/init/mediaserver.rc:1)
+[ 1060.322274] servicemanager: Caller(pid=4333,uid=1010,sid=u:r:wificond:s0) Could not find android.hardware.net.nlinterceptor.IInterceptor/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1065.032044] servicemanager: Caller(pid=4332,uid=0,sid=u:r:netd:s0) Found android.system.net.netd.INetd/default in framework VINTF manifest.
+[ 1067.914985] servicemanager: Caller(pid=4334,uid=1041,sid=u:r:hal_audio_default:s0) Found android.hardware.bluetooth.audio.IBluetoothAudioProviderFactory/default in device VINTF manifest.
+[ 1069.230702] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.core.IModule/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1069.264625] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.effect.IFactory/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1069.860186] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.effect.IFactory/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1069.880692] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.core.IModule/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1071.454112] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.effect.IFactory/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1071.510146] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.core.IModule/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1072.304591] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Found android.system.suspend.ISystemSuspend/default in framework VINTF manifest.
+[ 1074.298369] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.effect.IFactory/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1074.331066] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.core.IModule/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1074.374123] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1074.438547] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1074.450917] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1075.409712] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1075.426119] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1075.438752] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1076.425728] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1076.447098] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1076.455049] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1077.433865] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1077.458178] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1077.462472] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1078.449488] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1078.459371] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1078.462880] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1079.455258] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1079.482115] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1079.483712] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1080.474290] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1080.497870] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1080.499337] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1081.487329] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1081.510831] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1081.512613] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1082.512787] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1082.541906] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1082.543368] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1083.180766] servicemanager: Caller(pid=4330,uid=1047,sid=u:r:cameraserver:s0) Found android.frameworks.cameraservice.service.ICameraService/default in framework VINTF manifest.
+[ 1083.195228] servicemanager: Caller(pid=4330,uid=1047,sid=u:r:cameraserver:s0) Found android.frameworks.cameraservice.service.ICameraService/default in framework VINTF manifest.
+[ 1083.530847] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1083.550136] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1083.552675] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1084.542300] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1084.550039] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1084.552263] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1085.551391] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1085.574149] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1085.576556] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1085.818696] healthd: battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+[ 1086.571502] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1086.580503] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1086.602313] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1087.603048] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1087.620590] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1087.636784] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1088.623576] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1088.646714] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1088.655252] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1089.639175] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1089.660937] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1089.674088] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1090.707723] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1090.722059] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1090.742490] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1091.722900] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1091.738824] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1091.747071] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1092.735176] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1092.746456] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1092.750884] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1093.748434] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1093.768698] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1093.776713] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1094.538695] type=1400 audit(1793544795.069:14): avc:  denied  { getattr } for  comm="main" path="/system/framework/oat/x86_64/services.odex" dev="dm-46" ino=65545 scontext=u:r:zygote:s0 tcontext=u:object_r:shell_data_file:s0 tclass=file permissive=0
+[ 1094.550626] type=1400 audit(1793544795.077:15): avc:  denied  { read } for  comm="main" name="services.odex" dev="dm-46" ino=65545 scontext=u:r:zygote:s0 tcontext=u:object_r:shell_data_file:s0 tclass=file permissive=0
+[ 1094.770780] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1094.793610] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1094.795188] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1095.782452] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1095.807430] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1095.810687] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1096.796441] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1096.820705] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1096.824657] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1097.818355] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1097.824431] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1097.843331] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1098.827069] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1098.847625] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1098.854802] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1099.838665] servicemanager: Notifying apexservice they do (previously: don't) have clients when service is guaranteed to be in use
+[ 1099.852238] apexd: getActivePackages received by ApexService
+[ 1099.859407] AidlLazyServiceRegistrar: Process has 1 (of 1 available) client(s) in use after notification apexservice has clients: 1
+[ 1099.859725] AidlLazyServiceRegistrar: Shutdown prevented by forcePersist override flag.
+[ 1099.878181] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1099.935383] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1099.942041] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1100.924100] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1100.948651] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1100.956343] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1101.642622] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.power.stats.IPowerStats/default in device VINTF manifest.
+[ 1101.712267] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.frameworks.stats.IStats/default in framework VINTF manifest.
+[ 1101.724766] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Could not find android.hardware.memtrack.IMemtrack/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1101.941835] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1101.967310] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1101.970257] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1102.972234] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1102.987153] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1102.989966] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1104.013900] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1104.021246] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1104.025856] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1105.030834] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1105.055370] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1105.058257] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1105.776123] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.system.suspend.ISystemSuspend/default in framework VINTF manifest.
+[ 1105.811307] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.power.IPower/default in device VINTF manifest.
+[ 1106.050659] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1106.059521] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1106.062158] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1106.094358] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.light.ILights/default in device VINTF manifest.
+[ 1107.059606] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1107.071169] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1107.072582] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1107.985615] servicemanager: Notifying apexservice they don't (previously: do) have clients when we now have no record of a client
+[ 1107.986739] AidlLazyServiceRegistrar: Process has 0 (of 1 available) client(s) in use after notification apexservice has clients: 0
+[ 1107.986909] AidlLazyServiceRegistrar: Shutdown prevented by forcePersist override flag.
+[ 1108.076523] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1108.092373] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1108.098120] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1109.108615] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1109.123402] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1109.134081] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1110.142240] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1110.154073] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1110.157966] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1111.158111] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1111.187657] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1111.190626] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1112.186326] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1112.218882] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1112.221903] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1113.221795] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1113.228131] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1113.232132] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1114.238933] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1114.245537] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1114.247719] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1115.246715] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1115.263895] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1115.269610] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1116.278229] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1116.305783] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1116.310207] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1117.195838] servicemanager: Notifying apexservice they do (previously: don't) have clients when service is guaranteed to be in use
+[ 1117.197915] AidlLazyServiceRegistrar: Process has 1 (of 1 available) client(s) in use after notification apexservice has clients: 1
+[ 1117.198090] AidlLazyServiceRegistrar: Shutdown prevented by forcePersist override flag.
+[ 1117.199798] apexd: getAllPackages received by ApexService
+[ 1117.309676] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1117.314397] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1117.315804] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1118.334795] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1118.351837] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1118.354988] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1119.358422] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1119.374006] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1119.375499] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1120.386769] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1120.396743] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1120.407203] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1121.399618] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1121.410156] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1121.411497] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1122.406624] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1122.423942] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1122.426037] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1122.982142] servicemanager: Notifying apexservice they don't (previously: do) have clients when we now have no record of a client
+[ 1122.986134] AidlLazyServiceRegistrar: Process has 0 (of 1 available) client(s) in use after notification apexservice has clients: 0
+[ 1122.986339] AidlLazyServiceRegistrar: Shutdown prevented by forcePersist override flag.
+[ 1123.418297] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1123.440482] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1123.452172] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1124.454736] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1124.500087] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1124.503923] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1125.567883] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1125.662635] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1125.674797] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1126.673686] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1126.697870] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1126.700542] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1127.683931] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1127.706861] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1127.712245] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1128.700727] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1128.714946] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1128.716806] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1129.713696] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1129.723089] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1129.724442] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1130.735322] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1130.746919] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1130.748774] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1131.757909] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1131.767700] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1131.770909] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1132.815611] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1132.825889] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1132.828825] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1133.830916] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1133.839997] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1133.859669] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1134.862637] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1134.888272] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1134.905722] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1135.938309] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1135.978420] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1135.979993] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1136.946125] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1136.958590] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1136.960100] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1137.959020] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1137.964623] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1137.966533] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1138.975030] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1138.995107] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1138.996399] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1139.991360] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1140.027175] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1140.035953] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1141.031296] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1141.044823] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1141.046531] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1142.054097] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1142.066603] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1142.082055] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1143.085741] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1143.099340] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1143.114539] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1144.098286] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1144.114420] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1144.115764] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1145.108164] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1145.123807] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1145.130856] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1145.826497] healthd: battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+[ 1146.118783] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1146.137552] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1146.139603] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1147.133854] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1147.143885] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1147.146215] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1148.155047] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1148.174858] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1148.176381] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1149.186379] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1149.195374] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1149.199188] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1150.199385] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1150.208457] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1150.230390] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1151.222268] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1151.232113] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1151.238381] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1152.235906] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1152.267248] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1152.270172] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1153.273841] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1153.293753] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1153.300154] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1154.282853] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1154.298989] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1154.302616] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1155.326123] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1155.338466] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1155.340498] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1156.347873] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1156.362166] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1156.366477] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1156.916003] BpBinder: onLastStrongRef automatically unlinking death recipients: 
+[ 1157.138903] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'sensor_privacy' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1157.151946] init: Control message: Could not find 'aidl/sensor_privacy' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1157.156188] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service sensor_privacy as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1158.226082] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'sensor_privacy' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1158.234514] init: Control message: Could not find 'aidl/sensor_privacy' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1158.238152] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service sensor_privacy as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1158.379203] init: starting service 'idmap2d'...
+[ 1158.608218] init: ... started service 'idmap2d' has pid 4680
+[ 1158.608780] init: Control message: Processed ctl.start for 'idmap2d' from pid: 4453 (system_server)
+[ 1159.257968] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'sensor_privacy' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1159.286703] init: Control message: Could not find 'aidl/sensor_privacy' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1159.301776] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service sensor_privacy as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1160.274936] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'sensor_privacy' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1160.289933] init: Control message: Could not find 'aidl/sensor_privacy' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1160.294201] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service sensor_privacy as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1161.290675] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Since 'sensor_privacy' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1161.301860] init: Control message: Could not find 'aidl/sensor_privacy' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1161.306531] servicemanager: Caller(pid=4329,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service sensor_privacy as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1161.953679] BpBinder: onLastStrongRef automatically unlinking death recipients: 
+[ 1162.028707] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.sensors.ISensors/default in device VINTF manifest.
+[ 1162.056081] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.health.IHealth/default in device VINTF manifest.
+[ 1162.123038] healthd: battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+[ 1167.521522] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.power.IPower/default in device VINTF manifest.
+[ 1167.625645] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.vibrator.IVibratorManager/default in device VINTF manifest.
+[ 1167.718192] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.frameworks.vibrator.IVibratorControlService/default in framework VINTF manifest.
+[ 1167.720271] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.frameworks.vibrator.IVibratorControlService/default in framework VINTF manifest.
+[ 1170.359271] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.frameworks.sensorservice.ISensorManager/default in framework VINTF manifest.
+[ 1171.415690] init: Sending signal 9 to service 'idmap2d' (pid 4680) process group...
+[ 1171.451726] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_4680
+[ 1171.462892] init: Control message: Processed ctl.stop for 'idmap2d' from pid: 4453 (system_server)
+[ 1171.464084] init: Service 'idmap2d' (pid 4680) received signal 9
+[ 1171.464372] init: Sending signal 9 to service 'idmap2d' (pid 4680) process group...
+[ 1171.474838] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1000/pid_4680/cgroup.kill: No such file or directory
+[ 1171.475617] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1000/pid_4680/cgroup.procs: No such file or directory
+[ 1173.247262] init: processing action (sys.sysctl.extra_free_kbytes=*) from (/system/etc/init/hw/init.rc:1238)
+[ 1173.298596] init: starting service 'exec 27 (/system/bin/extra_free_kbytes.sh 4500)'...
+[ 1173.413829] init: ... started service 'exec 27 (/system/bin/extra_free_kbytes.sh 4500)' has pid 4745
+[ 1173.414641] init: SVC_EXEC service 'exec 27 (/system/bin/extra_free_kbytes.sh 4500)' pid 4745 (uid 0 gid 0+0 context default) started; waiting...
+[ 1173.415944] init: Command 'exec -- /system/bin/extra_free_kbytes.sh ${sys.sysctl.extra_free_kbytes}' action=sys.sysctl.extra_free_kbytes=* (/system/etc/init/hw/init.rc:1239) took 167ms and succeeded
+[ 1175.612476] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Could not find android.hardware.oemlock.IOemLock/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1178.650482] init: Service 'exec 27 (/system/bin/extra_free_kbytes.sh 4500)' (pid 4745) exited with status 0 waiting took 5.285000 seconds
+[ 1178.650782] init: Sending signal 9 to service 'exec 27 (/system/bin/extra_free_kbytes.sh 4500)' (pid 4745) process group...
+[ 1178.652582] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_0/pid_4745
+[ 1183.808501] init: Untracked pid 4780 exited with status 0
+[ 1183.808793] init: Untracked pid 4780 did not have an associated service entry and will not be reaped
+[ 1183.821808] init: Untracked pid 4782 exited with status 0
+[ 1183.822051] init: Untracked pid 4782 did not have an associated service entry and will not be reaped
+[ 1184.704713] init: Untracked pid 4791 exited with status 0
+[ 1184.709302] init: Untracked pid 4791 did not have an associated service entry and will not be reaped
+[ 1184.712792] init: Untracked pid 4789 exited with status 0
+[ 1184.718106] init: Untracked pid 4789 did not have an associated service entry and will not be reaped
+[ 1185.606854] init: Untracked pid 4796 exited with status 0
+[ 1185.607123] init: Untracked pid 4796 did not have an associated service entry and will not be reaped
+[ 1185.622426] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.wifi.IWifi/default in device VINTF manifest.
+[ 1185.623402] init: Untracked pid 4798 exited with status 0
+[ 1185.623619] init: Untracked pid 4798 did not have an associated service entry and will not be reaped
+[ 1185.692481] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.wifi.supplicant.ISupplicant/default in device VINTF manifest.
+[ 1185.735665] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.wifi.supplicant.ISupplicant/default in device VINTF manifest.
+[ 1186.884028] init: Untracked pid 4802 exited with status 0
+[ 1186.895360] init: Untracked pid 4802 did not have an associated service entry and will not be reaped
+[ 1186.905494] init: Untracked pid 4804 exited with status 0
+[ 1186.905783] init: Untracked pid 4804 did not have an associated service entry and will not be reaped
+[ 1188.624801] init: Untracked pid 4814 exited with status 0
+[ 1188.636847] init: Untracked pid 4814 did not have an associated service entry and will not be reaped
+[ 1188.639261] init: Untracked pid 4816 exited with status 0
+[ 1188.639450] init: Untracked pid 4816 did not have an associated service entry and will not be reaped
+[ 1190.019227] init: Untracked pid 4825 exited with status 0
+[ 1190.019477] init: Untracked pid 4825 did not have an associated service entry and will not be reaped
+[ 1190.033874] init: Untracked pid 4830 exited with status 0
+[ 1190.034111] init: Untracked pid 4830 did not have an associated service entry and will not be reaped
+[ 1191.449562] init: Untracked pid 4839 exited with status 0
+[ 1191.449813] init: Untracked pid 4839 did not have an associated service entry and will not be reaped
+[ 1191.488239] init: Untracked pid 4841 exited with status 0
+[ 1191.488473] init: Untracked pid 4841 did not have an associated service entry and will not be reaped
+[ 1192.530760] init: Untracked pid 4846 exited with status 0
+[ 1192.531241] init: Untracked pid 4846 did not have an associated service entry and will not be reaped
+[ 1192.532030] init: Untracked pid 4848 exited with status 0
+[ 1192.532354] init: Untracked pid 4848 did not have an associated service entry and will not be reaped
+[ 1193.673699] init: Untracked pid 4853 exited with status 0
+[ 1193.673950] init: Untracked pid 4853 did not have an associated service entry and will not be reaped
+[ 1193.690098] init: Untracked pid 4855 exited with status 0
+[ 1193.690362] init: Untracked pid 4855 did not have an associated service entry and will not be reaped
+[ 1194.878031] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.frameworks.location.altitude.IAltitudeService/default in framework VINTF manifest.
+[ 1196.789986] init: Untracked pid 4866 exited with status 0
+[ 1196.790442] init: Untracked pid 4866 did not have an associated service entry and will not be reaped
+[ 1196.833655] init: Untracked pid 4870 exited with status 0
+[ 1196.833905] init: Untracked pid 4870 did not have an associated service entry and will not be reaped
+[ 1197.371488] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Could not find android.hardware.soundtrigger3.ISoundTriggerHw/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1197.874654] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Could not find android.hardware.thermal.IThermal/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1197.922763] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Could not find android.hardware.usb.gadget.IUsbGadget/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1198.009357] init: Untracked pid 4878 exited with status 0
+[ 1198.009597] init: Untracked pid 4878 did not have an associated service entry and will not be reaped
+[ 1198.012005] init: Untracked pid 4880 exited with status 0
+[ 1198.012234] init: Untracked pid 4880 did not have an associated service entry and will not be reaped
+[ 1199.154087] init: Untracked pid 4888 exited with status 0
+[ 1199.154379] init: Untracked pid 4888 did not have an associated service entry and will not be reaped
+[ 1199.154838] init: Untracked pid 4886 exited with status 0
+[ 1199.155010] init: Untracked pid 4886 did not have an associated service entry and will not be reaped
+[ 1199.294906] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.usb.IUsb/default in device VINTF manifest.
+[ 1203.538134] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.biometrics.fingerprint.IFingerprint/default in device VINTF manifest.
+[ 1203.604559] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Since 'android.hardware.biometrics.fingerprint.IFingerprint/default' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1203.630580] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.biometrics.face.IFace/virtual in device VINTF manifest.
+[ 1203.667499] init: starting service 'vendor.biometrics.fingerprint-service.ranchu'...
+[ 1203.808052] servicemanager: Notifying android.hardware.biometrics.face.IFace/virtual they do (previously: don't) have clients when service is guaranteed to be in use
+[ 1203.890337] init: ... started service 'vendor.biometrics.fingerprint-service.ranchu' has pid 4916
+[ 1203.891135] init: Control message: Processed ctl.interface_start for 'aidl/android.hardware.biometrics.fingerprint.IFingerprint/default' from pid: 153 (/system/bin/servicemanager)
+[ 1204.090927] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.biometrics.face.IFace/virtual in device VINTF manifest.
+[ 1204.846907] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Since 'android.hardware.biometrics.fingerprint.IFingerprint/default' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1204.859112] init: service 'vendor.biometrics.fingerprint-service.ranchu' requested start, but it is already running (flags: 134)
+[ 1204.859417] init: Control message: Processed ctl.interface_start for 'aidl/android.hardware.biometrics.fingerprint.IFingerprint/default' from pid: 153 (/system/bin/servicemanager)
+[ 1204.892521] servicemanager: Caller(pid=4916,uid=1000,sid=u:r:hal_fingerprint_default:s0) Found android.hardware.biometrics.fingerprint.IFingerprint/default in device VINTF manifest.
+[ 1204.907669] BpBinder: onLastStrongRef automatically unlinking death recipients: 
+[ 1204.930926] servicemanager: Notifying android.hardware.biometrics.fingerprint.IFingerprint/default they do (previously: don't) have clients when service is guaranteed to be in use
+[ 1205.166747] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.biometrics.fingerprint.IFingerprint/default in device VINTF manifest.
+[ 1205.832473] healthd: battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+[ 1209.948247] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.authsecret.IAuthSecret/default in device VINTF manifest.
+[ 1213.676636] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.wifi.IWifi/default in device VINTF manifest.
+[ 1214.857976] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.health.IHealth/default in device VINTF manifest.
+[ 1215.148510] servicemanager: Notifying apexservice they do (previously: don't) have clients when service is guaranteed to be in use
+[ 1215.159625] apexd: getSessions() received by ApexService
+[ 1215.162381] AidlLazyServiceRegistrar: Process has 1 (of 1 available) client(s) in use after notification apexservice has clients: 1
+[ 1215.162606] AidlLazyServiceRegistrar: Shutdown prevented by forcePersist override flag.
+[ 1220.009480] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Could not find android.hardware.thermal.IThermal/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1247.995820] servicemanager: Notifying apexservice they don't (previously: do) have clients when we now have no record of a client
+[ 1248.024487] AidlLazyServiceRegistrar: Process has 0 (of 1 available) client(s) in use after notification apexservice has clients: 0
+[ 1248.043420] AidlLazyServiceRegistrar: Shutdown prevented by forcePersist override flag.
+[ 1265.233592] init: Untracked pid 5134 exited with status 0
+[ 1265.234742] init: Untracked pid 5134 did not have an associated service entry and will not be reaped
+[ 1265.235528] init: Untracked pid 5136 exited with status 0
+[ 1265.235703] init: Untracked pid 5136 did not have an associated service entry and will not be reaped
+[ 1265.851533] healthd: battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+[ 1266.905664] init: Untracked pid 5146 exited with status 0
+[ 1266.905955] init: Untracked pid 5146 did not have an associated service entry and will not be reaped
+[ 1266.927095] init: Untracked pid 5148 exited with status 0
+[ 1266.927349] init: Untracked pid 5148 did not have an associated service entry and will not be reaped
+[ 1268.596029] init: Untracked pid 5153 exited with status 0
+[ 1268.596276] init: Untracked pid 5153 did not have an associated service entry and will not be reaped
+[ 1268.633800] init: Untracked pid 5155 exited with status 0
+[ 1268.634087] init: Untracked pid 5155 did not have an associated service entry and will not be reaped
+[ 1269.711728] init: Untracked pid 5158 exited with status 0
+[ 1269.712025] init: Untracked pid 5158 did not have an associated service entry and will not be reaped
+[ 1269.719391] init: Untracked pid 5160 exited with status 0
+[ 1269.719596] init: Untracked pid 5160 did not have an associated service entry and will not be reaped
+[ 1271.148752] init: Untracked pid 5163 exited with status 0
+[ 1271.154348] init: Untracked pid 5163 did not have an associated service entry and will not be reaped
+[ 1271.154898] init: Untracked pid 5165 exited with status 0
+[ 1271.155069] init: Untracked pid 5165 did not have an associated service entry and will not be reaped
+[ 1272.441747] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Found android.hardware.gnss.IGnss/default in device VINTF manifest.
+[ 1272.479311] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Since 'android.hardware.gnss.IGnss/default' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1272.523462] init: starting service 'vendor.gnss.ranchu'...
+[ 1272.705922] init: ... started service 'vendor.gnss.ranchu' has pid 5171
+[ 1272.706558] init: Control message: Processed ctl.interface_start for 'aidl/android.hardware.gnss.IGnss/default' from pid: 153 (/system/bin/servicemanager)
+[ 1273.526655] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Since 'android.hardware.gnss.IGnss/default' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1273.538888] init: service 'vendor.gnss.ranchu' requested start, but it is already running (flags: 134)
+[ 1273.539173] init: Control message: Processed ctl.interface_start for 'aidl/android.hardware.gnss.IGnss/default' from pid: 153 (/system/bin/servicemanager)
+[ 1273.662736] servicemanager: Caller(pid=5171,uid=1021,sid=u:r:hal_gnss_default:s0) Found android.hardware.gnss.IGnss/default in device VINTF manifest.
+[ 1273.668046] servicemanager: Notifying android.hardware.gnss.IGnss/default they do (previously: don't) have clients when service is guaranteed to be in use
+[ 1273.699205] BpBinder: onLastStrongRef automatically unlinking death recipients: 
+[ 1278.995790] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1288.205507] init: Untracked pid 5215 exited with status 0
+[ 1288.205763] init: Untracked pid 5215 did not have an associated service entry and will not be reaped
+[ 1288.208555] init: Untracked pid 5218 exited with status 0
+[ 1288.208828] init: Untracked pid 5218 did not have an associated service entry and will not be reaped
+[ 1289.455964] init: Untracked pid 5225 exited with status 0
+[ 1289.456208] init: Untracked pid 5225 did not have an associated service entry and will not be reaped
+[ 1289.473919] init: Untracked pid 5227 exited with status 0
+[ 1289.474154] init: Untracked pid 5227 did not have an associated service entry and will not be reaped
+[ 1290.879953] init: Untracked pid 5232 exited with status 0
+[ 1290.880199] init: Untracked pid 5232 did not have an associated service entry and will not be reaped
+[ 1290.895326] init: Untracked pid 5234 exited with status 0
+[ 1290.895537] init: Untracked pid 5234 did not have an associated service entry and will not be reaped
+[ 1293.136597] init: Untracked pid 5243 exited with status 0
+[ 1293.159247] init: Untracked pid 5243 did not have an associated service entry and will not be reaped
+[ 1293.159903] init: Untracked pid 5245 exited with status 0
+[ 1293.160085] init: Untracked pid 5245 did not have an associated service entry and will not be reaped
+[ 1295.337540] init: Untracked pid 5261 exited with status 0
+[ 1295.337814] init: Untracked pid 5261 did not have an associated service entry and will not be reaped
+[ 1295.350713] init: Untracked pid 5263 exited with status 0
+[ 1295.350963] init: Untracked pid 5263 did not have an associated service entry and will not be reaped
+[ 1295.956228] servicemanager: Caller(pid=4453,uid=1000,sid=u:r:system_server:s0) Could not find android.hardware.input.processor.IInputProcessor/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1296.792395] init: Untracked pid 5270 exited with status 0
+[ 1296.792661] init: Untracked pid 5270 did not have an associated service entry and will not be reaped
+[ 1296.814244] init: Untracked pid 5272 exited with status 0
+[ 1296.814589] init: Untracked pid 5272 did not have an associated service entry and will not be reaped
+[ 1306.225638] sysrq: Show Blocked State
+[ 1306.231182] sysrq: Show backtrace of all active CPUs
+[ 1306.231403] NMI backtrace for cpu 1
+[ 1306.231581] CPU: 1 PID: 4494 Comm: watchdog Tainted: G           OE      6.6.50-android15-8-g8adecb593e9b-ab12525588 #1 03466743f55c4b5f087fe5c3134f2e4d2835d3e1
+[ 1306.231848] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.11.1-0-g0551a4be2c-prebuilt.qemu-project.org 04/01/2014
+[ 1306.231986] Call Trace:
+[ 1306.232063] <TASK>
+[ 1306.232142] dump_stack_lvl+0x6d/0xa0
+[ 1306.232481] dump_stack+0x14/0x20
+[ 1306.232514] nmi_cpu_backtrace+0xf2/0x130
+[ 1306.232550] ? __cfi_nmi_raise_cpu_backtrace+0x10/0x10
+[ 1306.232610] nmi_trigger_cpumask_backtrace+0x6a/0x100
+[ 1306.232651] arch_trigger_cpumask_backtrace+0x14/0x20
+[ 1306.232690] sysrq_handle_showallcpus+0x19/0x20
+[ 1306.232778] __handle_sysrq+0x169/0x180
+[ 1306.232820] write_sysrq_trigger+0x31/0x50
+[ 1306.233411] proc_reg_write+0x5a/0xc0
+[ 1306.233455] vfs_write+0x150/0x410
+[ 1306.233491] ? __fget_files+0x91/0xb0
+[ 1306.233528] ksys_write+0x70/0xe0
+[ 1306.233560] __x64_sys_write+0x1a/0x30
+[ 1306.233595] x64_sys_call+0x27e2/0x2e10
+[ 1306.233630] do_syscall_64+0x4a/0xa0
+[ 1306.233657] ? exc_page_fault+0x65/0xc0
+[ 1306.233692] entry_SYSCALL_64_after_hwframe+0x78/0xe2
+[ 1306.233813] RIP: 0033:0x7288bdf3d497
+[ 1306.234068] Code: 00 00 00 b8 00 00 00 00 0f 05 48 3d 01 f0 ff ff 72 09 f7 d8 89 c7 e8 c8 fa ff ff c3 0f 1f 80 00 00 00 00 b8 01 00 00 00 0f 05 <48> 3d 01 f0 ff ff 72 09 f7 d8 89 c7 e8 a8 fa ff ff c3 0f 1f 80 00
+[ 1306.234177] RSP: 002b:00007284f90e8ff8 EFLAGS: 00000213 ORIG_RAX: 0000000000000001
+[ 1306.234540] RAX: ffffffffffffffda RBX: 00007286ae39afe0 RCX: 00007288bdf3d497
+[ 1306.234588] RDX: 0000000000000001 RSI: 000072877e2bda40 RDI: 00000000000001ee
+[ 1306.234627] RBP: 00000000000001ee R08: ffffffffffffffff R09: 000072877e2bda80
+[ 1306.234665] R10: 0000000000000002 R11: 0000000000000213 R12: 0000000000000000
+[ 1306.234702] R13: 000000007039d798 R14: 0000000000000000 R15: 00007284f90e90ec
+[ 1306.234816] </TASK>
+[ 1306.235203] Sending NMI from CPU 1 to CPUs 0:
+[ 1306.235686] NMI backtrace for cpu 0
+[ 1306.237094] CPU: 0 PID: 524 Comm: binder:422_4 Tainted: G           OE      6.6.50-android15-8-g8adecb593e9b-ab12525588 #1 03466743f55c4b5f087fe5c3134f2e4d2835d3e1
+[ 1306.237557] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.11.1-0-g0551a4be2c-prebuilt.qemu-project.org 04/01/2014
+[ 1306.237674] RIP: 0033:0x5cd8438e70da
+[ 1306.238373] Code: 4c 8b 47 08 4d 85 c0 74 72 48 8b 0e f3 4d 0f b8 c8 49 83 f9 01 77 2b 49 8d 50 ff 48 21 ca 48 8b 07 48 8b 04 d0 48 85 c0 74 51 <48> 8b 00 48 85 c0 74 49 48 8b 70 08 48 39 f1 75 19 48 39 48 10 75
+[ 1306.238441] RSP: 002b:000072f84d951218 EFLAGS: 00000202
+[ 1306.239001] RAX: 000072f9c152f108 RBX: 0000013020388e1a RCX: 0000000000000000
+[ 1306.239030] RDX: 0000000000000000 RSI: 000072f84d951290 RDI: 000072f9c152f0f8
+[ 1306.239048] RBP: 0000000000000001 R08: 0000000000000002 R09: 0000000000000001
+[ 1306.239064] R10: 072d0000000a0000 R11: 000072fae2af45f8 R12: 0000000000000000
+[ 1306.239081] R13: 0000000000000004 R14: 000072f9c152f030 R15: 0000013020388e1a
+[ 1306.239114] FS:  000072f84d951f80 GS:  0000000000000000
+[ 1312.030188] binder_alloc: 4453: binder_alloc_buf, no vma
+[ 1312.030365] binder_debug: 7 callbacks suppressed
+[ 1312.030413] binder: cannot allocate buffer: vma cleared, target dead or dying
+[ 1312.030579] binder: 5186:5186 transaction call to 4453:0 failed 142768/29189/-3, size 816-16 line 3544
+[ 1312.037604] binder_alloc: 4453: binder_alloc_buf, no vma
+[ 1312.037761] binder: cannot allocate buffer: vma cleared, target dead or dying
+[ 1312.037807] binder: 5186:5329 transaction call to 4453:0 failed 142769/29189/-3, size 100-0 line 3544
+[ 1312.689619] binder: send failed reply for transaction 142677 to 5266:5266
+[ 1312.758521] binder: undelivered transaction 142680, process died.
+[ 1312.758947] binder: send failed reply for transaction 142683 to 5302:5302
+[ 1312.759090] binder: send failed reply for transaction 142705 to 5326:5326
+[ 1312.759195] binder: send failed reply for transaction 142712 to 5246:5246
+[ 1312.759261] binder: send failed reply for transaction 142743 to 4976:4976
+[ 1312.986399] servicemanager: Notifying android.hardware.biometrics.face.IFace/virtual they don't (previously: do) have clients when we now have no record of a client
+[ 1312.988146] servicemanager: Notifying android.hardware.biometrics.fingerprint.IFingerprint/default they don't (previously: do) have clients when we now have no record of a client
+[ 1312.988791] servicemanager: Notifying android.hardware.gnss.IGnss/default they don't (previously: do) have clients when we now have no record of a client
+[ 1313.198369] init: Service 'zygote' (pid 4328) received signal 9
+[ 1313.198835] init: Sending signal 9 to service 'zygote' (pid 4328) process group...
+[ 1313.208760] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_0/pid_4328
+[ 1313.464523] init: process with updatable components 'zygote' exited 4 times before boot completed
+[ 1313.492237] apexd: Native process 'zygote' is crashing. Attempting a revert
+[ 1313.527067] apexd: Revert failed : Revert requested, when there are no active sessions.
+[ 1313.532239] init: starting service 'exec 28 (/system/bin/vdc volume abort_fuse)'...
+[ 1313.566994] servicemanager: Caller(pid=422,uid=1000,sid=u:r:surfaceflinger:s0) Found android.hardware.power.IPower/default in device VINTF manifest.
+[ 1313.568654] servicemanager: Caller(pid=4330,uid=1047,sid=u:r:cameraserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1313.613479] servicemanager: Caller(pid=4916,uid=1000,sid=u:r:hal_fingerprint_default:s0) Unregistering android.hardware.biometrics.fingerprint.IFingerprint/default
+[ 1313.614069] BpBinder: onLastStrongRef automatically unlinking death recipients: 
+[ 1313.615210] servicemanager: Caller(pid=5171,uid=1021,sid=u:r:hal_gnss_default:s0) Unregistering android.hardware.gnss.IGnss/default
+[ 1313.615443] BpBinder: onLastStrongRef automatically unlinking death recipients: 
+[ 1313.846437] init: ... started service 'exec 28 (/system/bin/vdc volume abort_fuse)' has pid 5340
+[ 1313.847966] init: Command 'exec_background - system system -- /system/bin/vdc volume abort_fuse' action=onrestart (<Service 'zygote' onrestart>:1) took 363ms and succeeded
+[ 1313.918053] init: Command 'write /sys/power/state on' action=onrestart (<Service 'zygote' onrestart>:2) took 56ms and failed: Unable to write to file '/sys/power/state': Unable to write file contents: Invalid argument
+[ 1313.919881] init: Sending signal 9 to service 'audioserver' (pid 4329) process group...
+[ 1314.054256] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1041/pid_4329
+[ 1314.070804] init: Command 'restart audioserver' action=onrestart (<Service 'zygote' onrestart>:4) took 150ms and succeeded
+[ 1314.071167] init: Sending signal 9 to service 'cameraserver' (pid 4330) process group...
+[ 1314.202854] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1047/pid_4330
+[ 1314.248380] init: Command 'restart cameraserver' action=onrestart (<Service 'zygote' onrestart>:5) took 177ms and succeeded
+[ 1314.248776] init: Sending signal 9 to service 'media' (pid 4331) process group...
+[ 1314.339139] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1013/pid_4331
+[ 1314.350976] init: Command 'restart media' action=onrestart (<Service 'zygote' onrestart>:6) took 102ms and succeeded
+[ 1314.351475] init: Command 'restart --only-if-running media.tuner' action=onrestart (<Service 'zygote' onrestart>:7) took 0ms and failed: service media.tuner not found
+[ 1314.351803] init: Sending signal 9 to service 'netd' (pid 4332) process group...
+[ 1314.396844] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_0/pid_4332
+[ 1314.433902] init: Command 'restart netd' action=onrestart (<Service 'zygote' onrestart>:8) took 82ms and succeeded
+[ 1314.434264] init: Sending signal 9 to service 'wificond' (pid 4333) process group...
+[ 1314.458872] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1010/pid_4333
+[ 1314.479374] init: Service 'audioserver' (pid 4329) received signal 9
+[ 1314.479630] init: Sending signal 9 to service 'audioserver' (pid 4329) process group...
+[ 1314.480280] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1041/pid_4329/cgroup.kill: No such file or directory
+[ 1314.492455] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1041/pid_4329/cgroup.procs: No such file or directory
+[ 1314.495975] init: Sending signal 9 to service 'vendor.audio-hal' (pid 4334) process group...
+[ 1314.532779] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1041/pid_4334
+[ 1314.563748] init: Command 'restart vendor.audio-hal' action=onrestart (<Service 'audioserver' onrestart>:1) took 70ms and succeeded
+[ 1314.564124] init: Command 'restart vendor.audio-hal-aidl' action=onrestart (<Service 'audioserver' onrestart>:2) took 0ms and failed: service vendor.audio-hal-aidl not found
+[ 1314.564517] init: Command 'restart vendor.audio-effect-hal-aidl' action=onrestart (<Service 'audioserver' onrestart>:3) took 0ms and failed: service vendor.audio-effect-hal-aidl not found
+[ 1314.564835] init: Command 'restart vendor.audio-hal-4-0-msd' action=onrestart (<Service 'audioserver' onrestart>:4) took 0ms and failed: service vendor.audio-hal-4-0-msd not found
+[ 1314.577540] init: Command 'restart audio_proxy_service' action=onrestart (<Service 'audioserver' onrestart>:5) took 0ms and failed: service audio_proxy_service not found
+[ 1314.591373] init: Service 'cameraserver' (pid 4330) received signal 9
+[ 1314.591590] init: Sending signal 9 to service 'cameraserver' (pid 4330) process group...
+[ 1314.592149] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1047/pid_4330/cgroup.kill: No such file or directory
+[ 1314.592497] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1047/pid_4330/cgroup.procs: No such file or directory
+[ 1314.604183] init: Service 'media' (pid 4331) received signal 9
+[ 1314.604397] init: Sending signal 9 to service 'media' (pid 4331) process group...
+[ 1314.611253] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1013/pid_4331/cgroup.kill: No such file or directory
+[ 1314.611645] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1013/pid_4331/cgroup.procs: No such file or directory
+[ 1314.633913] init: Service 'netd' (pid 4332) received signal 9
+[ 1314.634140] init: Sending signal 9 to service 'netd' (pid 4332) process group...
+[ 1314.634653] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_0/pid_4332/cgroup.kill: No such file or directory
+[ 1314.635033] libprocessgroup: Failed to open /sys/fs/cgroup/uid_0/pid_4332/cgroup.procs: No such file or directory
+[ 1314.636016] init: Command 'restart zygote_secondary' action=onrestart (<Service 'netd' onrestart>:2) took 0ms and failed: service zygote_secondary not found
+[ 1314.650506] init: Service 'wificond' (pid 4333) received signal 9
+[ 1314.650736] init: Sending signal 9 to service 'wificond' (pid 4333) process group...
+[ 1314.651240] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1010/pid_4333/cgroup.kill: No such file or directory
+[ 1314.651567] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1010/pid_4333/cgroup.procs: No such file or directory
+[ 1314.659846] init: Service 'vendor.audio-hal' (pid 4334) received signal 9
+[ 1314.660040] init: Sending signal 9 to service 'vendor.audio-hal' (pid 4334) process group...
+[ 1314.660500] libprocessgroup: Failed to write 1 to /sys/fs/cgroup/uid_1041/pid_4334/cgroup.kill: No such file or directory
+[ 1314.673418] libprocessgroup: Failed to open /sys/fs/cgroup/uid_1041/pid_4334/cgroup.procs: No such file or directory
+[ 1314.702720] init: Service 'vendor.biometrics.fingerprint-service.ranchu' (pid 4916) exited with status 0 oneshot service took 111.005997 seconds in background
+[ 1314.703030] init: Sending signal 9 to service 'vendor.biometrics.fingerprint-service.ranchu' (pid 4916) process group...
+[ 1314.704502] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_4916
+[ 1314.735305] init: Service 'vendor.gnss.ranchu' (pid 5171) exited with status 0 oneshot service took 42.169998 seconds in background
+[ 1314.735592] init: Sending signal 9 to service 'vendor.gnss.ranchu' (pid 5171) process group...
+[ 1314.762392] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1021/pid_5171
+[ 1314.774250] init: Untracked pid 4976 received signal 9
+[ 1314.774469] init: Untracked pid 4976 did not have an associated service entry and will not be reaped
+[ 1314.775466] init: Untracked pid 5076 received signal 9
+[ 1314.775634] init: Untracked pid 5076 did not have an associated service entry and will not be reaped
+[ 1314.776235] init: Untracked pid 5246 received signal 9
+[ 1314.776394] init: Untracked pid 5246 did not have an associated service entry and will not be reaped
+[ 1314.793457] init: Untracked pid 5266 received signal 9
+[ 1314.793870] init: Untracked pid 5266 did not have an associated service entry and will not be reaped
+[ 1314.795279] init: Untracked pid 5302 received signal 9
+[ 1314.795568] init: Untracked pid 5302 did not have an associated service entry and will not be reaped
+[ 1314.796437] init: Untracked pid 4339 received signal 9
+[ 1314.796747] init: Untracked pid 4339 did not have an associated service entry and will not be reaped
+[ 1314.802969] init: Untracked pid 4340 received signal 9
+[ 1314.803129] init: Untracked pid 4340 did not have an associated service entry and will not be reaped
+[ 1314.814582] init: starting service 'bootanim'...
+[ 1314.898949] init: ... started service 'bootanim' has pid 5344
+[ 1314.899451] init: Control message: Processed ctl.start for 'bootanim' from pid: 422 (/system/bin/surfaceflinger)
+[ 1314.910810] init: processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+[ 1314.915632] init: starting service 'exec 29 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+[ 1315.064548] init: ... started service 'exec 29 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 5345
+[ 1315.086021] init: SVC_EXEC service 'exec 29 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 5345 (uid 1000 gid 1000+0 context default) started; waiting...
+[ 1315.086940] init: Command 'exec - system system -- /system/bin/flags_health_check UPDATABLE_CRASHING' action=sys.init.updatable_crashing=1 (/system/etc/init/flags_health_check.rc:11) took 173ms and succeeded
+[ 1315.109647] init: starting service 'zygote'...
+[ 1315.153779] init: Created socket '/dev/socket/zygote', mode 660, user 0, group 1000
+[ 1315.156475] init: Created socket '/dev/socket/usap_pool_primary', mode 660, user 0, group 1000
+[ 1315.310946] init: ... started service 'zygote' has pid 5346
+[ 1315.325256] init: starting service 'audioserver'...
+[ 1315.434014] init: ... started service 'audioserver' has pid 5348
+[ 1315.435773] init: starting service 'cameraserver'...
+[ 1315.511782] init: ... started service 'cameraserver' has pid 5349
+[ 1315.518513] init: starting service 'media'...
+[ 1315.575074] init: ... started service 'media' has pid 5350
+[ 1315.576729] init: starting service 'netd'...
+[ 1315.632592] init: Created socket '/dev/socket/dnsproxyd', mode 660, user 0, group 3003
+[ 1315.664845] init: Created socket '/dev/socket/mdns', mode 660, user 0, group 1000
+[ 1315.711187] init: Created socket '/dev/socket/fwmarkd', mode 660, user 0, group 3003
+[ 1315.818579] init: ... started service 'netd' has pid 5351
+[ 1315.820287] init: starting service 'wificond'...
+[ 1315.925950] init: ... started service 'wificond' has pid 5352
+[ 1315.927766] init: starting service 'vendor.audio-hal'...
+[ 1315.996423] init: ... started service 'vendor.audio-hal' has pid 5353
+[ 1316.001519] init: Service 'exec 28 (/system/bin/vdc volume abort_fuse)' (pid 5340) exited with status 0 oneshot service took 2.403000 seconds in background
+[ 1316.001883] init: Sending signal 9 to service 'exec 28 (/system/bin/vdc volume abort_fuse)' (pid 5340) process group...
+[ 1316.006361] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_5340
+[ 1316.019310] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1316.054194] servicemanager: Caller(pid=4330,uid=1047,sid=u:r:cameraserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1317.025725] init: Service 'exec 29 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 5345) exited with status 0 waiting took 2.078000 seconds
+[ 1317.026005] init: Sending signal 9 to service 'exec 29 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 5345) process group...
+[ 1317.027653] libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_1000/pid_5345
+[ 1317.050277] init: processing action (init.svc.media=*) from (/system/etc/init/mediaserver.rc:1)
+[ 1317.059396] init: processing action (init.svc.media=*) from (/system/etc/init/mediaserver.rc:1)
+[ 1317.063990] init: processing action (init.svc.audioserver=running) from (/system/etc/init/audioserver.rc:37)
+[ 1317.064386] init: service 'vendor.audio-hal' requested start, but it is already running (flags: 4)
+[ 1317.089264] init: Command 'start vendor.audio-hal-aidl' action=init.svc.audioserver=running (/system/etc/init/audioserver.rc:39) took 0ms and failed: service vendor.audio-hal-aidl not found
+[ 1317.089828] init: Command 'start vendor.audio-effect-hal-aidl' action=init.svc.audioserver=running (/system/etc/init/audioserver.rc:40) took 0ms and failed: service vendor.audio-effect-hal-aidl not found
+[ 1317.090249] init: Command 'start vendor.audio-hal-4-0-msd' action=init.svc.audioserver=running (/system/etc/init/audioserver.rc:41) took 0ms and failed: service vendor.audio-hal-4-0-msd not found
+[ 1317.090588] init: Command 'start audio_proxy_service' action=init.svc.audioserver=running (/system/etc/init/audioserver.rc:42) took 0ms and failed: service audio_proxy_service not found
+[ 1317.091282] init: processing action (init.svc.media=*) from (/system/etc/init/mediaserver.rc:1)
+[ 1318.492298] servicemanager: Caller(pid=5352,uid=1010,sid=u:r:wificond:s0) Could not find android.hardware.net.nlinterceptor.IInterceptor/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1321.330485] servicemanager: Caller(pid=5351,uid=0,sid=u:r:netd:s0) Found android.system.net.netd.INetd/default in framework VINTF manifest.
+[ 1323.346885] servicemanager: Caller(pid=5353,uid=1041,sid=u:r:hal_audio_default:s0) Found android.hardware.bluetooth.audio.IBluetoothAudioProviderFactory/default in device VINTF manifest.
+[ 1325.895796] healthd: battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+[ 1326.451853] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.core.IModule/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1326.488522] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.effect.IFactory/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1327.411485] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.effect.IFactory/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1327.451560] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.core.IModule/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1329.174300] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.effect.IFactory/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1329.199342] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.core.IModule/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1329.810317] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Found android.system.suspend.ISystemSuspend/default in framework VINTF manifest.
+[ 1331.966944] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.effect.IFactory/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1331.991282] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Could not find android.hardware.audio.core.IModule/default in the VINTF manifest. No alternative instances declared in VINTF.
+[ 1332.086504] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1332.096182] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1332.098729] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1333.106389] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1333.126705] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1333.133971] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1334.111582] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1334.127325] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1334.130166] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1335.129726] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1335.139216] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1335.140425] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1336.139591] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1336.147521] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1336.153438] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1337.149960] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1337.158566] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1337.159866] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1338.177728] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1338.194962] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1338.202813] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1338.788559] logd: logdr: UID=0 GID=0 PID=5429 n tail=0 logMask=bf pid=0 start=0ns deadline=0ns
+[ 1339.197781] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1339.219816] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1339.222493] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1340.210550] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1340.228726] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1340.242515] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1341.222551] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1341.250191] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1341.254272] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1342.227646] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1342.259794] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1342.262367] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1343.286515] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1343.306950] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1343.310402] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1344.305669] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1344.314795] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1344.316092] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1345.310576] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1345.357691] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1345.359291] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1346.343087] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1346.352153] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1346.367681] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1347.351040] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1347.378420] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1347.382092] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+[ 1348.391291] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Since 'activity' could not be found trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+[ 1348.485531] init: Control message: Could not find 'aidl/activity' for ctl.interface_start from pid: 153 (/system/bin/servicemanager)
+[ 1348.510462] servicemanager: Caller(pid=5348,uid=1041,sid=u:r:audioserver:s0) Tried to start aidl service activity as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
