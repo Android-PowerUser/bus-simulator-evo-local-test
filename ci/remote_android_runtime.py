@@ -217,6 +217,7 @@ try:
  status.update(state='game_installed',game_installed=True);save()
  adb(['logcat','-c'])
  shell('setprop debug.ld.app.com.Ovilex.BusSimulator2023 dlopen,dlsym,dlerror',30,False)
+ shell('settings put secure immersive_mode_confirmations confirmed',30,False)
  status.update(state='launching_game',game_launch_attempted=True);save()
  if os.environ.get('ANDROID_WAKE_BEFORE_GAME','').lower()=='true':shell('input keyevent 224',120,False)
  got_monitor=None
@@ -224,6 +225,22 @@ try:
   got_monitor=threading.Thread(target=dump_il2cpp_got_early,daemon=True);got_monitor.start()
  launch=shell('am start -W -n '+ACT,int(os.environ.get('ANDROID_LAUNCH_TIMEOUT','120')),False)
  (D/'game-launch.txt').write_text(launch);status['launch_command_output']=launch
+ # Dismiss only Android's first-run immersive-mode tip, never a license dialog.
+ try:
+  import xml.etree.ElementTree as ET,re
+  shell('uiautomator dump /data/local/tmp/launch-ui.xml',30,False)
+  ui=shell('cat /data/local/tmp/launch-ui.xml',15,False)
+  (D/'launch-ui.xml').write_text(ui)
+  tip=None
+  if 'Viewing full screen' in ui:
+   for node in ET.fromstring(ui[ui.index('<') :]).iter('node'):
+    if node.attrib.get('text')=='Got it':tip=node.attrib.get('bounds');break
+  if tip:
+   xy=list(map(int,re.findall(r'\d+',tip)))
+   if len(xy)==4:
+    shell('input tap '+str((xy[0]+xy[2])//2)+' '+str((xy[1]+xy[3])//2),15,False)
+    status['android_immersive_tip_dismissed']=True;save()
+ except Exception as e:print('IMMERSIVE_TIP_CHECK',str(e),flush=True)
  if got_monitor:
   got_monitor.join(8)
   status['il2cpp_got_monitor_finished']=not got_monitor.is_alive();save()
@@ -247,11 +264,15 @@ try:
  status['app_survived_120s']=bool(status.get('app_pid_at_120s'))
  status['foreground_is_game']=PKG in status['foreground_activity']
  status['runtime_start_verified']=verify_runtime(status, launch)
- status['state']='runtime_passed' if status['runtime_start_verified'] else 'license_blocked' if status['license_check_blocked'] else 'app_crashed' if game_crashed else 'runtime_failed'
+ status['app_liveness_verified']=status['runtime_start_verified']
+ if status['diagnostic_context_probe']:
+  status['runtime_start_verified']=False
+  status['diagnostic_only_not_a_repair']=True
+ status['state']='diagnostic_observed' if status['diagnostic_context_probe'] else 'runtime_passed' if status['runtime_start_verified'] else 'license_blocked' if status['license_check_blocked'] else 'app_crashed' if game_crashed else 'runtime_failed'
 except Exception as e:
  status.update(state='failed',error=type(e).__name__+': '+str(e));traceback.print_exc()
 finally:
- for name,args in [('final-logcat.txt',['logcat','-b','all','-d']),('kernel.txt',['shell','dmesg']),('processes.txt',['shell','ps -A'])]:
+ for name,args in [('threads.txt',['shell','ps -T -p $(pidof '+PKG+')']),('game-maps.txt',['shell','cat /proc/$(pidof '+PKG+')/maps']),('final-logcat.txt',['logcat','-b','all','-d']),('kernel.txt',['shell','dmesg']),('processes.txt',['shell','ps -A'])]:
   try:(D/name).write_text(adb(args,30,False))
   except Exception as e:(D/name).write_text(str(e))
  try:adb(['pull','/data/tombstones',str(D/'tombstones')],60,False)
