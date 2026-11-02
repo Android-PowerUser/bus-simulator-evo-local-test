@@ -1,0 +1,35 @@
+{
+  "build_id": "78b0074646c115a2f68b3ef36fae57c676213fac",
+  "frames": [
+    {
+      "address": "0x9d6d20",
+      "matches": [
+        {
+          "symbol": "_ZN21ChainedSignalHandlers13ForwardSignalEiP7siginfoPv",
+          "demangled": "ChainedSignalHandlers::ForwardSignal(int, siginfo*, void*)",
+          "offset": "0xbc"
+        }
+      ]
+    },
+    {
+      "address": "0x9e1ff8",
+      "matches": [
+        {
+          "symbol": "_ZN22NativeRuntimeException13SignalHandlerEiP7siginfoPv",
+          "demangled": "NativeRuntimeException::SignalHandler(int, siginfo*, void*)",
+          "offset": "0x394"
+        }
+      ]
+    },
+    {
+      "address": "0x965c58",
+      "matches": [
+        {
+          "symbol": "_Z24InitializeIl2CppFromMainRKN4core12basic_stringIcNS_20StringStorageDefaultIcEEEES5_iPPKcb",
+          "demangled": "InitializeIl2CppFromMain(core::basic_string<char, core::StringStorageDefault<char> > const&, core::basic_string<char, core::StringStorageDefault<char> > const&, int, char const**, bool)",
+          "offset": "0x10c"
+        }
+      ]
+    }
+  ]
+}
