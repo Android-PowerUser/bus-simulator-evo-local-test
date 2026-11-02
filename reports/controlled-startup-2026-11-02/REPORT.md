@@ -62,3 +62,26 @@ keine Käufe, Konten oder Lizenzdialoge werden angeklickt. Fahrbetrieb steht aus
 Dieser Befund legt nahe, zuerst den intakten Original-Initialisierungsweg
 im funktionsfähigen Play-Image zu verwenden statt GOT-only-Patches und
 Nullguards als Reparatur auszugeben.
+
+
+## Reproduktion schränkt den Erfolg klar ein
+
+UI-Smoke-Run 41492637268 (06887ea) installiert exakt dieselben drei
+Original-Splits, läuft diesmal jedoch durch die echte LicenseActivity
+in den nicht angemeldeten Google Play Store. Kein App-Prozess bei15s,
+kein nativer Crash, keine UI-Testaktion ausgeführt. Die vorherige sichtbare
+Driving-Mode-Auswahl ist echt, aber ohne Konto **nicht stabil reproduziert**.
+Die damalige Play-Licensing-Service-Beendigung ist kein Nachweis einer
+positiven Lizenzantwort. Deshalb keine belastbare Reparatur-/Spielerfolgsbehauptung.
+
+Erweiterte Beobachtung liest den Ereignispuffer: eine kurz sichtbare
+LicenseActivity wird jetzt auch nach Weiterleitung zu Play erkannt.
+Keine Lizenzprüfung abgeschaltet, keine Antwort gefälscht, kein Account
+injiziert. Blindes Wiederholen bis ein Lizenzfehler zufällig durchlässt
+wird nicht als Reparatur oder Abnahmekriterium verwendet.
+
+Stand: nativer Initialisierungsweg des Originals einmal erfolgreich
+beobachtet; v17/v18/v19 weiter keine Reparaturen. Für eine regulär
+reproduzierbare vollständige Spielprüfung ist eine berechtigte,
+angemeldete Play-Umgebung beziehungsweise ein geeigneter autorisierter
+Testbuild nötig. Die vorliegenden Werkzeuge besitzen diese nicht.

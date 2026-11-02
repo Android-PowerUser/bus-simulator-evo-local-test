@@ -3,6 +3,7 @@ from pathlib import Path
 from runtime_verdict import verify_runtime
 from android_transport import transient_boot_disconnect
 from process_identity import main_process
+from license_observation import license_block_seen
 R=Path(os.environ.get('GITHUB_WORKSPACE','.'));D=R/'runtime-results';D.mkdir(exist_ok=True)
 A=os.environ.get('ANDROID_HOME','/usr/local/lib/android/sdk')+'/platform-tools/adb'
 SERIAL=os.environ.get('ANDROID_SERIAL','emulator-5554')
@@ -266,7 +267,10 @@ try:
   try:screen('game-'+str(elapsed)+'s.png')
   except Exception as e:print('SCREENSHOT_FAILED',str(e),flush=True)
   if not pid:break
- if os.environ.get('TEST_UI_SMOKE','').lower()=='true' and status.get('app_pid_at_120s'):
+ license_events=adb(['logcat','-b','events','-d'],30,False)
+ (D/'launch-events.txt').write_text(license_events)
+ license_seen_before_ui=license_block_seen(PKG,'',license_events)
+ if os.environ.get('TEST_UI_SMOKE','').lower()=='true' and os.environ.get('TEST_STOCK_CONTROL','').lower()=='true' and status.get('app_pid_at_120s') and not license_seen_before_ui:
   from PIL import Image,ImageChops,ImageStat
   reference=Image.open(R/'ci/driving-mode-reference.png').convert('RGB')
   actual=Image.open(D/'game-120s.png').convert('RGB')
@@ -282,7 +286,7 @@ try:
  crashes=adb(['logcat','-b','crash','-d'],30,False);(D/'crash-logcat.txt').write_text(crashes)
  game_crashed=PKG in crashes
  status['game_fatal_crash_seen']=game_crashed
- status['license_check_blocked']='com.pairip.licensecheck.' in status['foreground_activity']
+ status['license_check_blocked']=license_block_seen(PKG,status['foreground_activity'],license_events)
  observed_pids=[status.get('app_pid_at_'+str(t)+'s') for t in (15,45,120)]
  status['app_process_restarted']=len(set(p for p in observed_pids if p))>1
  status['app_survived_120s']=bool(status.get('app_pid_at_120s'))

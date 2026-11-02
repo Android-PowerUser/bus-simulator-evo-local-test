@@ -1,3 +1,12 @@
+# Aktuell: Play-Kontrolle nicht reproduzierbar ohne Lizenzumgebung
+
+- 41491251617 zeigte echte Driving-Mode-Auswahl, aber 41492637268 erreicht mit identischen signierten Original-Splits die LicenseActivity und nicht angemeldeten Play Store.
+- Kein reproduzierbarer Spielerfolg, keine reparierte modifizierte APK. Keine zufälligen Lizenzfehler als Abnahme verwenden.
+- Ereignispuffer verhindert falsches license_check_blocked=false nach Weiterleitung. 29 Regressionstests.
+- Details/Nachweise: `reports/controlled-startup-2026-11-02/REPORT.md`.
+
+---
+
 # Original startet im offiziellen Play-Image
 
 - Actions 41491251617: originale signierte Version 1.27.42 installiert, native Initialisierung läuft; echte Driving-Mode-Selection sichtbar. Kein Account/Lizenzbypass.
