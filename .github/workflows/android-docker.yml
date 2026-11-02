@@ -17,6 +17,11 @@ on:
         default: false
         required: false
         type: boolean
+      money_abi_control:
+        description: Compare restored stock value and ABI-correct million-value candidate
+        default: false
+        required: false
+        type: boolean
 permissions:
   contents: read
 jobs:
@@ -27,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: ${{ fromJSON(inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
+        variant: ${{ fromJSON(inputs.money_abi_control && '["v19-stock-money","v19-million-abi"]' || inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
     env:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
     steps:
@@ -74,6 +79,15 @@ jobs:
         run: |
           python3 ci/build_generic_guard.py downloaded-game/candidate-config.apk downloaded-game/guard-config.apk
           mv downloaded-game/guard-config.apk downloaded-game/candidate-config.apk
+      - name: Build money ABI experiment and stock-value control
+        if: startsWith(matrix.variant, 'v19-')
+        env:
+          VARIANT: ${{ matrix.variant }}
+        run: |
+          args=()
+          if [ "$VARIANT" = v19-stock-money ]; then args+=(--stock-control); fi
+          python3 ci/build_money_abi_candidate.py downloaded-game/candidate-config.apk downloaded-game/abi-config.apk "${args[@]}"
+          mv downloaded-game/abi-config.apk downloaded-game/candidate-config.apk
       - name: Build emulator container
         run: docker build -t bus-android-test -f ci/docker/Dockerfile ci/docker
       - name: Install and test APK inside Docker with KVM
@@ -94,6 +108,9 @@ jobs:
               extra+=(-e TEST_CONTEXT_PROBE=true)
             fi
             extra+=(-e TEST_RESIGN_KEYSTORE_ASSET=repaired-test-signing-v1.jks)
+            if [[ "$VARIANT" = v19-* ]]; then
+              extra+=(-e "TEST_MONEY_ABI_VARIANT=$VARIANT")
+            fi
             if [ "$VARIANT" = v18-nullguard ]; then
               extra+=(-e TEST_EXPERIMENTAL_GENERIC_GUARD=true)
             fi

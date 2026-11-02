@@ -114,6 +114,7 @@ def resign_test_apks(apks,keystore):
  status['all_apks_resigned']=True;status['resign_seconds']=round(time.monotonic()-started,3);save()
 log=None
 try:
+ status['money_abi_experiment']=os.environ.get('TEST_MONEY_ABI_VARIANT','')
  status['experimental_generic_guard']=os.environ.get('TEST_EXPERIMENTAL_GENERIC_GUARD','').lower()=='true'
  status['diagnostic_context_probe']=os.environ.get('TEST_CONTEXT_PROBE','').lower()=='true'
  save();adb(['wait-for-device'],int(os.environ.get('ANDROID_DEVICE_TIMEOUT','180')))
