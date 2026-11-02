@@ -1,5 +1,6 @@
 import json,os,subprocess,time,traceback,zipfile,shutil,hashlib,threading
 from pathlib import Path
+from runtime_verdict import verify_runtime
 R=Path(os.environ.get('GITHUB_WORKSPACE','.'));D=R/'runtime-results';D.mkdir(exist_ok=True)
 A=os.environ.get('ANDROID_HOME','/usr/local/lib/android/sdk')+'/platform-tools/adb'
 SERIAL=os.environ.get('ANDROID_SERIAL','emulator-5554')
@@ -225,10 +226,12 @@ try:
  if got_monitor:
   got_monitor.join(8)
   status['il2cpp_got_monitor_finished']=not got_monitor.is_alive();save()
+ observation_started=time.monotonic()
  for elapsed in [15,45,120]:
-  time.sleep(elapsed-(0 if elapsed==15 else 15 if elapsed==45 else 45))
+  time.sleep(max(0,observation_started+elapsed-time.monotonic()))
   pid=shell('pidof '+PKG,30,False)
-  status['app_pid_at_'+str(elapsed)+'s']=pid;save()
+  status['app_pid_at_'+str(elapsed)+'s']=pid
+  status['observation_seconds_at_'+str(elapsed)+'s']=round(time.monotonic()-observation_started,3);save()
   try:screen('game-'+str(elapsed)+'s.png')
   except Exception as e:print('SCREENSHOT_FAILED',str(e),flush=True)
   if not pid:break
@@ -239,8 +242,8 @@ try:
  status['game_fatal_crash_seen']=game_crashed
  status['app_survived_120s']=bool(status.get('app_pid_at_120s'))
  status['foreground_is_game']=PKG in status['foreground_activity']
- status['runtime_start_verified']=bool(status['app_survived_120s'] and status['foreground_is_game'] and not game_crashed and 'Status: ok' in launch)
- status['state']='runtime_checked'
+ status['runtime_start_verified']=verify_runtime(status, launch)
+ status['state']='runtime_passed' if status['runtime_start_verified'] else 'app_crashed' if game_crashed else 'runtime_failed'
 except Exception as e:
  status.update(state='failed',error=type(e).__name__+': '+str(e));traceback.print_exc()
 finally:

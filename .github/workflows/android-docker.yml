@@ -24,6 +24,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Validate runtime verdict logic
+        run: python3 -m unittest discover -s ci -p 'test_*.py' -v
       - name: Prepare KVM and Android SDK
         run: |
           set -euo pipefail
