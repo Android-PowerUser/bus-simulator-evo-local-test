@@ -1,0 +1,93 @@
+name: Android Docker crash regression
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Release containing test APK components
+        default: local-test-242-v8-lifecycle
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  emulator:
+    name: Docker API35 - ${{ matrix.variant }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [stock, v17]
+    env:
+      TEST_RELEASE_TAG: ${{ inputs.release_tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Prepare KVM and Android SDK
+        run: |
+          set -euo pipefail
+          test -c /dev/kvm
+          sudo chmod 666 /dev/kvm
+          (yes || true) | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator' 'build-tools;35.0.0' 'system-images;android-35;google_apis;x86_64'
+      - name: Download private test inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VARIANT: ${{ matrix.variant }}
+        run: |
+          set -euo pipefail
+          mkdir -p downloaded-game
+          gh release download "$TEST_RELEASE_TAG" --pattern '*.xapk' --dir downloaded-game
+          if [ "$VARIANT" = stock ]; then
+            for name in stock-original-base.apk stock-original-config.apk stock-original-asset-layout.zip stock-original-manifest.json; do
+              gh release download "$TEST_RELEASE_TAG" --pattern "$name" --dir downloaded-game
+            done
+          else
+            gh release download "$TEST_RELEASE_TAG" --pattern 'candidate-v9-native-init-8dbafd23-base.apk' --output downloaded-game/candidate-base.apk
+            cp apk/candidate-v17-got-resolver-config.apk downloaded-game/candidate-config.apk
+            (cd apk && sha256sum -c SHA256SUMS.txt)
+            gh release download "$TEST_RELEASE_TAG" --pattern 'repaired-test-signing-v1.jks' --output downloaded-game/test-signing.jks
+          fi
+      - name: Build emulator container
+        run: docker build -t bus-android-test -f ci/docker/Dockerfile ci/docker
+      - name: Install and test APK inside Docker with KVM
+        env:
+          VARIANT: ${{ matrix.variant }}
+        run: |
+          set -euo pipefail
+          # Remove historical evidence from checkout; only this run is uploaded.
+          rm -rf runtime-results
+          mkdir runtime-results
+          extra=()
+          if [ "$VARIANT" = stock ]; then
+            extra+=(-e TEST_STOCK_CONTROL=true)
+          else
+            extra+=(-e TEST_BASE_OVERRIDE_ASSET=candidate-v9-native-init-8dbafd23-base.apk)
+            extra+=(-e TEST_CONFIG_OVERRIDE_ASSET=candidate-v17-got-resolver-config.apk)
+            extra+=(-e TEST_RESIGN_KEYSTORE_ASSET=repaired-test-signing-v1.jks)
+          fi
+          docker run --rm --name bus-emulator --device /dev/kvm --shm-size=2g \
+            -v "$ANDROID_HOME:/opt/android-sdk:ro" \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -e TEST_RELEASE_TAG \
+            -e "TEST_ENVIRONMENT=Docker / KVM / x86_64 API35 / ARM64 native bridge / $VARIANT" \
+            -e ANDROID_BOOT_TIMEOUT=600 -e ANDROID_INSTALL_TIMEOUT=600 \
+            -e ANDROID_WAKE_BEFORE_GAME=true "${extra[@]}" bus-android-test
+      - name: Upload current-run evidence even on crash
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-docker-${{ matrix.variant }}-${{ github.run_id }}
+          path: runtime-results/
+          retention-days: 14
+      - name: Write test summary
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          p=Path('runtime-results/status.json')
+          summary=json.dumps(json.loads(p.read_text()), indent=2) if p.exists() else 'Test did not reach harness; inspect setup logs.'
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('## Android Docker result\n```json\n'+summary+'\n```\n')
+          PY
