@@ -22,6 +22,9 @@ class RuntimeVerdictTests(unittest.TestCase):
     def test_rejects_launcher_only_success(self):
         self.s['app_survived_120s']=False
         self.assertFalse(verify_runtime(self.s, 'Status: ok'))
+    def test_rejects_license_screen(self):
+        self.s['foreground_activity']='com.Ovilex.BusSimulator2023/com.pairip.licensecheck.LicenseActivity'
+        self.assertFalse(verify_runtime(self.s, 'Status: ok'))
     def test_rejects_empty_result(self):
         self.assertFalse(verify_runtime({}, 'Status: ok'))
     def test_rejects_launch_error(self):

@@ -240,10 +240,13 @@ try:
  crashes=adb(['logcat','-b','crash','-d'],30,False);(D/'crash-logcat.txt').write_text(crashes)
  game_crashed=PKG in crashes
  status['game_fatal_crash_seen']=game_crashed
+ status['license_check_blocked']='com.pairip.licensecheck.' in status['foreground_activity']
+ observed_pids=[status.get('app_pid_at_'+str(t)+'s') for t in (15,45,120)]
+ status['app_process_restarted']=len(set(p for p in observed_pids if p))>1
  status['app_survived_120s']=bool(status.get('app_pid_at_120s'))
  status['foreground_is_game']=PKG in status['foreground_activity']
  status['runtime_start_verified']=verify_runtime(status, launch)
- status['state']='runtime_passed' if status['runtime_start_verified'] else 'app_crashed' if game_crashed else 'runtime_failed'
+ status['state']='runtime_passed' if status['runtime_start_verified'] else 'license_blocked' if status['license_check_blocked'] else 'app_crashed' if game_crashed else 'runtime_failed'
 except Exception as e:
  status.update(state='failed',error=type(e).__name__+': '+str(e));traceback.print_exc()
 finally:

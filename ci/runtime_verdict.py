@@ -6,6 +6,8 @@ def verify_runtime(status, launch):
         and status.get('app_survived_120s')
         and status.get('foreground_is_game')
         and not status.get('game_fatal_crash_seen')
+        and not status.get('license_check_blocked')
+        and 'com.pairip.licensecheck.' not in status.get('foreground_activity','')
         and status.get('system_server_pid_before')
         == status.get('system_server_pid_after')
         and status.get('system_server_pid_before')
