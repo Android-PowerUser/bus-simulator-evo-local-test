@@ -114,6 +114,7 @@ def resign_test_apks(apks,keystore):
  status['all_apks_resigned']=True;status['resign_seconds']=round(time.monotonic()-started,3);save()
 log=None
 try:
+ status['diagnostic_context_probe']=os.environ.get('TEST_CONTEXT_PROBE','').lower()=='true'
  save();adb(['wait-for-device'],int(os.environ.get('ANDROID_DEVICE_TIMEOUT','180')))
  end=time.monotonic()+int(os.environ.get('ANDROID_BOOT_TIMEOUT','240'))
  next_watchdog_write=0
@@ -255,6 +256,9 @@ finally:
   except Exception as e:(D/name).write_text(str(e))
  try:adb(['pull','/data/tombstones',str(D/'tombstones')],60,False)
  except Exception as e:print('TOMBSTONE_CAPTURE_FAILED',str(e),flush=True)
+ if os.environ.get('TEST_CONTEXT_PROBE','').lower()=='true':
+  try:adb(['pull','/data/user/0/'+PKG+'/unity-guest-ucontext.bin',str(D/'unity-guest-ucontext.bin')],30,False)
+  except Exception as e:print('CONTEXT_CAPTURE_FAILED',str(e),flush=True)
  save()
  if log:log.terminate()
  print('FINAL_STATUS',json.dumps(status),flush=True)

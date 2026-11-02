@@ -7,6 +7,11 @@ on:
         default: local-test-242-v8-lifecycle
         required: true
         type: string
+      diagnostic_context:
+        description: Diagnostic only - capture original ARM64 crash context before forwarding
+        default: false
+        required: false
+        type: boolean
 permissions:
   contents: read
 jobs:
@@ -17,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [stock, v17]
+        variant: ${{ fromJSON(inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
     env:
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
     steps:
@@ -53,6 +58,12 @@ jobs:
             (cd apk && sha256sum -c SHA256SUMS.txt)
             gh release download "$TEST_RELEASE_TAG" --pattern 'repaired-test-signing-v1.jks' --output downloaded-game/test-signing.jks
           fi
+      - name: Build diagnostic signal context probe
+        if: matrix.variant == 'v17-context'
+        run: |
+          sudo apt-get install -y -qq binutils-aarch64-linux-gnu
+          python3 ci/build_context_probe.py downloaded-game/candidate-config.apk downloaded-game/probe-config.apk
+          mv downloaded-game/probe-config.apk downloaded-game/candidate-config.apk
       - name: Build emulator container
         run: docker build -t bus-android-test -f ci/docker/Dockerfile ci/docker
       - name: Install and test APK inside Docker with KVM
@@ -69,6 +80,9 @@ jobs:
           else
             extra+=(-e TEST_BASE_OVERRIDE_ASSET=candidate-v9-native-init-8dbafd23-base.apk)
             extra+=(-e TEST_CONFIG_OVERRIDE_ASSET=candidate-v17-got-resolver-config.apk)
+            if [ "$VARIANT" = v17-context ]; then
+              extra+=(-e TEST_CONTEXT_PROBE=true)
+            fi
             extra+=(-e TEST_RESIGN_KEYSTORE_ASSET=repaired-test-signing-v1.jks)
           fi
           docker run --rm --name bus-emulator --device /dev/kvm --shm-size=2g \
