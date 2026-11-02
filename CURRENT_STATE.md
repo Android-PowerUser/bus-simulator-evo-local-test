@@ -1,3 +1,12 @@
+# Neuester Kontrollstand: v19 und Play-Image
+
+- Bericht: `reports/controlled-startup-2026-11-02/REPORT.md`.
+- v19 Originalgeld und ABI-korrigierter Millionenwert: gleicher Startup-Crash; Geldpatch nicht allein ursächlich.
+- Offizielles Play-Image zuerst durch vorübergehenden ADB-Disconnect vor Installation abgebrochen; gezielte Boot-Recovery ergänzt, Wiederholung ausstehend.
+- 21 Unit-Tests grün. Kein verifizierter Spielstart, keine reparierte APK.
+
+---
+
 # Aktuell: öffentliches Repository, v18-Hypothese verworfen
 
 - Repository am 2026-11-02 nach ausdrücklicher Zustimmung einschließlich Historie/Release-APKs/Testschlüssel öffentlich geschaltet; unauthentifizierten Zugriff geprüft. Testschlüssel ist offengelegt, nicht produktiv verwenden.

@@ -1,0 +1,15 @@
+{
+  "release_tag": "local-test-242-v8-lifecycle",
+  "environment": "Docker / KVM / x86_64 API35 / google_apis_playstore / ARM64 native bridge / stock",
+  "android_serial": "emulator-5554",
+  "control_installed": false,
+  "control_launched": false,
+  "game_installed": false,
+  "game_launch_attempted": false,
+  "gameplay_verified": false,
+  "state": "failed",
+  "money_abi_experiment": "",
+  "experimental_generic_guard": false,
+  "diagnostic_context_probe": false,
+  "error": "RuntimeError: ADB exit 1: adb: device 'emulator-5554' not found\n"
+}

@@ -1,6 +1,7 @@
 import json,os,subprocess,time,traceback,zipfile,shutil,hashlib,threading
 from pathlib import Path
 from runtime_verdict import verify_runtime
+from android_transport import transient_boot_disconnect
 R=Path(os.environ.get('GITHUB_WORKSPACE','.'));D=R/'runtime-results';D.mkdir(exist_ok=True)
 A=os.environ.get('ANDROID_HOME','/usr/local/lib/android/sdk')+'/platform-tools/adb'
 SERIAL=os.environ.get('ANDROID_SERIAL','emulator-5554')
@@ -121,11 +122,15 @@ try:
  end=time.monotonic()+int(os.environ.get('ANDROID_BOOT_TIMEOUT','240'))
  next_watchdog_write=0
  while time.monotonic()<end:
+  ready=''
   try:
    ready=shell('getprop sys.boot_completed; pm path android; service check media.audio_policy; service check settings; service check activity; service check window',int(os.environ.get('ANDROID_READY_TIMEOUT','20')))
    required_boot='' if os.environ.get('ANDROID_PACKAGE_READY','').lower()=='true' else '1\n'
    if ready.startswith(required_boot) and 'package:/system/' in ready and all(x in ready for x in ['media.audio_policy: found','Service settings: found','Service activity: found','Service window: found']):break
   except subprocess.TimeoutExpired:pass
+  except RuntimeError as error:
+   if not transient_boot_disconnect(error):raise
+   status['boot_adb_disconnects']=status.get('boot_adb_disconnects',0)+1;save()
   if 'ready' in locals() and 'Service settings: found' in ready and time.monotonic()>=next_watchdog_write:
    shell('settings put global system_server_watchdog_timeout_ms 3600000',60,False)
    next_watchdog_write=time.monotonic()+15

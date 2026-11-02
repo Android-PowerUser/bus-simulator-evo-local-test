@@ -1,0 +1,40 @@
+11-02 17:23:59.678  4210  4295 E CRASH   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+11-02 17:23:59.681  4210  4295 E CRASH   : Version '2022.3.62f2 (7670c08855a9)', Build type 'Release', Scripting Backend 'il2cpp', CPU 'arm64-v8a'
+11-02 17:23:59.681  4210  4295 E CRASH   : Build fingerprint: 'google/sdk_gphone64_x86_64/emu64xa:15/AE3A.240806.043/12960925:userdebug/dev-keys'
+11-02 17:23:59.681  4210  4295 E CRASH   : Revision: '0'
+11-02 17:23:59.681  4210  4295 E CRASH   : ABI: 'arm64'
+11-02 17:23:59.685  4210  4295 E CRASH   : Timestamp: 2026-11-02 17:23:59.681702155+0000
+11-02 17:23:59.685  4210  4295 E CRASH   : pid: 4210, tid: 4295, name: UnityMain  >>> com.Ovilex.BusSimulator2023 <<<
+11-02 17:23:59.685  4210  4295 E CRASH   : uid: 10210
+11-02 17:23:59.685  4210  4295 E CRASH   : signal 11 (SIGSEGV), code 2 (SEGV_ACCERR), fault addr --------
+11-02 17:23:59.686  4210  4295 E CRASH   :     x0  000000000d4dcbfa  x1  0000000000000001  x2  0000727d7e774238  x3  0000000000000020
+11-02 17:23:59.686  4210  4295 E CRASH   :     x4  0000727b002d1878  x5  0000000000000000  x6  0000000000000002  x7  00000a0f1a24011d
+11-02 17:23:59.686  4210  4295 E CRASH   :     x8  0000727a5d541000  x9  0000727a5917a92c  x10 0000727a5a086918  x11 0000000000000000
+11-02 17:23:59.686  4210  4295 E CRASH   :     x12 0000000000000018  x13 0000000000000002  x14 0000727a5b5ed3c4  x15 0000000000000000
+11-02 17:23:59.686  4210  4295 E CRASH   :     x16 0000000000000000  x17 0000000000000000  x18 0000727a70858000  x19 0000727a5d29d028
+11-02 17:23:59.686  4210  4295 E CRASH   :     x20 0000727a30609310  x21 0000727a5d2bbe10  x22 0000727a5d29d028  x23 0000727a5d2a0170
+11-02 17:23:59.686  4210  4295 E CRASH   :     x24 0000727a5d533000  x25 0000727a5d2a3c58  x26 0000000000000001  x27 0000727e48e01040
+11-02 17:23:59.686  4210  4295 E CRASH   :     x28 0000000000000049  x29 0000727b002d1990
+11-02 17:23:59.687  4210  4295 E CRASH   :     lr  0000727a5a086b4c  sp  0000727b002d18a0  pc  0000727a5a086f9c  pst 0000000000000000
+11-02 17:23:59.687  4210  4295 E CRASH   : 
+11-02 17:23:59.687  4210  4295 E CRASH   : backtrace:
+11-02 17:23:59.687  4210  4295 E CRASH   :       #00 pc 0000000002327f9c  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.687  4210  4295 E CRASH   :       #01 pc 0000000002327b48  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.687  4210  4295 E CRASH   :       #02 pc 0000000002327918  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.687  4210  4295 E CRASH   :       #03 pc 00000000023093b8  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #04 pc 000000000421bc2c  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #05 pc 00000000040d4a70  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #06 pc 0000000002352f24  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #07 pc 0000000002352e70  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #08 pc 0000000002351340  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #09 pc 000000000236ecc4  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #10 pc 00000000023275a0  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #11 pc 00000000023527b8  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #12 pc 000000000233cabc  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libil2cpp.so (il2cpp_init+28) (BuildId: db6d9cc7ad17a33fec8d53265ad8b99c39ece5db)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #13 pc 0000000000965c58  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 17:23:59.688  4210  4295 E CRASH   :       #14 pc 00000000009dff4c  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 17:23:59.689  4210  4295 E CRASH   :       #15 pc 00000000009e0eac  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 17:23:59.689  4210  4295 E CRASH   :       #16 pc 00000000009fa720  /data/app/~~8toNBVPfEREZweZLS8kAnQ==/com.Ovilex.BusSimulator2023-KyhYtn-fYXuBXsvZKUwnRA==/lib/arm64/libunity.so (BuildId: 78b0074646c115a2f68b3ef36fae57c676213fac)
+11-02 17:23:59.689  4210  4295 E CRASH   :       #17 pc 0000000000004018  /system/lib64/arm64/libnative_bridge_vdso.so (BuildId: c7eb2dae1deb0f51d28b7a1c3619dca4)
+11-02 17:24:00.494  4210  4295 E CRASH   : Tombstone written to: /storage/emulated/0/Android/data/com.Ovilex.BusSimulator2023/files/tombstone_00
+11-02 17:24:00.494  4210  4295 E CRASH   : Forwarding signal 11
