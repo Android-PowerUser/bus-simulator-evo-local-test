@@ -1,0 +1,87 @@
+name: Native ARM64 Android container control
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Release containing cryptographically checked original inputs
+        default: local-test-242-v8-lifecycle
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  original_native:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 25
+    env:
+      TEST_RELEASE_TAG: ${{ inputs.release_tag }}
+      TEST_STOCK_CONTROL: 'true'
+      TEST_ENVIRONMENT: Native ARM64 Linux host / redroid Android14 Docker / no translation / no Play account
+      TEST_SYSTEM_IMAGE_TAG: redroid_aosp_arm64
+      ANDROID_SERIAL: 127.0.0.1:5555
+      ANDROID_BOOT_TIMEOUT: '240'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify native host and Binder kernel support
+        run: |
+          set -euo pipefail
+          mkdir -p runtime-results
+          exec > >(tee runtime-results/native-host.txt) 2>&1
+          uname -a
+          test "$(uname -m)" = aarch64
+          docker version
+          if ! sudo modprobe binder_linux devices=binder,hwbinder,vndbinder; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends "linux-modules-extra-$(uname -r)"
+            sudo modprobe binder_linux devices=binder,hwbinder,vndbinder
+          fi
+          ls -l /dev/*binder* || true
+          grep binder /proc/filesystems || true
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends adb
+          mkdir -p "$RUNNER_TEMP/android-sdk/platform-tools"
+          ln -s "$(command -v adb)" "$RUNNER_TEMP/android-sdk/platform-tools/adb"
+          echo "ANDROID_HOME=$RUNNER_TEMP/android-sdk" >> "$GITHUB_ENV"
+      - name: Start actual ARM64 Android, never a native bridge
+        run: |
+          set -euo pipefail
+          docker pull --platform linux/arm64 redroid/redroid:14.0.0-latest
+          docker image inspect redroid/redroid:14.0.0-latest > runtime-results/redroid-image.json
+          test "$(docker image inspect --format '{{.Architecture}}' redroid/redroid:14.0.0-latest)" = arm64
+          docker run -d --name android-native --privileged --shm-size=2g \
+            -p 127.0.0.1:5555:5555 \
+            redroid/redroid:14.0.0-latest \
+            androidboot.use_memfd=true androidboot.redroid_gpu_mode=guest \
+            androidboot.redroid_width=480 androidboot.redroid_height=800 androidboot.redroid_dpi=160
+          python3 ci/wait_native_android.py
+      - name: Fetch original inputs only after successful native Android boot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p downloaded-game
+          gh release download "$TEST_RELEASE_TAG" --pattern '*.xapk' --dir downloaded-game
+          for name in stock-original-base.apk stock-original-config.apk stock-original-asset-layout.zip stock-original-manifest.json; do
+            gh release download "$TEST_RELEASE_TAG" --pattern "$name" --dir downloaded-game
+          done
+      - name: Install original and collect actual native runtime outcome
+        run: |
+          set -euo pipefail
+          python3 ci/remote_android_runtime.py 2>&1 | tee runtime-results/test-console.txt
+      - name: Capture container failure separately from APK failure
+        if: always()
+        run: |
+          docker logs android-native > runtime-results/redroid-console.txt 2>&1 || true
+          docker inspect android-native > runtime-results/redroid-container.json 2>&1 || true
+          if command -v adb >/dev/null; then
+            adb -s 127.0.0.1:5555 logcat -d > runtime-results/native-logcat.txt 2>&1 || true
+            adb -s 127.0.0.1:5555 shell getprop > runtime-results/native-properties.txt 2>&1 || true
+          fi
+          docker rm -f android-native || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-arm64-original-${{ github.run_id }}
+          path: runtime-results/
