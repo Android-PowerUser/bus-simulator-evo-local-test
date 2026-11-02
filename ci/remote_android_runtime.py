@@ -199,8 +199,21 @@ try:
    with (package_dir/name).open('rb') as f:actual=hashlib.file_digest(f,'sha256').hexdigest()
    assert actual==expected,'Original component hash mismatch: '+name
    status['installed_component_sha256'][name]=actual
+ if os.environ.get('TEST_REMOVE_APP_METADATA','').lower()=='true':
+  assert os.environ.get('TEST_STOCK_CONTROL','').lower()=='true' and not os.environ.get('TEST_RESIGN_KEYSTORE_ASSET')
+  from apk_runtime_metadata import remove_application_metadata
+  status['original_source_component_sha256']=status.pop('installed_component_sha256')
+  status['variant']='genuine_original_signatures_application_metadata_removed_negative_control'
+  status['original_application_metadata_removed']={}
+  tools=sorted((Path(os.environ['ANDROID_HOME'])/'build-tools').glob('*/apksigner'));assert tools
+  status['installed_component_sha256']={}
+  for apk in map(Path,apks):
+   status['original_application_metadata_removed'][apk.name]=remove_application_metadata(apk)
+   subprocess.run([str(tools[-1]),'verify','--verbose','--print-certs',str(apk)],timeout=60,check=True)
+   with apk.open('rb') as f:status['installed_component_sha256'][apk.name]=hashlib.file_digest(f,'sha256').hexdigest()
+  save()
  runtime_metadata=None
- if os.environ.get('TEST_PRESERVE_RUNTIME_METADATA','').lower()=='true':
+ if os.environ.get('TEST_PRESERVE_RUNTIME_METADATA','').lower()=='true' and os.environ.get('TEST_REMOVE_APP_METADATA','').lower()!='true':
   assert os.environ.get('TEST_STOCK_CONTROL','').lower()=='true'
   from apk_runtime_metadata import extract
   runtime_metadata={}
@@ -208,7 +221,7 @@ try:
    runtime_metadata[name]=extract(package_dir/name)
  original_init_variant=os.environ.get('TEST_ORIGINAL_INIT_VARIANT','')
  if original_init_variant:
-  if original_init_variant not in ('v20-resigned-original','v20-original-init-million','v21-resigned-original','v21-original-init-million'):raise ValueError('Unknown original-init experiment')
+  if original_init_variant not in ('v20-resigned-original','v20-original-init-million','v21-resigned-original','v21-original-init-million','v22-resigned-original','v22-original-init-million'):raise ValueError('Unknown original-init experiment')
   assert os.environ.get('TEST_STOCK_CONTROL','').lower()=='true'
   status['original_init_experiment']=original_init_variant
   status['original_source_component_sha256']=status.pop('installed_component_sha256')

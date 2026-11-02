@@ -115,3 +115,26 @@ und SourceStamp=false. Dies ist kein positiver Lizenznachweis.
 Offline-Roundtrip und37Tests grün. Android-Ergebnis für v21 noch offen;
 fehlende Metadaten sind eine Hypothese, keine bereits bewiesene Reparatur.
 Audit-JSONs dokumentieren entfernte Blöcke und echte APK-Signerprüfung.
+
+
+## v21 abgelehnt; weitere Diagnose sauber getrennt
+
+41496478857 aufcf987db: in allen3Splits fa1cfabe exakt erhalten
+(Basis41938Bytes,ARM-Config40995Bytes,Assetpack200Bytes). Installation
+und Neusignerprüfung erfolgreich, beide Appvarianten trotzdem nach4s
+am identischen PairIP+0x55b3c mit identischen ungültigen Operanden.
+Die erhaltenen Metadaten allein beheben den Crash also NICHT.
+
+Neuer echter Hostmodellfehler: VMRunner.invoke hat im verifizierten
+Stock-Smali die executeVM-Aufrufzeile69 statt der bisher simulierten49.
+Modellvertrag mit Regressiontest korrigiert. Zusätzlich entdeckt:
+Unicorns Instruktionsbudget wurde als normales Funktionsende ausgegeben.
+Jetzt wird vor jeder Folgephase ausdrücklich das Rückkehr-Sentinel geprüft.
+Zwei erste49/69-Läufe mit20M-Budget/proc-v11/konstantemClock sind daher
+**nicht als erfolgreich abgeschlossene Startup-Läufe auswertbar**.
+Korrigierter kontrollierter Vergleich mit synthetischem Procmodell und
+monotoner Uhr läuft separat; unveränderte VM-Guards.
+
+Parallel wird ein zweites, unverändertes Android-Nativemodell mit Unidbg
+aufgebaut, um Fehler der handgeschriebenen libc/JNI-Stubs zu isolieren.
+API23-Resolver ist eine Einschränkung, kein Android15-Nachweis.

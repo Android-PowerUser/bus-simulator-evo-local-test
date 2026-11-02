@@ -1,6 +1,6 @@
 import io,struct,tempfile,unittest,zipfile
 from pathlib import Path
-from apk_runtime_metadata import parse,extract,restore,MAGIC,APP_METADATA_ID
+from apk_runtime_metadata import parse,extract,restore,remove_application_metadata,MAGIC,APP_METADATA_ID
 class RuntimeMetadataTests(unittest.TestCase):
  def apk(self,path,records):
   b=io.BytesIO()
@@ -29,3 +29,13 @@ class RuntimeMetadataTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as t:
    p=Path(t)/'app.apk';self.apk(p,[(0x7109871a,b'new')]);before=p.read_bytes()
    self.assertIsNone(extract(p));self.assertFalse(restore(p,None)['restored']);self.assertEqual(before,p.read_bytes())
+
+ def test_padding_remains_last(self):
+  with tempfile.TemporaryDirectory() as t:
+   p=Path(t)/'app.apk';self.apk(p,[(0x7109871a,b'new'),(0x42726577,b'padding')]);restore(p,b'appdata')
+   self.assertEqual([i for i,_ in parse(p)[4]],[0x7109871a,APP_METADATA_ID,0x42726577])
+ def test_removal_preserves_authentication_bytes(self):
+  with tempfile.TemporaryDirectory() as t:
+   p=Path(t)/'app.apk';records=[(0x7109871a,b'original-signature'),(APP_METADATA_ID,b'appdata'),(0x6dff800d,b'authentic-stamp')]
+   self.apk(p,records);remove_application_metadata(p)
+   self.assertEqual(parse(p)[4],[(0x7109871a,b'original-signature'),(0x6dff800d,b'authentic-stamp')])

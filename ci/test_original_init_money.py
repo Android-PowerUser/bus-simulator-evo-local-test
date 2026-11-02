@@ -1,6 +1,8 @@
 import lzma,unittest,sys
+from io import BytesIO
 from pathlib import Path
 from build_original_init_money import patch,ENTRY,CAVE
+from elftools.elf.elffile import ELFFile
 from unicorn import Uc,UC_ARCH_ARM64,UC_MODE_ARM
 from unicorn.arm64_const import *
 class OriginalInitMoneyTests(unittest.TestCase):
@@ -16,7 +18,12 @@ class OriginalInitMoneyTests(unittest.TestCase):
   self.assertEqual(self.raw[last:],self.out[last:])
  def test_original_initializer_not_got_resolver(self):
   # Original DT_INIT occupies the beginning of the same RX page as our cave.
-  self.assertEqual(self.raw[0x5a08000:0x5a08040],self.out[0x5a08000:0x5a08040])
+  elf=ELFFile(BytesIO(self.raw))
+  init=next(t.entry.d_val for t in elf.get_section_by_name('.dynamic').iter_tags() if t.entry.d_tag=='DT_INIT')
+  segment=next(s for s in elf.iter_segments() if s['p_type']=='PT_LOAD' and s['p_vaddr']<=init<s['p_vaddr']+s['p_filesz'])
+  offset=segment['p_offset']+init-segment['p_vaddr']
+  self.assertEqual(self.raw[offset:offset+4],bytes.fromhex('5f2403d5'))
+  self.assertEqual(self.raw[offset:offset+64],self.out[offset:offset+64])
  def test_call_abi(self):
   u=Uc(UC_ARCH_ARM64,UC_MODE_ARM)
   for va,(start,end) in zip([ENTRY,CAVE],self.report['modified_file_ranges']):

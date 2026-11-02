@@ -14,6 +14,7 @@ import math
 import re
 import struct
 from pathlib import Path
+from emulation_contract import run_until_return
 
 from elftools.elf.elffile import ELFFile
 from unicorn import (
@@ -50,8 +51,11 @@ parser.add_argument("--clock-profile", choices=("constant", "monotonic"), defaul
                     help="clock_gettime input; monotonic advances deterministically by 1 ms per call")
 parser.add_argument("--emulate-original-tls", action="store_true",
                     help="hook the original helper with per-thread TLS semantics")
+parser.add_argument("--invoke-stack-line", type=int, default=69,
+                    help="VMRunner.invoke source line from verified stock smali; 49 reproduces the old incorrect stack control")
 parser.add_argument("--max-insns", type=int, default=200_000_000)
 args = parser.parse_args()
+print("EMULATION_INPUTS " + repr(vars(args)), flush=True)
 asset = args.asset.read_bytes()
 proc_status_override = b""
 proc_maps_override = b""
@@ -477,8 +481,9 @@ def handle_jni(index: int) -> None:
             frame_specs = [
                 (b"com.pairip.VMRunner", b"executeVM", b"Native Method",
                  b"VMRunner.java", -2, True),
-                (b"com.pairip.VMRunner", b"invoke", b"VMRunner.java:49",
-                 b"VMRunner.java", 49, False),
+                (b"com.pairip.VMRunner", b"invoke",
+                 b"VMRunner.java:" + str(args.invoke_stack_line).encode(),
+                 b"VMRunner.java", args.invoke_stack_line, False),
             ]
             if (args.with_startup and not target_runtime_visible
                     and args.startup_stack != "short"):
@@ -1610,7 +1615,7 @@ try:
         uc.reg_write(UC_ARM64_REG_X1, 0)
         uc.reg_write(UC_ARM64_REG_SP, STACK + 0x1F0000)
         uc.reg_write(UC_ARM64_REG_X30, SENTINEL)
-        uc.emu_start(0x8A1FC, SENTINEL, count=args.max_insns)
+        run_until_return(uc, 0x8A1FC, SENTINEL, args.max_insns, UC_ARM64_REG_PC, "JNI_OnLoad")
         print(f"JNI_OnLoad returned {uc.reg_read(UC_ARM64_REG_X0):#x}")
 
         if args.with_startup:
@@ -1624,7 +1629,7 @@ try:
             uc.reg_write(UC_ARM64_REG_X3, 0)
             uc.reg_write(UC_ARM64_REG_SP, STACK + 0x1F0000)
             uc.reg_write(UC_ARM64_REG_X30, SENTINEL)
-            uc.emu_start(0x6A61C, SENTINEL, count=args.max_insns)
+            run_until_return(uc, 0x6A61C, SENTINEL, args.max_insns, UC_ARM64_REG_PC, "executeVM")
             print(f"Startup program returned {uc.reg_read(UC_ARM64_REG_X0):#x}")
             asset = game_asset
             target_runtime_visible = True
@@ -1646,7 +1651,7 @@ try:
         uc.reg_write(UC_ARM64_REG_X3, 0)
         uc.reg_write(UC_ARM64_REG_SP, STACK + 0x1F0000)
         uc.reg_write(UC_ARM64_REG_X30, SENTINEL)
-        uc.emu_start(0x69EB4, SENTINEL, count=args.max_insns)
+        run_until_return(uc, 0x69EB4, SENTINEL, args.max_insns, UC_ARM64_REG_PC, "DT_INIT ExecuteProgram")
     else:
         uc.reg_write(UC_ARM64_REG_X0, ENV)
         uc.reg_write(UC_ARM64_REG_X1, 0)
@@ -1656,7 +1661,7 @@ try:
         uc.reg_write(UC_ARM64_REG_X30, SENTINEL)
         # The JNI native entry's real prologue begins at 0x6a61c. The preceding
         # BL belongs to ExecuteProgram's impossible error branch.
-        uc.emu_start(0x6A61C, SENTINEL, count=args.max_insns)
+        run_until_return(uc, 0x6A61C, SENTINEL, args.max_insns, UC_ARM64_REG_PC, "executeVM")
     print(f"completed pc={uc.reg_read(UC_ARM64_REG_PC):#x} insns={insn_count} vm_steps={vm_steps}")
 except (UcError, RuntimeError, MemoryError) as error:
     print(f"stopped: {type(error).__name__}: {error}")
