@@ -1,0 +1,47 @@
+{
+  "release_tag": "local-test-242-v8-lifecycle",
+  "environment": "Docker / KVM / x86_64 API35 / ARM64 native bridge / stock",
+  "android_serial": "emulator-5554",
+  "control_installed": true,
+  "control_launched": true,
+  "game_installed": true,
+  "game_launch_attempted": true,
+  "gameplay_verified": false,
+  "state": "runtime_checked",
+  "system_server_pid_before": "575",
+  "supported_abis": "x86_64,arm64-v8a",
+  "native_bridge": "libndk_translation.so",
+  "android_sdk": "35",
+  "control_ready_generation": "575",
+  "control_install_transport": "no_streaming",
+  "control_install_seconds": 2.394,
+  "system_server_pid_after_control_install": "575",
+  "control_package_paths": [
+    "/data/app/~~bKTcqL2Tr2nmCqd5L7uK1A==/com.arena.installcontrol-47aM6pqH6n6sM99l1U6qKA==/base.apk"
+  ],
+  "variant": "cryptographically_verified_unmodified_original_control",
+  "installed_component_sha256": {
+    "com.Ovilex.BusSimulator2023.apk": "3fdd3863d39e0e251cdfb7dbf421b595069e23681c9c4003c5db4eb8d3ffe388",
+    "config.arm64_v8a.apk": "1ec029e920de71615d8b333a2a3dc2efaaec549ac121d96c632a28c4672d5d2f",
+    "UnityDataAssetPack.apk": "25646655523e4e7d922fe25efa78ea04b8ec49fea9934d5a5e549a30a213a6b1"
+  },
+  "game_ready_generation": "575",
+  "game_install_transport": "no_streaming",
+  "game_install_seconds": 48.306,
+  "system_server_pid_after_game_install": "575",
+  "game_package_paths": [
+    "/data/app/~~FeKgOGbxQtilCdPda84B1A==/com.Ovilex.BusSimulator2023-tQ18B56ruz0DX5q4UXes2w==/base.apk",
+    "/data/app/~~FeKgOGbxQtilCdPda84B1A==/com.Ovilex.BusSimulator2023-tQ18B56ruz0DX5q4UXes2w==/split_UnityDataAssetPack.apk",
+    "/data/app/~~FeKgOGbxQtilCdPda84B1A==/com.Ovilex.BusSimulator2023-tQ18B56ruz0DX5q4UXes2w==/split_config.arm64_v8a.apk"
+  ],
+  "launch_command_output": "Starting: Intent { cmp=com.Ovilex.BusSimulator2023/com.google.firebase.MessagingUnityPlayerActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.Ovilex.BusSimulator2023/com.google.firebase.MessagingUnityPlayerActivity\nTotalTime: 5924\nWaitTime: 6014\nComplete",
+  "app_pid_at_15s": "4307",
+  "app_pid_at_45s": "4516",
+  "app_pid_at_120s": "4825",
+  "system_server_pid_after": "575",
+  "foreground_activity": "topResumedActivity=ActivityRecord{d1e00d3 u0 com.Ovilex.BusSimulator2023/com.pairip.licensecheck.LicenseActivity t9}",
+  "game_fatal_crash_seen": false,
+  "app_survived_120s": true,
+  "foreground_is_game": true,
+  "runtime_start_verified": true
+}

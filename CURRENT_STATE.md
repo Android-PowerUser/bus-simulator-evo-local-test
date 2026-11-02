@@ -1,3 +1,25 @@
+# Neuester Stand: Docker/GitHub Actions — 2026-11-02
+
+**Diese Ergänzung ersetzt für den aktuellen Teststand die darunterliegende historische lokale TCG-Zusammenfassung.**
+
+- Workflow: `.github/workflows/android-docker.yml`; Dockerfile und Startskript: `ci/docker/`.
+- KVM-beschleunigter Android-15/API35-Emulator läuft in Docker. ARM64 über `libndk_translation.so`, kein nativer ARM64-Beweis.
+- Aktuellster abgeschlossener Lauf: https://github.com/Android-PowerUser/bus-simulator-evo-local-test/actions/runs/41448714075 (getesteter Commit `312c291`).
+- Beide Kontroll- und Spielinstallationen erfolgreich; drei Splits verifiziert.
+- v17 + v9-Basis: reproduzierter nativer SIGSEGV in UnityMain/IL2CPP. **Nicht repariert.**
+- Kryptografisch geprüftes Original: Google-Play-Lizenzdialog und Prozessneustarts. **Kein erfolgreicher Spielstart.**
+- Alter Stock-Job aus Run 41447624214 meldete falsch Erfolg. Das Testharness wurde korrigiert: gleiche App-PID und gleiche system_server-Generation erforderlich; Lizenz-Activity wird explizit abgelehnt. Acht Unit-Tests erfolgreich.
+- Aktueller vollständiger Bericht mit kleinen versionierten Nachweisen: `reports/docker-2026-11-02/REPORT.md`. Vollständige Logs, Screenshots und Tombstones in den Actions-Artefakten.
+- Persönlicher Token wird weder versioniert noch in den Container eingebaut. Actions nutzt `github.token` nur zum Download privater Release-Eingaben.
+
+## Nächster belastbarer Reparaturschritt
+
+Native Debug-/Entwicklerversion mit Symbolen/Quellen oder ein lizenzierter Original-Vergleich auf unterstützter Play-Installation. Die Ursache der inkonsistenten IL2CPP-Daten des modifizierten Kandidaten ist noch nicht bewiesen. Keine Nullpointer-RET-Patches als Reparatur ausgeben, keine Lizenzfehler als Spielerfolg zählen.
+
+---
+
+## Historischer lokaler Stand (unverändert)
+
 # Aktueller Arbeitsstand — Bus Simulator EVO 1.27.42
 
 Stand der Sicherung: 2026-11-02. Dieses Dokument beschreibt den tatsächlichen Teststand; es wird kein Spielergebnis behauptet, das nicht in den Logs belegt ist.
