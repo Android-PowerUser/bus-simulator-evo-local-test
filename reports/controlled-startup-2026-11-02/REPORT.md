@@ -33,3 +33,32 @@ Die Nachbarwörter wirken ebenfalls hochentropisch. Das spricht dafür,
 die fehlende Dateninitialisierung weiter zu prüfen, beweist jedoch
 weder einen bestimmten Cipher noch eine ausführbare Entschlüsselung.
 Keine erfundenen Methodenindizes und keine weiteren blinden Guards.
+
+
+## Wichtiger neuer Gegenbeweis: Original startet mit Play-Image
+
+Wiederholung 41491251617 auf a501b2b: offizielles Play-Store-Image,
+Play Store 41.3.25, kein Account und keine Lizenzumgehung. Boot-
+Transportwiederholung funktioniert. Originalsignaturen und SHA256 aller
+Splits geprüft, Installation erfolgreich, system_server 553 unverändert.
+Original-App-Hauptprozess 4652 bleibt über 120 Sekunden bestehen;
+Native-IL2CPP-Initialisierung und verwalteter Unity-Code laufen!
+Die 120s-Aufnahme zeigt echte **DRIVING MODE SELECTION** mit Buttons,
+Tilt und Steering Wheel, keinen schwarzen Bildschirm und keinen Lizenzdialog.
+
+Harness meldete fälschlich Prozessneustart, weil PairIP einen gleichnamigen
+Kindprozess 5556 mit PPID 4652 erzeugt: `pidof` liefert jetzt zwei PIDs.
+Es ist kein Ersatz des Hauptprozesses. Neue Prozessauswahl prüft die
+Elternrelation; mehrere unabhängige Hauptprozesse werden weiter abgelehnt,
+ein tatsächlich ersetzter Hauptprozess bekommt weiterhin eine andere PID.
+Kein Spielerfolg wird daraus automatisch abgeleitet.
+
+Es gibt verwaltete NullReferenceExceptions in WishWheel.CreatePersistentData
+bei fehlenden Firebase-Remote-Config-Defaults. Ob diese die weitere Navigation
+blockieren, ist noch ungeklärt. Ein vorlagengeprüfter, ausschließlich auf
+Original angewandter UI-Smoke-Test wählt die kostenfreie Steuerungsart Buttons;
+keine Käufe, Konten oder Lizenzdialoge werden angeklickt. Fahrbetrieb steht aus.
+
+Dieser Befund legt nahe, zuerst den intakten Original-Initialisierungsweg
+im funktionsfähigen Play-Image zu verwenden statt GOT-only-Patches und
+Nullguards als Reparatur auszugeben.

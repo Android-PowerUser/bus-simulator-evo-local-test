@@ -22,6 +22,11 @@ on:
         default: false
         required: false
         type: boolean
+      stock_ui_smoke:
+        description: On verified stock only, select button controls if the exact onboarding screen matches
+        default: false
+        required: false
+        type: boolean
       play_store_control:
         description: Verified original on official Google Play Store image (no account injected)
         default: false
@@ -39,6 +44,7 @@ jobs:
       matrix:
         variant: ${{ fromJSON(inputs.play_store_control && '["stock"]' || inputs.money_abi_control && '["v19-stock-money","v19-million-abi"]' || inputs.generic_container_guard && '["v18-nullguard"]' || inputs.diagnostic_context && '["v17-context"]' || '["stock","v17"]') }}
     env:
+      TEST_UI_SMOKE: ${{ inputs.stock_ui_smoke && 'true' || 'false' }}
       TEST_RELEASE_TAG: ${{ inputs.release_tag }}
       TEST_SYSTEM_IMAGE_TAG: ${{ inputs.play_store_control && 'google_apis_playstore' || 'google_apis' }}
     steps:
@@ -107,6 +113,7 @@ jobs:
           extra=()
           if [ "$VARIANT" = stock ]; then
             extra+=(-e TEST_STOCK_CONTROL=true)
+            extra+=(-e TEST_UI_SMOKE)
             if [ "$TEST_SYSTEM_IMAGE_TAG" = google_apis_playstore ]; then
               extra+=(-e ANDROID_SKIP_ADB_ROOT=true)
             fi

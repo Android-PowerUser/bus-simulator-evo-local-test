@@ -1,3 +1,12 @@
+# Original startet im offiziellen Play-Image
+
+- Actions 41491251617: originale signierte Version 1.27.42 installiert, native Initialisierung läuft; echte Driving-Mode-Selection sichtbar. Kein Account/Lizenzbypass.
+- Hauptprozess 4652 bleibt, Kindprozess5556 ist kein Neustart. Strenge Elternprozess-Auswahl und 4 Regressionstests ergänzt.
+- Bericht `reports/controlled-startup-2026-11-02/REPORT.md`; UI-Smoke-Wiederholung folgt.
+- 25 Tests grün. Noch kein Fahrbetrieb, keine reparierte modifizierte APK.
+
+---
+
 # Neuester Kontrollstand: v19 und Play-Image
 
 - Bericht: `reports/controlled-startup-2026-11-02/REPORT.md`.

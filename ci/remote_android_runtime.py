@@ -2,6 +2,7 @@ import json,os,subprocess,time,traceback,zipfile,shutil,hashlib,threading
 from pathlib import Path
 from runtime_verdict import verify_runtime
 from android_transport import transient_boot_disconnect
+from process_identity import main_process
 R=Path(os.environ.get('GITHUB_WORKSPACE','.'));D=R/'runtime-results';D.mkdir(exist_ok=True)
 A=os.environ.get('ANDROID_HOME','/usr/local/lib/android/sdk')+'/platform-tools/adb'
 SERIAL=os.environ.get('ANDROID_SERIAL','emulator-5554')
@@ -256,12 +257,26 @@ try:
  observation_started=time.monotonic()
  for elapsed in [15,45,120]:
   time.sleep(max(0,observation_started+elapsed-time.monotonic()))
-  pid=shell('pidof '+PKG,30,False)
+  table=shell('ps -A -o PID,PPID,NAME',30,False)
+  (D/('process-tree-'+str(elapsed)+'s.txt')).write_text(table)
+  status['all_app_pids_at_'+str(elapsed)+'s']=shell('pidof '+PKG,30,False)
+  pid=main_process(table,PKG)
   status['app_pid_at_'+str(elapsed)+'s']=pid
   status['observation_seconds_at_'+str(elapsed)+'s']=round(time.monotonic()-observation_started,3);save()
   try:screen('game-'+str(elapsed)+'s.png')
   except Exception as e:print('SCREENSHOT_FAILED',str(e),flush=True)
   if not pid:break
+ if os.environ.get('TEST_UI_SMOKE','').lower()=='true' and status.get('app_pid_at_120s'):
+  from PIL import Image,ImageChops,ImageStat
+  reference=Image.open(R/'ci/driving-mode-reference.png').convert('RGB')
+  actual=Image.open(D/'game-120s.png').convert('RGB')
+  box=(150,40,650,440)
+  match=actual.size==reference.size and max(ImageStat.Stat(ImageChops.difference(reference.crop(box),actual.crop(box))).mean)<5
+  status['driving_mode_template_matched']=match;save()
+  if match and PKG in shell('dumpsys activity activities | grep topResumedActivity',30,False):
+   shell('input tap 290 150; input tap 400 414',30)
+   status['ui_smoke_action']='select_buttons_driving_mode';save()
+   time.sleep(25);screen('after-driving-mode-selection.png')
  status['system_server_pid_after']=shell('pidof system_server',30,False)
  status['foreground_activity']=shell("dumpsys activity activities | grep -E 'mResumedActivity|topResumedActivity'",30,False)
  crashes=adb(['logcat','-b','crash','-d'],30,False);(D/'crash-logcat.txt').write_text(crashes)
