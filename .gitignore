@@ -1,3 +1,6 @@
 latest-evidence/
 downloaded-game/
 __pycache__/
+
+.diagnostics/
+*.py[cod]

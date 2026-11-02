@@ -22,4 +22,15 @@ adb start-server
 emulator -avd BusDocker -no-window -no-audio -no-snapshot -no-boot-anim \
   -accel on -memory 3072 -cores 2 -gpu swangle -feature -Vulkan \
   -camera-back none -camera-front none -no-metrics > runtime-results/emulator.log 2>&1 &
+EMULATOR_PID=$!
+# Fail immediately for a host/container error instead of waiting three minutes
+# and incorrectly presenting it as an APK failure.
+for attempt in $(seq 1 30); do
+  if ! kill -0 "$EMULATOR_PID" 2>/dev/null; then
+    cat runtime-results/emulator.log
+    exit 20
+  fi
+  if adb devices | grep -q 'emulator-5554'; then break; fi
+  sleep 2
+done
 python3 ci/remote_android_runtime.py 2>&1 | tee runtime-results/test-console.txt

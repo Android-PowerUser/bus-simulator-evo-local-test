@@ -27,6 +27,9 @@ jobs:
       - name: Prepare KVM and Android SDK
         run: |
           set -euo pipefail
+          # Reclaim preinstalled toolchains: SDK + XAPK + Docker + userdata need >15 GB.
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup "$ANDROID_HOME/ndk" /opt/hostedtoolcache/CodeQL
+          df -h .
           test -c /dev/kvm
           sudo chmod 666 /dev/kvm
           (yes || true) | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator' 'build-tools;35.0.0' 'system-images;android-35;google_apis;x86_64'
